@@ -1,5 +1,3 @@
-import { writable } from 'svelte/store';
-
 export const BASE_DIMENSIONS = {
 	location: 'สถานที่',
 	faculty: 'คณะ',
@@ -7,7 +5,3 @@ export const BASE_DIMENSIONS = {
 	year: 'เวลา (ปี)',
 	language: 'ภาษา'
 };
-
-const basedim = writable(BASE_DIMENSIONS.FACULTY);
-
-export default basedim;
