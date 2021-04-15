@@ -1,15 +1,12 @@
 <script>
-	import basedim, { BASE_DIMENSIONS } from '../stores/basedim';
-
-	function pickDimension(dim) {
-		$basedim = dim;
-		console.log(dim);
-	}
+	import { BASE_DIMENSIONS } from '../stores/basedim';
 </script>
 
 <div class="flex justify-center items-center h-full w-full">
 	{#each Object.entries(BASE_DIMENSIONS) as [dim, title]}
-		<div class="cols" on:click={() => pickDimension(dim)}>{title}</div>
+		<a href={`/dashboard/${dim}`} class="cols">
+			{title}
+		</a>
 	{/each}
 </div>
 

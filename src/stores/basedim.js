@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store';
 
 export const BASE_DIMENSIONS = {
-	LOCATION: 'สถานที่',
-	FACULTY: 'คณะ',
-	HOUR: 'เวลา (ชั่วโมง)',
-	YEAR: 'เวลา (ปี)',
-	LANGUAGE: 'ภาษา'
+	location: 'สถานที่',
+	faculty: 'คณะ',
+	hour: 'เวลา (ชั่วโมง)',
+	year: 'เวลา (ปี)',
+	language: 'ภาษา'
 };
 
 const basedim = writable(BASE_DIMENSIONS.FACULTY);
