@@ -1,15 +1,32 @@
 <script>
+	import { onMount } from 'svelte';
+
+	import * as d3 from 'd3';
+
 	import { page } from '$app/stores';
 
 	const {
 		params: { basedim }
 	} = $page;
+
+	let data = [];
+
+	onMount(async () => {
+		data = await d3.json('/data/data.json');
+	});
 </script>
 
-<main class="w-screen h-screen">
+<main class="w-screen h-screen flex flex-row">
 	<nav>
 		<h1>{basedim}</h1>
 	</nav>
+	<div id="visualise" class="flex-1 p-4 max-h-screen overflow-y-auto">
+		{#each data as d}
+			<div>
+				{d.basedim}
+			</div>
+		{/each}
+	</div>
 </main>
 
 <style lang="postcss">

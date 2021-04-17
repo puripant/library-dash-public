@@ -24,7 +24,7 @@ function find_anchor(node) {
 class Router {
 	/** @param {{
 	 *    base: string;
-	 *    routes: import('types.internal').CSRRoute[];
+	 *    routes: import('types/internal').CSRRoute[];
 	 * }} opts */
 	constructor({ base, routes }) {
 		this.base = base;
@@ -262,8 +262,8 @@ class Router {
 }
 
 /**
- * @param {import('../../types.internal').LoadOutput} loaded
- * @returns {import('../../types.internal').LoadOutput}
+ * @param {import('types/page').LoadOutput} loaded
+ * @returns {import('types/page').LoadOutput}
  */
 function normalize(loaded) {
 	// TODO should this behaviour be dev-only?
@@ -355,7 +355,7 @@ function initial_fetch(resource, opts) {
 	return fetch(resource, opts);
 }
 
-/** @typedef {import('types.internal').CSRComponent} CSRComponent */
+/** @typedef {import('types/internal').CSRComponent} CSRComponent */
 
 class Renderer {
 	/** @param {{
@@ -422,7 +422,7 @@ class Renderer {
 	 *   status: number;
 	 *   error: Error;
 	 *   nodes: Array<Promise<CSRComponent>>;
-	 *   page: import('types').Page;
+	 *   page: import('types/page').Page;
 	 * }} selected
 	 */
 	async start({ status, error, nodes, page }) {
@@ -646,7 +646,7 @@ class Renderer {
 	/**
 	 *
 	 * @param {{
-	 *   page: import('types').Page;
+	 *   page: import('types/page').Page;
 	 *   branch: import('./types').BranchNode[]
 	 * }} opts
 	 */
@@ -713,7 +713,7 @@ class Renderer {
 	 *   status?: number;
 	 *   error?: Error;
 	 *   module: CSRComponent;
-	 *   page: import('types').Page;
+	 *   page: import('types/page').Page;
 	 *   context: Record<string, any>;
 	 * }} options
 	 * @returns
@@ -748,7 +748,7 @@ class Renderer {
 		const session = this.$session;
 
 		if (module.load) {
-			/** @type {import('types.internal').LoadInput | import('types.internal').ErrorLoadInput} */
+			/** @type {import('types/page').LoadInput | import('types/page').ErrorLoadInput} */
 			const load_input = {
 				page: {
 					host: page.host,
@@ -774,8 +774,8 @@ class Renderer {
 			};
 
 			if (error) {
-				/** @type {import('types.internal').ErrorLoadInput} */ (load_input).status = status;
-				/** @type {import('types.internal').ErrorLoadInput} */ (load_input).error = error;
+				/** @type {import('types/page').ErrorLoadInput} */ (load_input).status = status;
+				/** @type {import('types/page').ErrorLoadInput} */ (load_input).error = error;
 			}
 
 			const loaded = await module.load.call(null, load_input);
@@ -811,7 +811,7 @@ class Renderer {
 			session: this.session_id !== this.current.session_id
 		};
 
-		/** @type {import('types').Page} */
+		/** @type {import('types/page').Page} */
 		const page = { host: this.host, path, query, params };
 
 		/** @type {import('./types').BranchNode[]} */
@@ -992,8 +992,8 @@ class Renderer {
  *   hydrate: {
  *     status: number;
  *     error: Error;
- *     nodes: Array<Promise<import('types.internal').CSRComponent>>;
- *     page: import('types').Page;
+ *     nodes: Array<Promise<import('types/internal').CSRComponent>>;
+ *     page: import('types/page').Page;
  *   };
  * }} opts */
 async function start({ paths, target, session, host, route, spa, hydrate }) {
