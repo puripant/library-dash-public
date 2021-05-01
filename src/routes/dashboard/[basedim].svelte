@@ -34,14 +34,15 @@
 				x: d.basedim,
 				y: d[dim].reduce((prev, cur) => (prev += cur.count), 0)
 			}))
-			.sort((x, y) => y.y - x.y)
-			.slice(0, 5);
+			.sort((x, y) => y.y - x.y);
+
 		let newItem = {
 			6: gridHelp.item({
 				w: Math.round(randomNumberInRange(1, 4)),
 				h: Math.round(randomNumberInRange(1, 4)),
 				x: 0,
-				y: 0
+				y: 0,
+				customDragger: true
 			}),
 			id: id(),
 			data: bardata
@@ -77,7 +78,7 @@
 		</ul>
 	</nav>
 	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
-		<Grid bind:items rowHeight={100} let:item let:dataItem {cols}>
+		<Grid bind:items rowHeight={100} let:item let:dataItem {cols} let:movePointerDown>
 			<div class="w-full h-full">
 				<span
 					on:pointerdown={(e) => e.stopPropagation()}
@@ -86,6 +87,7 @@
 				>
 					✕
 				</span>
+				<div on:pointerdown={movePointerDown}>Dragger</div>
 				<Barchart data={dataItem.data} />
 			</div>
 		</Grid>
