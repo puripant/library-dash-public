@@ -1,6 +1,5 @@
 <script>
 	import * as d3 from 'd3';
-	import { ticks } from 'd3';
 	export let data = [],
 		dim = '';
 	export const margin = {
@@ -33,9 +32,9 @@
 
 <div class="w-full h-full flex flex-col">
 	<div id="input-area">
-		<h2>{dim}</h2>
-		<div id="slicer" class="w-full">
-			<input type="range" class="w-full" min={5} max={data.length} step={1} bind:value={slicer} />
+		<h2 class="text-center font-bold p-2 text-lg">{dim}</h2>
+		<div id="slicer" class="w-full px-2 flex flex-col">
+			<p class="text-center text-sm font-">Top {slicer} - {slicer + 5}</p>
 		</div>
 	</div>
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
@@ -73,5 +72,8 @@
 				{/each}
 			</g>
 		</svg>
+	</div>
+	<div id="slicer" class="w-full px-2 flex flex-col">
+		<input type="range" class="w-full" min={0} max={data.length} step={1} bind:value={slicer} />
 	</div>
 </div>

@@ -24,22 +24,22 @@
 	});
 
 	$: items = [
-		{
-			6: gridHelp.item({
-				w: 2,
-				h: 5,
-				x: 0,
-				y: 0,
-				customDragger: true
-			}),
-			id: id(),
-			data: data
-				.map((d) => ({
-					x: d.basedim,
-					y: d['checkin_gmt_year'].reduce((prev, cur) => (prev += cur.count), 0)
-				}))
-				.sort((x, y) => y.y - x.y)
-		}
+		// {
+		// 	6: gridHelp.item({
+		// 		w: 2,
+		// 		h: 5,
+		// 		x: 0,
+		// 		y: 0,
+		// 		customDragger: true
+		// 	}),
+		// 	id: id(),
+		// 	data: data
+		// 		.map((d) => ({
+		// 			x: d.basedim,
+		// 			y: d['checkin_gmt_year'].reduce((prev, cur) => (prev += cur.count), 0)
+		// 		}))
+		// 		.sort((x, y) => y.y - x.y)
+		// }
 	];
 
 	const cols = [[1200, 6]];
