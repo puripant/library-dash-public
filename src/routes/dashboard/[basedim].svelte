@@ -8,6 +8,7 @@
 
 	// import { page } from '$app/stores';
 	import id from '../..//utils/id';
+	import Barchart from '../barchart/index.svelte';
 
 	// const {
 	// 	params: { basedim }
@@ -22,32 +23,19 @@
 		console.log(data);
 	});
 
-	let items = [
-		{
-			[COLS]: gridHelp.item({
-				x: 0,
-				y: 0,
-				w: 2,
-				h: 2
-			}),
-			id: id()
-		},
-
-		{
-			[COLS]: gridHelp.item({
-				x: 2,
-				y: 0,
-				w: 2,
-				h: 2
-			}),
-			id: id()
-		}
-	];
+	let items = [];
 
 	const cols = [[1200, 6]];
 	const randomNumberInRange = (min, max) => Math.random() * (max - min) + min;
 
-	function add() {
+	function add(dim) {
+		const bardata = data
+			.map((d) => ({
+				x: d.basedim,
+				y: d[dim].reduce((prev, cur) => (prev += cur.count), 0)
+			}))
+			.sort((x, y) => y.y - x.y)
+			.slice(0, 5);
 		let newItem = {
 			6: gridHelp.item({
 				w: Math.round(randomNumberInRange(1, 4)),
@@ -55,7 +43,8 @@
 				x: 0,
 				y: 0
 			}),
-			id: id()
+			id: id(),
+			data: bardata
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);
@@ -73,10 +62,6 @@
 
 	const remove = (item) => {
 		items = items.filter((value) => value.id !== item.id);
-
-		// if (adjustAfterRemove) {
-		// 	items = gridHelp.adjust(items, COLS);
-		// }
 	};
 </script>
 
@@ -86,14 +71,14 @@
 		<ul class="flex flex-col">
 			{#each Object.keys(data[0]) as dim}
 				<li>
-					{dim} <button on:click={add}>+</button>
+					{dim} <button on:click={() => add(dim)}>+</button>
 				</li>
 			{/each}
 		</ul>
 	</nav>
 	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 		<Grid bind:items rowHeight={100} let:item let:dataItem {cols}>
-			<div class="demo-widget">
+			<div class="w-full h-full">
 				<span
 					on:pointerdown={(e) => e.stopPropagation()}
 					on:click={() => remove(dataItem)}
@@ -101,7 +86,7 @@
 				>
 					✕
 				</span>
-				<p>{dataItem.id}</p>
+				<Barchart data={dataItem.data} />
 			</div>
 		</Grid>
 	</div>
