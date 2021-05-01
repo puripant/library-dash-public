@@ -38,8 +38,8 @@
 
 		let newItem = {
 			6: gridHelp.item({
-				w: Math.round(randomNumberInRange(1, 4)),
-				h: Math.round(randomNumberInRange(1, 4)),
+				w: 2,
+				h: 5,
 				x: 0,
 				y: 0,
 				customDragger: true
