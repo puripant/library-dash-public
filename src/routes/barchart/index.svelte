@@ -1,5 +1,6 @@
 <script>
 	import * as d3 from 'd3';
+	import Bar from './bar.svelte';
 	export let data = [],
 		dim = '';
 	export const margin = {
@@ -19,7 +20,7 @@
 
 	$: Y = d3
 		.scaleLinear()
-		.domain([0, d3.max(data, (d) => d.y)])
+		.domain([0, d3.max(data, (d) => d.y.reduce((prev, cur) => (prev += cur.count), 0))])
 		.range([h - margin.bottom, margin.top])
 		.nice();
 
@@ -62,13 +63,7 @@
 
 			<g class="bar">
 				{#each bardata as d, i}
-					<rect
-						x={X(d.x)}
-						y={Y(d.y)}
-						width={X.bandwidth()}
-						height={h - margin.bottom - Y(d.y)}
-						fill={`hsl(${(i * 360) / 5}, 50%, 60%)`}
-					/>
+					<Bar {X} {Y} {w} {h} {margin} data={d} />
 				{/each}
 			</g>
 		</svg>

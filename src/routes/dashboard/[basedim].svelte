@@ -15,7 +15,7 @@
 	// } = $page;
 	const basedim = 'library';
 
-	let data = [{ checkin_gmt_year: [] }];
+	let data = [{ checkin_gmt_year: [{ day: '', count: 1 }] }];
 
 	const COLS = 6;
 	onMount(async () => {
@@ -49,9 +49,13 @@
 		const bardata = data
 			.map((d) => ({
 				x: d.basedim,
-				y: d[dim].reduce((prev, cur) => (prev += cur.count), 0)
+				y: d[dim]
 			}))
-			.sort((x, y) => y.y - x.y);
+			.sort((x, y) => {
+				const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+				const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+				return b - a;
+			});
 
 		let newItem = {
 			6: gridHelp.item({
