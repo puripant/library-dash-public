@@ -18,7 +18,7 @@
 
 	$: Y = d3
 		.scaleLinear()
-		.domain([0, d3.max(bardata, (d) => d.y)])
+		.domain([0, d3.max(data, (d) => d.y)])
 		.range([h - margin.top, margin.bottom]);
 
 	$: X = d3
@@ -28,33 +28,35 @@
 		.padding(0.2);
 </script>
 
-<div class="w-full h-full" bind:clientHeight={h} bind:clientWidth={w}>
+<div class="w-full h-full flex flex-col">
 	<div id="input-area">
 		<div id="slicer">
 			{slicer}
 			<input type="range" min={5} max={data.length} step={1} bind:value={slicer} />
 		</div>
 	</div>
-	<svg class="w-full h-full">
-		<g class="bar">
-			{#each bardata as d}
-				<rect
-					x={X(d.x)}
-					y={Y(d.y)}
-					width={X.bandwidth()}
-					height={h - margin.top - Y(d.y)}
-					fill="green"
-				/>
-			{/each}
-		</g>
+	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
+		<svg class="w-full h-full">
+			<g class="bar">
+				{#each bardata as d}
+					<rect
+						x={X(d.x)}
+						y={Y(d.y)}
+						width={X.bandwidth()}
+						height={h - margin.top - Y(d.y)}
+						fill="green"
+					/>
+				{/each}
+			</g>
 
-		<!-- X Scale -->
-		<g transform={`translate(0, ${h - margin.top / 2})`}>
-			{#each bardata as d}
-				<g transform={`translate(${X(d.x) + X.bandwidth() / 2} , 0)`}>
-					<text text-anchor="middle">{d.x}</text>
-				</g>
-			{/each}
-		</g>
-	</svg>
+			<!-- X Scale -->
+			<g transform={`translate(0, ${h - margin.top / 2})`}>
+				{#each bardata as d}
+					<g transform={`translate(${X(d.x) + X.bandwidth() / 2} , 0)`}>
+						<text text-anchor="middle">{d.x}</text>
+					</g>
+				{/each}
+			</g>
+		</svg>
+	</div>
 </div>

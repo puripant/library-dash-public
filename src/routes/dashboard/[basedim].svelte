@@ -15,7 +15,7 @@
 	// } = $page;
 	const basedim = 'library';
 
-	let data = [{ basedim: 0 }];
+	let data = [{ checkin_gmt_year: [] }];
 
 	const COLS = 6;
 	onMount(async () => {
@@ -23,7 +23,24 @@
 		console.log(data);
 	});
 
-	let items = [];
+	$: items = [
+		{
+			6: gridHelp.item({
+				w: 2,
+				h: 5,
+				x: 0,
+				y: 0,
+				customDragger: true
+			}),
+			id: id(),
+			data: data
+				.map((d) => ({
+					x: d.basedim,
+					y: d['checkin_gmt_year'].reduce((prev, cur) => (prev += cur.count), 0)
+				}))
+				.sort((x, y) => y.y - x.y)
+		}
+	];
 
 	const cols = [[1200, 6]];
 	const randomNumberInRange = (min, max) => Math.random() * (max - min) + min;
@@ -59,6 +76,7 @@
 		};
 
 		items = [...items, ...[newItem]];
+		console.log(newItem);
 	}
 
 	const remove = (item) => {
@@ -79,16 +97,20 @@
 	</nav>
 	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 		<Grid bind:items rowHeight={100} let:item let:dataItem {cols} let:movePointerDown>
-			<div class="w-full h-full">
-				<span
-					on:pointerdown={(e) => e.stopPropagation()}
-					on:click={() => remove(dataItem)}
-					class="remove"
-				>
-					✕
-				</span>
-				<div on:pointerdown={movePointerDown}>Dragger</div>
-				<Barchart data={dataItem.data} />
+			<div class="w-full h-full border-2 border-black flex flex-col">
+				<div id="top-bar" class="w-full flex bg-gray-200 px-2">
+					<span
+						on:pointerdown={(e) => e.stopPropagation()}
+						on:click={() => remove(dataItem)}
+						class="remove"
+					>
+						✕
+					</span>
+					<div on:pointerdown={movePointerDown} class="flex-1 cursor-pointer" />
+				</div>
+				<div class="flex-1">
+					<Barchart data={dataItem.data} />
+				</div>
 			</div>
 		</Grid>
 	</div>
