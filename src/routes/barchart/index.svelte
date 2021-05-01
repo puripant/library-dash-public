@@ -16,7 +16,6 @@
 	let slicer = 0;
 
 	$: bardata = data.slice(slicer, slicer + 5);
-	$: console.log('bardata', bardata);
 
 	$: Y = d3
 		.scaleLinear()

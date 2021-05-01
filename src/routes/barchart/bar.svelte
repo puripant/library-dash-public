@@ -1,15 +1,6 @@
 <script>
-	import * as d3 from 'd3';
 	export let X = () => 0,
-		Y = () => 0,
-		w = 300,
-		h = 150,
-		margin = {
-			top: 20,
-			right: 20,
-			bottom: 50,
-			left: 40
-		};
+		Y = () => 0;
 	export let data = { x: '', y: [{ x2: '02', y2: 5 }] };
 	$: bardata = {
 		x: data.x,
@@ -21,32 +12,29 @@
 			.sort((a, b) => +a.x2 - b.x2)
 	};
 
-	$: console.log('b', bardata);
-	$: console.log(d3.cumsum(bardata.y, (d) => d.y2));
-
-	let accumulator = 0;
-	$: stackdata = bardata.y.reduce((acc, cur, idx) => {
-		if (idx === 0) {
-			return acc;
-		}
-		return [
-			...acc,
-			{
-				...cur,
-				y: (accumulator += cur.y2)
-			}
-		];
-	}, []);
-
-	$: console.log('stack', stackdata);
+	$: stackdata = (() => {
+		let accumulator = 0;
+		const stackdata = bardata.y.reduce((acc, cur, idx) => {
+			return [
+				...acc,
+				{
+					...cur,
+					y: (accumulator += cur.y2),
+					prev: acc.length ? acc[idx - 1].y : 0
+				}
+			];
+		}, []);
+		return stackdata;
+	})();
 </script>
 
-<!-- {#each stackdata.y as d, i}
-	<rect
-		x={X(data.x)}
-		y={Y(d.y)}
-		width={X.bandwidth()}
-		height={h - d.y}
-		fill={`hsl(${(i * 360) / 5}, 50%, 60%)`}
-	/>
-{/each} -->
+<g transform={`translate(${X(data.x)}, 0)`}>
+	{#each stackdata as d, i}
+		<rect
+			y={Y(d.y)}
+			width={X.bandwidth()}
+			height={Y(d.prev) - Y(d.y)}
+			fill={`hsl(${(i * 360) / data.y.length}, 50%, 60%)`}
+		/>
+	{/each}
+</g>
