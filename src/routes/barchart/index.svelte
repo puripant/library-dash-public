@@ -1,11 +1,13 @@
 <script>
 	import * as d3 from 'd3';
-	export let data = [];
+	import { ticks } from 'd3';
+	export let data = [],
+		dim = '';
 	export const margin = {
 		top: 20,
 		right: 20,
-		bottom: 20,
-		left: 20
+		bottom: 50,
+		left: 40
 	};
 
 	let w = 300,
@@ -19,42 +21,55 @@
 	$: Y = d3
 		.scaleLinear()
 		.domain([0, d3.max(data, (d) => d.y)])
-		.range([h - margin.top, margin.bottom]);
+		.range([h - margin.bottom, margin.top])
+		.nice();
 
 	$: X = d3
 		.scaleBand()
 		.domain(bardata.map((d) => d.x))
 		.range([margin.left, w - margin.right])
-		.padding(0.2);
+		.padding(0.25);
 </script>
 
 <div class="w-full h-full flex flex-col">
 	<div id="input-area">
-		<div id="slicer">
-			{slicer}
-			<input type="range" min={5} max={data.length} step={1} bind:value={slicer} />
+		<h2>{dim}</h2>
+		<div id="slicer" class="w-full">
+			<input type="range" class="w-full" min={5} max={data.length} step={1} bind:value={slicer} />
 		</div>
 	</div>
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
 		<svg class="w-full h-full">
-			<g class="bar">
+			<!-- X Axis -->
+			<g transform={`translate(0, ${h - margin.bottom + 10})`}>
 				{#each bardata as d}
+					<g transform={`translate(${X(d.x) + X.bandwidth() / 2} , 0)`}>
+						<text text-anchor="start" transform={'rotate(45)'} font-size={10}>{d.x}</text>
+					</g>
+				{/each}
+			</g>
+
+			<!-- Y Axis -->
+			<g transform={`translate(${margin.left}, 0)`}>
+				{#each Y.ticks() as tick}
+					<g transform={`translate(0, ${Y(tick)})`}>
+						<text text-anchor="end" dominant-baseline="central" font-size={10}
+							>{d3.format(',')(tick)}</text
+						>
+						<line x2={w - margin.left - margin.right} stroke={'rgba(0, 0, 0, 0.2)'} />
+					</g>
+				{/each}
+			</g>
+
+			<g class="bar">
+				{#each bardata as d, i}
 					<rect
 						x={X(d.x)}
 						y={Y(d.y)}
 						width={X.bandwidth()}
-						height={h - margin.top - Y(d.y)}
-						fill="green"
+						height={h - margin.bottom - Y(d.y)}
+						fill={`hsl(${(i * 360) / 5}, 50%, 60%)`}
 					/>
-				{/each}
-			</g>
-
-			<!-- X Scale -->
-			<g transform={`translate(0, ${h - margin.top / 2})`}>
-				{#each bardata as d}
-					<g transform={`translate(${X(d.x) + X.bandwidth() / 2} , 0)`}>
-						<text text-anchor="middle">{d.x}</text>
-					</g>
 				{/each}
 			</g>
 		</svg>

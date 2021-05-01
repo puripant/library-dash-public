@@ -62,7 +62,8 @@
 				customDragger: true
 			}),
 			id: id(),
-			data: bardata
+			data: bardata,
+			dim: dim
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);
@@ -76,7 +77,6 @@
 		};
 
 		items = [...items, ...[newItem]];
-		console.log(newItem);
 	}
 
 	const remove = (item) => {
@@ -109,7 +109,7 @@
 					<div on:pointerdown={movePointerDown} class="flex-1 cursor-pointer" />
 				</div>
 				<div class="flex-1">
-					<Barchart data={dataItem.data} />
+					<Barchart data={dataItem.data} dim={dataItem.dim} />
 				</div>
 			</div>
 		</Grid>
