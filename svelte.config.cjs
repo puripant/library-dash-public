@@ -17,7 +17,7 @@ module.exports = {
 		// You can create optimized builds for different platforms by
 		// specifying a different adapter
 		adapter: adapterStatic({
-			fallback: '200.html'
+			fallback: 'index.html'
 		}),
 
 		// hydrate the <div id="svelte"> element in src/app.html

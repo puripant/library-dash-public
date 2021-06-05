@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import Grid from 'svelte-grid';
-	import gridHelp from 'svelte-grid/build/helper/index';
+	import gridHelp from 'svelte-grid/build/helper/index.js';
 
 	import * as d3 from 'd3';
 
