@@ -23,18 +23,7 @@
 
 	const cols = [[1200, 6]];
 
-	function add(dim) {
-		const bardata = data
-			.map((d) => ({
-				x: d.basedim,
-				y: d[dim]
-			}))
-			.sort((x, y) => {
-				const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-				const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-				return b - a;
-			});
-
+	function add(dim, data) {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -44,7 +33,7 @@
 				customDragger: true
 			}),
 			id: id(),
-			data: bardata,
+			data,
 			dim: dim
 		};
 
@@ -62,7 +51,29 @@
 	}
 
 	const addByFilter = (event) => {
-		console.log('--- event :', event.detail, ' ---');
+		const {
+			dim,
+			data: { x2 }
+		} = event.detail;
+
+		const bardata = data
+			.map((d) => {
+				return {
+					x: d.basedim,
+					y: d[dim].filter((y) => {
+						const [f] = Object.values(y);
+
+						return f === x2;
+					})
+				};
+			})
+			.sort((x, y) => {
+				const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+				const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+				return b - a;
+			});
+
+		add(dim, bardata);
 	};
 
 	const remove = (item) => {
@@ -76,7 +87,23 @@
 		<ul class="flex flex-col">
 			{#each Object.keys(data[0]) as dim}
 				<li>
-					{dim} <button on:click={() => add(dim)}>+</button>
+					{dim}
+					<button
+						on:click={() => {
+							const bardata = data
+								.map((d) => ({
+									x: d.basedim,
+									y: d[dim]
+								}))
+								.sort((x, y) => {
+									const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+									const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+									return b - a;
+								});
+
+							add(dim, bardata);
+						}}>+</button
+					>
 				</li>
 			{/each}
 		</ul>
