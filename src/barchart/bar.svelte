@@ -9,7 +9,7 @@
 				const [x2, y2] = Object.values(k);
 				return { x2, y2 };
 			})
-			.sort((a, b) => +a.x2 - b.x2)
+			.sort((a, b) => +a.x2 - +b.x2)
 	};
 
 	$: stackdata = (() => {
@@ -19,7 +19,7 @@
 				...acc,
 				{
 					...cur,
-					y: (accumulator += cur.y2),
+					y: (accumulator += +cur.y2),
 					prev: acc.length ? acc[idx - 1].y : 0
 				}
 			];

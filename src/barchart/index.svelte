@@ -62,7 +62,7 @@
 
 			<g class="bar">
 				{#each bardata as d, i}
-					<Bar {X} {Y} {w} {h} {margin} data={d} />
+					<Bar {X} {Y} data={d} />
 				{/each}
 			</g>
 		</svg>
