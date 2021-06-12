@@ -62,7 +62,7 @@
 	}
 
 	const addByFilter = (event) => {
-		console.log('--- event :', event, ' ---');
+		console.log('--- event :', event.detail, ' ---');
 	};
 
 	const remove = (item) => {

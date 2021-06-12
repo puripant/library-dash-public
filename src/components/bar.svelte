@@ -7,8 +7,9 @@
 
 	const dispatch = createEventDispatcher();
 
-	function filter(d) {
+	function filter(x, d) {
 		dispatch('filter', {
+			x,
 			data: d
 		});
 	}
@@ -47,7 +48,7 @@
 			width={X.bandwidth()}
 			height={Y(d.prev) - Y(d.y)}
 			fill={`hsl(${(i * 360) / data.y.length}, 50%, 60%)`}
-			on:click={() => filter(d)}
+			on:click={() => filter(data.x, d)}
 		/>
 	{/each}
 </g>

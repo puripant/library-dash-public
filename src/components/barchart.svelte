@@ -19,7 +19,7 @@
 	const dispatch = createEventDispatcher();
 
 	function forward(event) {
-		dispatch('filter', event.detail);
+		dispatch('filter', { ...event.detail, dim });
 	}
 
 	$: bardata = data.slice(slicer, slicer + 5);
