@@ -1,6 +1,7 @@
 <script>
-	export let X = () => 0,
-		Y = () => 0;
+	import * as d3 from 'd3';
+	export let X = d3.scaleBand(),
+		Y = d3.scaleLinear();
 	export let data = { x: '', y: [{ x2: '02', y2: 5 }] };
 	$: bardata = {
 		x: data.x,
