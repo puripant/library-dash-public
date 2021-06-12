@@ -83,7 +83,12 @@
 	</nav>
 	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 		<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
-			<Card on:filter={addByFilter} onRemove={remove(dataItem)} {movePointerDown} {...dataItem} />
+			<Card
+				on:filter={addByFilter}
+				on:remove={() => remove(dataItem)}
+				{movePointerDown}
+				{...dataItem}
+			/>
 		</Grid>
 	</div>
 </main>

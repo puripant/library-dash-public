@@ -3,18 +3,24 @@
 
 	import Barchart from '../components/barchart.svelte';
 
-	export let onRemove, movePointerDown, data, dim;
+	export let movePointerDown, data, dim;
 
 	const dispatch = createEventDispatcher();
 
 	function forward(event) {
 		dispatch('filter', event.detail);
 	}
+
+	function removeEvent() {
+		dispatch('remove');
+	}
 </script>
 
 <div class="w-full h-full border-2 border-black flex flex-col">
 	<div id="top-bar" class="w-full flex bg-gray-200 px-2">
-		<span on:pointerdown={(e) => e.stopPropagation()} on:click={onRemove} class="remove"> ✕ </span>
+		<span on:pointerdown={(e) => e.stopPropagation()} on:click={removeEvent} class="remove">
+			✕
+		</span>
 		<div on:pointerdown={movePointerDown} class="flex-1 cursor-pointer" />
 	</div>
 	<div class="flex-1">
