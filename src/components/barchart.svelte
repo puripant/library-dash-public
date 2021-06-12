@@ -1,5 +1,6 @@
 <script>
 	import * as d3 from 'd3';
+	import { createEventDispatcher } from 'svelte';
 	import Bar from './bar.svelte';
 	export let data = [],
 		dim = '';
@@ -14,6 +15,12 @@
 		h = 150;
 
 	let slicer = 0;
+
+	const dispatch = createEventDispatcher();
+
+	function forward(event) {
+		dispatch('filter', event.detail);
+	}
 
 	$: bardata = data.slice(slicer, slicer + 5);
 
@@ -61,8 +68,8 @@
 			</g>
 
 			<g class="bar">
-				{#each bardata as d, i}
-					<Bar {X} {Y} data={d} />
+				{#each bardata as d}
+					<Bar {X} {Y} data={d} on:filter={forward} />
 				{/each}
 			</g>
 		</svg>

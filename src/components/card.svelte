@@ -1,7 +1,15 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
 	import Barchart from '../components/barchart.svelte';
 
 	export let onRemove, movePointerDown, data, dim;
+
+	const dispatch = createEventDispatcher();
+
+	function forward(event) {
+		dispatch('filter', event.detail);
+	}
 </script>
 
 <div class="w-full h-full border-2 border-black flex flex-col">
@@ -10,6 +18,6 @@
 		<div on:pointerdown={movePointerDown} class="flex-1 cursor-pointer" />
 	</div>
 	<div class="flex-1">
-		<Barchart {data} {dim} />
+		<Barchart {data} {dim} on:filter={forward} />
 	</div>
 </div>

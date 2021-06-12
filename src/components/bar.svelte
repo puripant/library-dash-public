@@ -1,8 +1,18 @@
 <script>
 	import * as d3 from 'd3';
+	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
 		Y = d3.scaleLinear();
 	export let data = { x: '', y: [{ x2: '02', y2: 5 }] };
+
+	const dispatch = createEventDispatcher();
+
+	function filter(d) {
+		dispatch('filter', {
+			data: d
+		});
+	}
+
 	$: bardata = {
 		x: data.x,
 		y: data.y
@@ -32,10 +42,12 @@
 <g transform={`translate(${X(data.x)}, 0)`}>
 	{#each stackdata as d, i}
 		<rect
+			class="cursor-pointer"
 			y={Y(d.y)}
 			width={X.bandwidth()}
 			height={Y(d.prev) - Y(d.y)}
 			fill={`hsl(${(i * 360) / data.y.length}, 50%, 60%)`}
+			on:click={() => filter(d)}
 		/>
 	{/each}
 </g>

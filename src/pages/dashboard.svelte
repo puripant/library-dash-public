@@ -7,7 +7,7 @@
 	import * as d3 from 'd3';
 
 	import id from '../utils/id';
-	import Card from 'src/components/card.svelte';
+	import Card from '../components/card.svelte';
 
 	const basedim = 'library';
 
@@ -61,6 +61,10 @@
 		items = [...items, ...[newItem]];
 	}
 
+	const addByFilter = (event) => {
+		console.log('--- event :', event, ' ---');
+	};
+
 	const remove = (item) => {
 		items = items.filter((value) => value.id !== item.id);
 	};
@@ -79,7 +83,7 @@
 	</nav>
 	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 		<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
-			<Card onRemove={remove(dataItem)} {movePointerDown} {...dataItem} />
+			<Card on:filter={addByFilter} onRemove={remove(dataItem)} {movePointerDown} {...dataItem} />
 		</Grid>
 	</div>
 </main>
