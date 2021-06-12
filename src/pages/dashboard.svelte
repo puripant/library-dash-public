@@ -7,7 +7,7 @@
 	import * as d3 from 'd3';
 
 	import id from '../utils/id';
-	import Barchart from '../components/barchart.svelte';
+	import Card from 'src/components/card.svelte';
 
 	const basedim = 'library';
 
@@ -78,22 +78,8 @@
 		</ul>
 	</nav>
 	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
-		<Grid bind:items rowHeight={100} let:item let:dataItem {cols} let:movePointerDown>
-			<div class="w-full h-full border-2 border-black flex flex-col">
-				<div id="top-bar" class="w-full flex bg-gray-200 px-2">
-					<span
-						on:pointerdown={(e) => e.stopPropagation()}
-						on:click={() => remove(dataItem)}
-						class="remove"
-					>
-						✕
-					</span>
-					<div on:pointerdown={movePointerDown} class="flex-1 cursor-pointer" />
-				</div>
-				<div class="flex-1">
-					<Barchart data={dataItem.data} dim={dataItem.dim} />
-				</div>
-			</div>
+		<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
+			<Card onRemove={remove(dataItem)} {movePointerDown} {...dataItem} />
 		</Grid>
 	</div>
 </main>
