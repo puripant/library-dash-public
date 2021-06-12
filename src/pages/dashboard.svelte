@@ -86,7 +86,7 @@
 			<Card
 				on:filter={addByFilter}
 				on:remove={() => remove(dataItem)}
-				{movePointerDown}
+				on:move={(e) => movePointerDown(e.detail)}
 				{...dataItem}
 			/>
 		</Grid>
