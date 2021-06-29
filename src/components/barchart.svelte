@@ -10,6 +10,7 @@
 		bottom: 50,
 		left: 40
 	};
+	let tooltip = '';
 
 	let w = 300,
 		h = 150;
@@ -20,6 +21,13 @@
 
 	function forward(event) {
 		dispatch('filter', { ...event.detail, dim });
+	}
+
+	function handleHover(event) {
+		const { tooltip: newTooltip } = event.detail;
+		console.log('--- event :', event, ' ---');
+
+		tooltip = newTooltip;
 	}
 
 	$: bardata = data.slice(slicer, slicer + 5);
@@ -42,6 +50,7 @@
 		<h2 class="text-center font-bold p-2 text-lg">{dim}</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
 			<p class="text-center text-sm font-">Top {slicer} - {slicer + 5}</p>
+			<p class="text-center text-sm">{tooltip || 'hover for tooltip'}</p>
 		</div>
 	</div>
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
@@ -69,7 +78,7 @@
 
 			<g class="bar">
 				{#each bardata as d}
-					<Bar {X} {Y} data={d} on:filter={forward} />
+					<Bar {X} {Y} data={d} on:filter={forward} on:hover={handleHover} />
 				{/each}
 			</g>
 		</svg>

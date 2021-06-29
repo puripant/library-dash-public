@@ -15,6 +15,13 @@
 		});
 	}
 
+	function hover(x, d) {
+		console.log('--- d :', d, ' ---');
+		dispatch('hover', {
+			tooltip: x.length === 0 ? x : `basedim: ${x} x: ${d.x2} count: ${d.y2}`
+		});
+	}
+
 	$: bardata = {
 		x: data.x,
 		y: data.y
@@ -50,6 +57,8 @@
 			height={Y(d.prev) - Y(d.y)}
 			fill={colorHash.hex(d.x2)}
 			on:click={() => filter(data.x, d)}
+			on:mouseenter={() => hover(data.x, d)}
+			on:mouseleave={() => hover('')}
 		/>
 	{/each}
 </g>
