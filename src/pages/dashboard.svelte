@@ -11,7 +11,7 @@
 
 	const basedim = 'library';
 
-	let data = [{ checkin_gmt_year: [{ day: '', count: 1 }] }];
+	let data = [{ checkin_gmt_year: [{ key: '', count: 1 }] }];
 
 	const COLS = 6;
 	onMount(async () => {
