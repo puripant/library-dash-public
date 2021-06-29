@@ -1,5 +1,6 @@
 <script>
 	import * as d3 from 'd3';
+	import colorHash from '../utils/barcolors';
 	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
 		Y = d3.scaleLinear();
@@ -47,7 +48,7 @@
 			y={Y(d.y)}
 			width={X.bandwidth()}
 			height={Y(d.prev) - Y(d.y)}
-			fill={`hsl(${(i * 360) / data.y.length}, 50%, 60%)`}
+			fill={colorHash.hex(d.x2)}
 			on:click={() => filter(data.x, d)}
 		/>
 	{/each}
