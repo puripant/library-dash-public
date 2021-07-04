@@ -3,7 +3,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import Bar from './bar.svelte';
 	export let data = [],
-		dim = '';
+		dim = '',
+		name = '';
 	export const margin = {
 		top: 20,
 		right: 20,
@@ -47,7 +48,7 @@
 
 <div class="w-full h-full flex flex-col">
 	<div id="input-area">
-		<h2 class="text-center font-bold p-2 text-lg">{dim}</h2>
+		<h2 class="text-center font-bold p-2 text-lg">{name}</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
 			<p class="text-center text-sm font-">Top {slicer} - {slicer + 5}</p>
 			<p class="text-center text-sm">{tooltip || 'hover for tooltip'}</p>

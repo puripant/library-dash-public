@@ -40,7 +40,8 @@
 			}),
 			id: id(),
 			data,
-			dim: metadata[dim]
+			dim: dim,
+			name: metadata[dim]
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);

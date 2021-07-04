@@ -3,7 +3,7 @@
 
 	import Barchart from '../components/barchart.svelte';
 
-	export let data, dim;
+	export let data, dim, name;
 
 	const dispatch = createEventDispatcher();
 
@@ -24,6 +24,6 @@
 		<div on:pointerdown={(e) => dispatch('move', e)} class="flex-1 cursor-pointer" />
 	</div>
 	<div class="flex-1">
-		<Barchart {data} {dim} on:filter={forward} />
+		<Barchart {data} {dim} {name} on:filter={forward} />
 	</div>
 </div>
