@@ -18,7 +18,7 @@
 
 <div class="w-full h-full border-2 border-black flex flex-col">
 	<div id="top-bar" class="w-full flex bg-gray-200 px-2">
-		<span on:pointerdown={(e) => e.stopPropagation()} on:click={removeEvent} class="remove">
+		<span on:pointerdown={(e) => e.stopPropagation()} on:click={removeEvent} class="cursor-pointer">
 			✕
 		</span>
 		<div on:pointerdown={(e) => dispatch('move', e)} class="flex-1 cursor-pointer" />
