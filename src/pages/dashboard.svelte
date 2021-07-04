@@ -12,11 +12,17 @@
 	const basedim = 'library';
 
 	let data = [{ checkin_gmt_year: [{ key: '', count: 1 }] }];
+	let metadata = {
+		checkout_gmt_year:
+			'\u0e08\u0e33\u0e19\u0e27\u0e19\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48\u0e16\u0e39\u0e01\u0e22\u0e37\u0e21\u0e43\u0e19\u0e1b\u0e35\u0e19\u0e31\u0e49\u0e19 \u0e46'
+	};
 
 	const COLS = 6;
 	onMount(async () => {
 		data = await d3.json('/data/data.json');
 		console.log(data);
+
+		metadata = await d3.json('/data/metadata.json');
 	});
 
 	$: items = [];
@@ -34,7 +40,7 @@
 			}),
 			id: id(),
 			data,
-			dim: dim
+			dim: metadata[dim]
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);
@@ -86,25 +92,27 @@
 		<h1>{basedim}</h1>
 		<ul class="flex flex-col">
 			{#each Object.keys(data[0]) as dim}
-				<li>
-					{dim}
-					<button
-						on:click={() => {
-							const bardata = data
-								.map((d) => ({
-									x: d.basedim,
-									y: d[dim]
-								}))
-								.sort((x, y) => {
-									const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-									const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-									return b - a;
-								});
+				{#if metadata[dim]}
+					<li>
+						{metadata[dim]}
+						<button
+							on:click={() => {
+								const bardata = data
+									.map((d) => ({
+										x: d.basedim,
+										y: d[dim]
+									}))
+									.sort((x, y) => {
+										const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+										const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+										return b - a;
+									});
 
-							add(dim, bardata);
-						}}>+</button
-					>
-				</li>
+								add(dim, bardata);
+							}}>+</button
+						>
+					</li>
+				{/if}
 			{/each}
 		</ul>
 	</nav>
