@@ -29,7 +29,7 @@
 
 	const cols = [[1200, 6]];
 
-	function add(dim, data) {
+	function add(dim, data, name) {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -41,7 +41,7 @@
 			id: id(),
 			data,
 			dim: dim,
-			name: metadata[dim]
+			name
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);
@@ -80,7 +80,7 @@
 				return b - a;
 			});
 
-		add(dim, bardata);
+		add(dim, bardata, `${metadata[dim]} (${x2})`);
 	};
 
 	const remove = (item) => {
@@ -109,7 +109,7 @@
 										return b - a;
 									});
 
-								add(dim, bardata);
+								add(dim, bardata, metadata[dim]);
 							}}>+</button
 						>
 					</li>
