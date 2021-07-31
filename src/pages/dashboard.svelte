@@ -8,6 +8,7 @@
 
 	import id from '../utils/id';
 	import Card from '../components/card.svelte';
+	import barcolorsFactory from '../utils/barcolors';
 
 	const basedim = 'library';
 
@@ -16,19 +17,18 @@
 		checkout_gmt_year:
 			'\u0e08\u0e33\u0e19\u0e27\u0e19\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48\u0e16\u0e39\u0e01\u0e22\u0e37\u0e21\u0e43\u0e19\u0e1b\u0e35\u0e19\u0e31\u0e49\u0e19 \u0e46'
 	};
+	let barcolors;
 
 	const COLS = 6;
 	onMount(async () => {
 		const book = await d3.json('/data/book.json');
-		console.log(data);
-
-		metadata = await d3.json('/data/metadata.json');
-		console.log('--- metadata :', metadata, ' ---');
 		const ptype = await d3.json('/data/ptype.json');
-		console.log('--- ptype :', ptype, ' ---');
 		const location = await d3.json('/data/location.json');
-		console.log('--- location :', location, ' ---');
+		metadata = await d3.json('/data/metadata.json');
+
 		data = { book, ptype, location };
+
+		barcolors = barcolorsFactory(data, metadata);
 	});
 
 	$: items = [];
@@ -61,7 +61,8 @@
 			data,
 			datacb,
 			dim: dim,
-			name
+			name,
+			color: barcolors[dim]
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);

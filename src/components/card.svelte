@@ -3,7 +3,7 @@
 
 	import Barchart from '../components/barchart.svelte';
 
-	export let data, datacb, dim, name;
+	export let data, datacb, dim, name, color;
 
 	let basedim = 'book';
 	$: bardata = datacb(data[basedim]);
@@ -40,6 +40,6 @@
 		{/each}
 	</div>
 	<div class="flex-1">
-		<Barchart data={bardata} {dim} {name} on:filter={forward} />
+		<Barchart data={bardata} {dim} {name} {color} on:filter={forward} />
 	</div>
 </div>

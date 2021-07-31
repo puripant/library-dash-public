@@ -4,7 +4,8 @@
 	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
 		Y = d3.scaleLinear();
-	export let data = { x: '', y: [{ x2: '02', y2: 5 }] };
+	export let data = { x: '', y: [{ x2: '02', y2: 5 }] },
+		color;
 
 	const dispatch = createEventDispatcher();
 
@@ -54,7 +55,7 @@
 			y={Y(d.y)}
 			width={X.bandwidth()}
 			height={Y(d.prev) - Y(d.y)}
-			fill={colorHash.hex(d.x2)}
+			fill={color(d.x2)}
 			on:click={() => filter(data.x, d)}
 			on:mouseenter={() => hover(data.x, d)}
 			on:mouseleave={() => hover('')}

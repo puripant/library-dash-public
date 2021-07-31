@@ -4,7 +4,8 @@
 	import Bar from './bar.svelte';
 	export let data = { book: [] },
 		dim = '',
-		name = '';
+		name = '',
+		color;
 	export const margin = {
 		top: 20,
 		right: 20,
@@ -80,7 +81,7 @@
 
 			<g class="bar">
 				{#each bardata as d}
-					<Bar {X} {Y} data={d} on:filter={forward} on:hover={handleHover} />
+					<Bar {X} {Y} data={d} {color} on:filter={forward} on:hover={handleHover} />
 				{/each}
 			</g>
 		</svg>
