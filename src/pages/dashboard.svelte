@@ -11,7 +11,7 @@
 
 	const basedim = 'library';
 
-	let data = [{ checkin_gmt_year: [{ key: '', count: 1 }] }];
+	let data = { book: [{ checkin_gmt_year: [{ key: '', count: 1 }] }] };
 	let metadata = {
 		checkout_gmt_year:
 			'\u0e08\u0e33\u0e19\u0e27\u0e19\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48\u0e16\u0e39\u0e01\u0e22\u0e37\u0e21\u0e43\u0e19\u0e1b\u0e35\u0e19\u0e31\u0e49\u0e19 \u0e46'
@@ -19,7 +19,7 @@
 
 	const COLS = 6;
 	onMount(async () => {
-		data = await d3.json('/data/data.json');
+		const book = await d3.json('/data/book.json');
 		console.log(data);
 
 		metadata = await d3.json('/data/metadata.json');
@@ -28,13 +28,27 @@
 		console.log('--- ptype :', ptype, ' ---');
 		const location = await d3.json('/data/location.json');
 		console.log('--- location :', location, ' ---');
+		data = { book, ptype, location };
 	});
 
 	$: items = [];
 
 	const cols = [[1200, 6]];
 
-	function add(dim, data, name) {
+	/**
+	 * @param {string} dim
+	 * @param {{
+    book: {
+        checkin_gmt_year: {
+            key: string;
+            count: number;
+        }[];
+    }[];
+}} data
+	 * @param {(data: { x: any; y: any; }[]) => { x: any; y: any; }[]} datacb
+	 * @param {string} name
+	 */
+	function add(dim, data, datacb, name) {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -45,6 +59,7 @@
 			}),
 			id: id(),
 			data,
+			datacb,
 			dim: dim,
 			name
 		};
@@ -68,24 +83,25 @@
 			data: { x2 }
 		} = event.detail;
 
-		const bardata = data
-			.map((d) => {
-				return {
-					x: d.basedim,
-					y: d[dim].filter((y) => {
-						const [f] = Object.values(y);
+		const datacb = (data) =>
+			data
+				.map((d) => {
+					return {
+						x: d.basedim,
+						y: d[dim].filter((y) => {
+							const [f] = Object.values(y);
 
-						return f === x2;
-					})
-				};
-			})
-			.sort((x, y) => {
-				const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-				const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-				return b - a;
-			});
+							return f === x2;
+						})
+					};
+				})
+				.sort((x, y) => {
+					const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+					const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+					return b - a;
+				});
 
-		add(dim, bardata, `${metadata[dim]} (${x2})`);
+		add(dim, data, datacb, `${metadata[dim]} (${x2})`);
 	};
 
 	const remove = (item) => {
@@ -97,13 +113,13 @@
 	<nav>
 		<h1>{basedim}</h1>
 		<ul class="flex flex-col">
-			{#each Object.keys(data[0]) as dim}
-				{#if metadata[dim]}
-					<li>
-						{metadata[dim]}
-						<button
-							on:click={() => {
-								const bardata = data
+			{#each Object.entries(metadata) as [dim, title]}
+				<li>
+					{title}
+					<button
+						on:click={() => {
+							const datacb = (data) =>
+								data
 									.map((d) => ({
 										x: d.basedim,
 										y: d[dim]
@@ -114,11 +130,10 @@
 										return b - a;
 									});
 
-								add(dim, bardata, metadata[dim]);
-							}}>+</button
-						>
-					</li>
-				{/if}
+							add(dim, data, datacb, title);
+						}}>+</button
+					>
+				</li>
 			{/each}
 		</ul>
 	</nav>

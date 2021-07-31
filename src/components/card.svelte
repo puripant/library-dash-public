@@ -3,7 +3,11 @@
 
 	import Barchart from '../components/barchart.svelte';
 
-	export let data, dim, name;
+	export let data, datacb, dim, name;
+
+	let basedim = 'book';
+	$: bardata = datacb(data[basedim]);
+	$: basedims = Object.keys(data);
 
 	const dispatch = createEventDispatcher();
 
@@ -23,7 +27,19 @@
 		</span>
 		<div on:pointerdown={(e) => dispatch('move', e)} class="flex-1 cursor-pointer" />
 	</div>
+	<div id="base-dim" class="w-full flex flex-row justify-evenly items-center">
+		{#each basedims as title}
+			<div
+				class={`text-black flex-1 text-center border-2 border-white rounded cursor-pointer ${
+					title === basedim ? 'bg-blue-100' : ''
+				}`}
+				on:click={() => (basedim = title)}
+			>
+				{title}
+			</div>
+		{/each}
+	</div>
 	<div class="flex-1">
-		<Barchart {data} {dim} {name} on:filter={forward} />
+		<Barchart data={bardata} {dim} {name} on:filter={forward} />
 	</div>
 </div>
