@@ -83,8 +83,8 @@
 			data: { x2 }
 		} = event.detail;
 
-		const datacb = (data) =>
-			data
+		const filter = (data) => {
+			return data
 				.map((d) => {
 					return {
 						x: d.basedim,
@@ -100,8 +100,8 @@
 					const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
 					return b - a;
 				});
-
-		add(dim, data, datacb, `${metadata[dim]} (${x2})`);
+		};
+		add(dim, data, filter, `${metadata[dim]} (${x2})`);
 	};
 
 	const remove = (item) => {
@@ -118,7 +118,7 @@
 					{title}
 					<button
 						on:click={() => {
-							const datacb = (data) =>
+							const format = (data) =>
 								data
 									.map((d) => ({
 										x: d.basedim,
@@ -130,7 +130,7 @@
 										return b - a;
 									});
 
-							add(dim, data, datacb, title);
+							add(dim, data, format, title);
 						}}>+</button
 					>
 				</li>
