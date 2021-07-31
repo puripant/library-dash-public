@@ -17,7 +17,7 @@
 
 	function hover(x, d) {
 		dispatch('hover', {
-			tooltip: x.length === 0 ? x : `basedim: ${x} x: ${d.x2} count: ${d.y2}`
+			tooltip: x.length === 0 ? x : `basedim: ${x} \n x: ${d.x2} count: ${d.y2}`
 		});
 	}
 

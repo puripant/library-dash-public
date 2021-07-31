@@ -49,8 +49,10 @@
 	<div id="input-area">
 		<h2 class="text-center font-bold p-2 text-lg">{name}</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
-			<p class="text-center text-sm font-">Top {slicer} - {slicer + 5}</p>
-			<p class="text-center text-sm">{tooltip || 'hover for tooltip'}</p>
+			<p class="text-center text-sm">Top {slicer} - {slicer + 5}</p>
+			<p class="text-center text-sm h-10 whitespace-pre flex items-center justify-center">
+				{tooltip || 'hover for tooltip'}
+			</p>
 		</div>
 	</div>
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
