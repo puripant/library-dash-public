@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
+	import { Wave as Spinner } from 'svelte-loading-spinners';
 	import Grid from 'svelte-grid';
 	import gridHelp from 'svelte-grid/build/helper/index.js';
 
@@ -18,6 +19,7 @@
 			'\u0e08\u0e33\u0e19\u0e27\u0e19\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48\u0e16\u0e39\u0e01\u0e22\u0e37\u0e21\u0e43\u0e19\u0e1b\u0e35\u0e19\u0e31\u0e49\u0e19 \u0e46'
 	};
 	let barcolors;
+	let ready = false;
 
 	const COLS = 6;
 	onMount(async () => {
@@ -29,6 +31,7 @@
 		data = { book, ptype, location };
 
 		barcolors = barcolorsFactory(data, metadata);
+		ready = true;
 	});
 
 	$: items = [];
@@ -111,43 +114,49 @@
 </script>
 
 <main class="w-screen h-screen flex flex-row">
-	<nav>
-		<h1>{basedim}</h1>
-		<ul class="flex flex-col">
-			{#each Object.entries(metadata) as [dim, title]}
-				<li>
-					{title}
-					<button
-						on:click={() => {
-							const format = (data) =>
-								data
-									.map((d) => ({
-										x: d.basedim,
-										y: d[dim]
-									}))
-									.sort((x, y) => {
-										const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-										const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-										return b - a;
-									});
+	{#if ready}
+		<nav>
+			<h1>{basedim}</h1>
+			<ul class="flex flex-col">
+				{#each Object.entries(metadata) as [dim, title]}
+					<li>
+						{title}
+						<button
+							on:click={() => {
+								const format = (data) =>
+									data
+										.map((d) => ({
+											x: d.basedim,
+											y: d[dim]
+										}))
+										.sort((x, y) => {
+											const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+											const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+											return b - a;
+										});
 
-							add(dim, data, format, title);
-						}}>+</button
-					>
-				</li>
-			{/each}
-		</ul>
-	</nav>
-	<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
-		<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
-			<Card
-				on:filter={addByFilter}
-				on:remove={() => remove(dataItem)}
-				on:move={(e) => movePointerDown(e.detail)}
-				{...dataItem}
-			/>
-		</Grid>
-	</div>
+								add(dim, data, format, title);
+							}}>+</button
+						>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+		<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
+			<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
+				<Card
+					on:filter={addByFilter}
+					on:remove={() => remove(dataItem)}
+					on:move={(e) => movePointerDown(e.detail)}
+					{...dataItem}
+				/>
+			</Grid>
+		</div>
+	{:else}
+		<div class="w-full h-full flex justify-center items-center">
+			<Spinner size="60" color="hsl(200, 60%, 40%)" unit="px" duration="1s" />
+		</div>
+	{/if}
 </main>
 
 <style lang="postcss">
