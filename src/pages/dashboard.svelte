@@ -23,6 +23,11 @@
 		console.log(data);
 
 		metadata = await d3.json('/data/metadata.json');
+		console.log('--- metadata :', metadata, ' ---');
+		const ptype = await d3.json('/data/ptype.json');
+		console.log('--- ptype :', ptype, ' ---');
+		const location = await d3.json('/data/location.json');
+		console.log('--- location :', location, ' ---');
 	});
 
 	$: items = [];

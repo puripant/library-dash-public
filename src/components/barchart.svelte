@@ -44,10 +44,27 @@
 		.domain(bardata.map((d) => d.x))
 		.range([margin.left, w - margin.right])
 		.padding(0.25);
+
+	const basedims = [
+		{ name: 'location', title: 'ห้องสมุด' },
+		{ name: 'ptype', title: 'ประเภท' },
+		{ name: 'book', title: 'หนังสือ' }
+	];
 </script>
 
 <div class="w-full h-full flex flex-col">
 	<div id="input-area">
+		<div id="base-dim" class="w-full flex flex-row justify-evenly items-center">
+			{#each basedims as basedim}
+				<div
+					class={`text-black flex-1 text-center border-2 border-white rounded ${
+						basedim.name === 'book' ? 'bg-blue-100' : ''
+					}`}
+				>
+					{basedim.title}
+				</div>
+			{/each}
+		</div>
 		<h2 class="text-center font-bold p-2 text-lg">{name}</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
 			<p class="text-center text-sm font-">Top {slicer} - {slicer + 5}</p>
