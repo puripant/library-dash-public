@@ -12,7 +12,7 @@
 	import barcolorsFactory from '../utils/barcolors';
 	import type { ColorMap } from '../utils/barcolors';
 
-	import type { TData, TDataCB } from '../types/index';
+	import type { TData, TDataCB, TStadckdata } from '../types/index';
 	import metadata from '../utils/metadata';
 
 	const basedim = 'library';
@@ -63,29 +63,31 @@
 		items = [...items, ...[newItem]];
 	}
 
-	const addByFilter = (event) => {
+	const addByFilter = (event: {
+		detail: {
+			dim: string;
+			data: TStadckdata;
+		};
+	}) => {
 		const {
 			dim,
 			data: { x2 }
 		} = event.detail;
 
-		const filter = (data) => {
-			return data
-				.map((d) => {
-					return {
-						x: d.basedim,
-						y: d[dim].filter((y) => {
-							const [f] = Object.values(y);
-
-							return f === x2;
-						})
-					};
-				})
-				.sort((x, y) => {
-					const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-					const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-					return b - a;
-				});
+		const filter: TDataCB = (data, basedim, dim) => {
+			const dataByBaseDim = d3.group(
+				data,
+				(d) => d[basedim],
+				(d) => d[dim]
+			);
+			const res = Array.from(dataByBaseDim.entries()).map(([x, y]) => ({
+				x,
+				y: Array.from(y.entries()).map(([z, w]) => ({
+					x2: z,
+					y2: w.filter((v) => v[dim] === x2).length
+				}))
+			}));
+			return res;
 		};
 		add(dim, data, filter, `${metadata[dim]} (${x2})`);
 	};
@@ -95,7 +97,6 @@
 	};
 
 	const format: TDataCB = (data: Array<TData>, basedim: string, dim: string) => {
-		console.log('--- data, basedim, dim :', data, basedim, dim, ' ---');
 		const dataByBaseDim = d3.group(
 			data,
 			(d) => d[basedim],
@@ -105,19 +106,8 @@
 			x,
 			y: Array.from(y.entries()).map(([z, w]) => ({ x2: z, y2: w.length }))
 		}));
-		console.log('--- dataByBaseDim :', res, ' ---');
 		return res;
 	};
-	// data
-	// 	.map((d) => ({
-	// 		x: d.basedim,
-	// 		y: d[dim]
-	// 	}))
-	// 	.sort((x, y) => {
-	// 		const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-	// 		const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-	// 		return b - a;
-	// 	});
 </script>
 
 <main class="w-screen h-screen flex flex-row">

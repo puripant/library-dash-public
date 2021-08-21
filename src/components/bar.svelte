@@ -1,22 +1,23 @@
 <script lang="ts">
 	import * as d3 from 'd3';
+	import type { TBardata, TStadckdata } from 'src/types';
 	import type { TColor } from 'src/utils/barcolors';
 	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
 		Y = d3.scaleLinear();
-	export let data = { x: '', y: [{ x2: '02', y2: 5 }] },
+	export let data: TBardata = { x: '', y: [{ x2: '02', y2: 5 }] },
 		color: TColor;
 
 	const dispatch = createEventDispatcher();
 
-	function filter(x: string, d): void {
+	function filter(x: string, d: TStadckdata): void {
 		dispatch('filter', {
 			x,
 			data: d
 		});
 	}
 
-	function hover(x, d) {
+	function hover(x: string, d?: TStadckdata) {
 		dispatch('hover', {
 			tooltip: x.length === 0 ? x : `basedim: ${x} \n x: ${d.x2} count: ${d.y2}`
 		});
@@ -34,7 +35,7 @@
 
 	$: stackdata = (() => {
 		let accumulator = 0;
-		const stackdata = bardata.y.reduce((acc, cur, idx) => {
+		const stackdata: Array<TStadckdata> = bardata.y.reduce((acc, cur, idx) => {
 			return [
 				...acc,
 				{
@@ -59,7 +60,7 @@
 			fill={color(d.x2)}
 			on:click={() => filter(data.x, d)}
 			on:mouseenter={() => hover(data.x, d)}
-			on:mouseleave={() => hover('', d)}
+			on:mouseleave={() => hover('')}
 		/>
 	{/each}
 </g>
