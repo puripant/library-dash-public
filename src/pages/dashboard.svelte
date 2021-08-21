@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 
 	import { Wave as Spinner } from 'svelte-loading-spinners';
@@ -10,25 +10,20 @@
 	import id from '../utils/id';
 	import Card from '../components/card.svelte';
 	import barcolorsFactory from '../utils/barcolors';
+	import type { ColorMap } from '../utils/barcolors';
+
+	import type { TData, TDataCB } from '../types/index';
+	import metadata from '../utils/metadata';
 
 	const basedim = 'library';
 
-	let data = { book: [{ checkin_gmt_year: [{ key: '', count: 1 }] }] };
-	let metadata = {
-		checkout_gmt_year:
-			'\u0e08\u0e33\u0e19\u0e27\u0e19\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48\u0e16\u0e39\u0e01\u0e22\u0e37\u0e21\u0e43\u0e19\u0e1b\u0e35\u0e19\u0e31\u0e49\u0e19 \u0e46'
-	};
-	let barcolors;
+	let data: Array<TData> = [];
+	let barcolors: ColorMap;
 	let ready = false;
 
 	const COLS = 6;
 	onMount(async () => {
-		const book = await d3.json('/data/book.json');
-		const ptype = await d3.json('/data/ptype.json');
-		const location = await d3.json('/data/location.json');
-		metadata = await d3.json('/data/metadata.json');
-
-		data = { book, ptype, location };
+		data = await d3.json('/data/data.json');
 
 		barcolors = barcolorsFactory(data, metadata);
 		ready = true;
@@ -38,20 +33,7 @@
 
 	const cols = [[1200, 6]];
 
-	/**
-	 * @param {string} dim
-	 * @param {{
-    book: {
-        checkin_gmt_year: {
-            key: string;
-            count: number;
-        }[];
-    }[];
-}} data
-	 * @param {(data: { x: any; y: any; }[]) => { x: any; y: any; }[]} datacb
-	 * @param {string} name
-	 */
-	function add(dim, data, datacb, name) {
+	function add(dim: string, data: Array<TData>, datacb: TDataCB, name: string) {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -111,6 +93,31 @@
 	const remove = (item) => {
 		items = items.filter((value) => value.id !== item.id);
 	};
+
+	const format: TDataCB = (data: Array<TData>, basedim: string, dim: string) => {
+		console.log('--- data, basedim, dim :', data, basedim, dim, ' ---');
+		const dataByBaseDim = d3.group(
+			data,
+			(d) => d[basedim],
+			(d) => d[dim]
+		);
+		const res = Array.from(dataByBaseDim.entries()).map(([x, y]) => ({
+			x,
+			y: Array.from(y.entries()).map(([z, w]) => ({ x2: z, y2: w.length }))
+		}));
+		console.log('--- dataByBaseDim :', res, ' ---');
+		return res;
+	};
+	// data
+	// 	.map((d) => ({
+	// 		x: d.basedim,
+	// 		y: d[dim]
+	// 	}))
+	// 	.sort((x, y) => {
+	// 		const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
+	// 		const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
+	// 		return b - a;
+	// 	});
 </script>
 
 <main class="w-screen h-screen flex flex-row">
@@ -123,18 +130,6 @@
 						{title}
 						<button
 							on:click={() => {
-								const format = (data) =>
-									data
-										.map((d) => ({
-											x: d.basedim,
-											y: d[dim]
-										}))
-										.sort((x, y) => {
-											const a = x.y.reduce((prev, cur) => (prev += cur.count), 0);
-											const b = y.y.reduce((prev, cur) => (prev += cur.count), 0);
-											return b - a;
-										});
-
 								add(dim, data, format, title);
 							}}>+</button
 						>

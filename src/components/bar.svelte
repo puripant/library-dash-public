@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
 	import * as d3 from 'd3';
-	import colorHash from '../utils/barcolors';
+	import type { TColor } from 'src/utils/barcolors';
 	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
 		Y = d3.scaleLinear();
 	export let data = { x: '', y: [{ x2: '02', y2: 5 }] },
-		color;
+		color: TColor;
 
 	const dispatch = createEventDispatcher();
 
-	function filter(x, d) {
+	function filter(x: string, d): void {
 		dispatch('filter', {
 			x,
 			data: d
@@ -44,6 +44,7 @@
 				}
 			];
 		}, []);
+		console.log('--- stackdata :', stackdata, ' ---');
 		return stackdata;
 	})();
 </script>
@@ -58,7 +59,7 @@
 			fill={color(d.x2)}
 			on:click={() => filter(data.x, d)}
 			on:mouseenter={() => hover(data.x, d)}
-			on:mouseleave={() => hover('')}
+			on:mouseleave={() => hover('', d)}
 		/>
 	{/each}
 </g>

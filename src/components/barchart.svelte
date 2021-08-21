@@ -1,11 +1,15 @@
-<script>
+<script lang="ts">
 	import * as d3 from 'd3';
 	import { createEventDispatcher } from 'svelte';
 	import Bar from './bar.svelte';
-	export let data = { book: [] },
+	import type { TBardata } from '../types';
+	import type { TColor } from 'src/utils/barcolors';
+
+	export let data: Array<TBardata> = [],
 		dim = '',
 		name = '',
-		color;
+		color: TColor;
+
 	export const margin = {
 		top: 20,
 		right: 20,
@@ -35,7 +39,7 @@
 
 	$: Y = d3
 		.scaleLinear()
-		.domain([0, d3.max(data, (d) => d.y.reduce((prev, cur) => (prev += cur.count), 0))])
+		.domain([0, d3.max(data, (d) => d.y.reduce((prev, cur) => (prev += cur.y2), 0))])
 		.range([h - margin.bottom, margin.top])
 		.nice();
 

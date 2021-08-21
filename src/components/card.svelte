@@ -1,12 +1,15 @@
-<script>
+<script lang="ts">
+	import type { TColor } from 'src/utils/barcolors';
+
 	import { createEventDispatcher } from 'svelte';
 
 	import Barchart from '../components/barchart.svelte';
+	import type { TData, TDataCB } from '../types';
 
-	export let data, datacb, dim, name, color;
+	export let data: Array<TData>, datacb: TDataCB, dim: string, name: string, color: TColor;
 
-	let basedim = 'book';
-	$: bardata = datacb(data[basedim]);
+	let basedim = 'day';
+	$: bardata = datacb(data, basedim, dim);
 	$: basedims = Object.keys(data);
 
 	const dispatch = createEventDispatcher();

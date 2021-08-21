@@ -11,16 +11,20 @@
 	"devDependencies": {
 		"@svitejs/vite-plugin-svelte": "^0.11.1",
 		"@tailwindcss/jit": "^0.1.1",
+		"@tsconfig/svelte": "^2.0.1",
+		"@types/d3": "^7.0.0",
 		"autoprefixer": "^10.2.5",
 		"cssnano": "^4.1.10",
 		"d3": "^7.0.0",
 		"postcss": "^8.2.7",
 		"postcss-load-config": "^3.0.1",
 		"svelte": "^3.35.0",
+		"svelte-check": "^2.2.4",
 		"svelte-grid": "^5.0.1",
 		"svelte-loading-spinners": "^0.1.7",
-		"svelte-preprocess": "^4.6.9",
+		"svelte-preprocess": "^4.7.4",
 		"tailwindcss": "^2.0.3",
+		"typescript": "^4.3.5",
 		"vite": "^2.1.0"
 	}
 }
