@@ -6,7 +6,6 @@
 	import type { TColor } from 'src/utils/barcolors';
 
 	export let data: Array<TBardata> = [],
-		dim = '',
 		name = '',
 		color: TColor;
 
@@ -26,7 +25,7 @@
 	const dispatch = createEventDispatcher();
 
 	function forward(event) {
-		dispatch('filter', { ...event.detail, dim });
+		dispatch('filter', event.detail);
 	}
 
 	function handleHover(event) {

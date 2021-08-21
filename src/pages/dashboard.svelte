@@ -66,33 +66,18 @@
 
 	const addByFilter = (event: {
 		detail: {
-			dim: string;
-			data: TStadckdata;
+			xDim: string;
+			stackDim: string;
+			filter: TFilter;
 		};
 	}) => {
-		const {
-			dim: stackDim,
-			data: { x2 }
-		} = event.detail;
+		const { xDim, stackDim, filter } = event.detail;
 
-		add(data, `${metadata[stackDim]} (${x2})`, xDim, stackDim);
+		add(data, `${metadata[stackDim]} (${filter.value})`, xDim, stackDim, filter);
 	};
 
 	const remove = (item) => {
 		items = items.filter((value) => value.id !== item.id);
-	};
-
-	const format: TDataCB = (data: Array<TData>, basedim: string, dim: string) => {
-		const dataByBaseDim = d3.group(
-			data,
-			(d) => d[basedim],
-			(d) => d[dim]
-		);
-		const res = Array.from(dataByBaseDim.entries()).map(([x, y]) => ({
-			x,
-			y: Array.from(y.entries()).map(([z, w]) => ({ x2: z, y2: w.length }))
-		}));
-		return res;
 	};
 </script>
 

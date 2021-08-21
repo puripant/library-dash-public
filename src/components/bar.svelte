@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as d3 from 'd3';
-	import type { TBardata, TStadckdata } from 'src/types';
+	import type { TBardata, TFilter, TStadckdata } from 'src/types';
 	import type { TColor } from 'src/utils/barcolors';
 	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
@@ -10,11 +10,8 @@
 
 	const dispatch = createEventDispatcher();
 
-	function filter(x: string, d: TStadckdata): void {
-		dispatch('filter', {
-			x,
-			data: d
-		});
+	function filter(filterValue: string): void {
+		dispatch('filter', filterValue);
 	}
 
 	function hover(x: string, d?: TStadckdata) {
@@ -58,7 +55,7 @@
 			width={X.bandwidth()}
 			height={Y(d.prev) - Y(d.y)}
 			fill={color(d.x2)}
-			on:click={() => filter(data.x, d)}
+			on:click={() => filter(d.x2)}
 			on:mouseenter={() => hover(data.x, d)}
 			on:mouseleave={() => hover('')}
 		/>

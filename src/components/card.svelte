@@ -15,13 +15,12 @@
 		stackDim: string,
 		filter: TFilter;
 
-	let basedim = 'day';
 	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
 	const dispatch = createEventDispatcher();
 
 	function forward(event) {
-		dispatch('filter', event.detail);
+		dispatch('filter', { filter: { dim: stackDim, value: event.detail }, stackDim, xDim });
 	}
 
 	function removeEvent() {
@@ -63,6 +62,6 @@
 		{/each}
 	</div>
 	<div class="flex-1">
-		<Barchart data={bardata} dim={xDim} {name} color={color[stackDim]} on:filter={forward} />
+		<Barchart data={bardata} {name} color={color[stackDim]} on:filter={forward} />
 	</div>
 </div>
