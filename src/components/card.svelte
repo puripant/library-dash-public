@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { TColor } from 'src/utils/barcolors';
+	import metadata from '../utils/metadata';
 
 	import { createEventDispatcher } from 'svelte';
 
@@ -10,7 +11,6 @@
 
 	let basedim = 'day';
 	$: bardata = datacb(data, basedim, dim);
-	$: basedims = Object.keys(data);
 
 	const dispatch = createEventDispatcher();
 
@@ -31,12 +31,12 @@
 		<div on:pointerdown={(e) => dispatch('move', e)} class="flex-1 cursor-pointer" />
 	</div>
 	<div id="base-dim" class="w-full flex flex-row justify-evenly items-center">
-		{#each basedims as title}
+		{#each Object.entries(metadata) as [key, title]}
 			<div
 				class={`text-black flex-1 text-center border-2 border-white rounded cursor-pointer ${
 					title === basedim ? 'bg-blue-100' : ''
 				}`}
-				on:click={() => (basedim = title)}
+				on:click={() => (basedim = key)}
 			>
 				{title}
 			</div>
