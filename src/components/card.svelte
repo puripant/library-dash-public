@@ -30,11 +30,12 @@
 		</span>
 		<div on:pointerdown={(e) => dispatch('move', e)} class="flex-1 cursor-pointer" />
 	</div>
+	<h3 class="text-center">แกน X</h3>
 	<div id="base-dim" class="w-full flex flex-row justify-evenly items-center">
 		{#each Object.entries(metadata) as [key, title]}
 			<div
-				class={`text-black flex-1 text-center border-2 border-white rounded cursor-pointer ${
-					title === basedim ? 'bg-blue-100' : ''
+				class={`text-black flex-1 text-xs text-center border-2 border-white rounded cursor-pointer ${
+					key === basedim ? 'bg-blue-100' : ''
 				}`}
 				on:click={() => (basedim = key)}
 			>
@@ -42,7 +43,20 @@
 			</div>
 		{/each}
 	</div>
+	<h3 class="text-center">แกน stack</h3>
+	<div id="dim" class="w-full flex flex-row justify-evenly items-center">
+		{#each Object.entries(metadata) as [key, title]}
+			<div
+				class={`text-black flex-1 text-xs text-center border-2 border-white rounded cursor-pointer ${
+					key === dim ? 'bg-blue-100' : ''
+				}`}
+				on:click={() => (dim = key)}
+			>
+				{title}
+			</div>
+		{/each}
+	</div>
 	<div class="flex-1">
-		<Barchart data={bardata} {dim} {name} {color} on:filter={forward} />
+		<Barchart data={bardata} {dim} {name} color={color[dim]} on:filter={forward} />
 	</div>
 </div>

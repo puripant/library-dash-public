@@ -47,7 +47,7 @@
 			datacb,
 			dim: dim,
 			name,
-			color: barcolors[dim]
+			color: barcolors
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);
