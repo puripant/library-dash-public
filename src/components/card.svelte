@@ -23,6 +23,25 @@
 		dispatch('filter', { filter: { dim: stackDim, value: event.detail }, stackDim, xDim });
 	}
 
+	let tooltip = '';
+
+	function handleHover(event: {
+		detail:
+			| {
+					xDatum: string;
+					stackDatum: string;
+					count: number;
+			  }
+			| false;
+	}) {
+		if (event.detail) {
+			const { xDatum, stackDatum, count } = event.detail;
+			tooltip = `${xDim}: ${xDatum}\n${stackDim}: ${stackDatum} count: ${count}`;
+		} else {
+			tooltip = 'hover for tooltip';
+		}
+	}
+
 	function removeEvent() {
 		dispatch('remove');
 	}
@@ -61,7 +80,15 @@
 			</div>
 		{/each}
 	</div>
+	<div id="input-area">
+		<h2 class="text-center font-bold p-2 text-lg">{name}</h2>
+		<div id="slicer" class="w-full px-2 flex flex-col">
+			<p class="text-center text-sm h-10 whitespace-pre flex items-center justify-center">
+				{tooltip}
+			</p>
+		</div>
+	</div>
 	<div class="flex-1">
-		<Barchart data={bardata} {name} color={color[stackDim]} on:filter={forward} />
+		<Barchart data={bardata} color={color[stackDim]} on:filter={forward} on:hover={handleHover} />
 	</div>
 </div>

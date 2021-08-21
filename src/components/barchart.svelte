@@ -6,7 +6,6 @@
 	import type { TColor } from 'src/utils/barcolors';
 
 	export let data: Array<TBardata> = [],
-		name = '',
 		color: TColor;
 
 	export const margin = {
@@ -15,7 +14,6 @@
 		bottom: 50,
 		left: 40
 	};
-	let tooltip = '';
 
 	let w = 300,
 		h = 150;
@@ -29,9 +27,7 @@
 	}
 
 	function handleHover(event) {
-		const { tooltip: newTooltip } = event.detail;
-
-		tooltip = newTooltip;
+		dispatch('hover', event.detail);
 	}
 
 	$: bardata = data.slice(slicer, slicer + 5);
@@ -50,15 +46,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col">
-	<div id="input-area">
-		<h2 class="text-center font-bold p-2 text-lg">{name}</h2>
-		<div id="slicer" class="w-full px-2 flex flex-col">
-			<p class="text-center text-sm">Top {slicer} - {slicer + 5}</p>
-			<p class="text-center text-sm h-10 whitespace-pre flex items-center justify-center">
-				{tooltip || 'hover for tooltip'}
-			</p>
-		</div>
-	</div>
+	<p class="text-center text-sm">Top {slicer} - {slicer + 5}</p>
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
 		<svg class="w-full h-full">
 			<!-- X Axis -->

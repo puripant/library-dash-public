@@ -14,10 +14,18 @@
 		dispatch('filter', filterValue);
 	}
 
-	function hover(x: string, d?: TStadckdata) {
-		dispatch('hover', {
-			tooltip: x.length === 0 ? x : `basedim: ${x} \n x: ${d.x2} count: ${d.y2}`
-		});
+	function hover(xDatum: string, d?: TStadckdata) {
+		dispatch(
+			'hover',
+			d
+				? {
+						// tooltip: x.length === 0 ? x : `แกน X: ${x} \n cd: ${d.x2} count: ${d.y2}`
+						xDatum,
+						stackDatum: d.x2,
+						count: d.y2
+				  }
+				: false
+		);
 	}
 
 	$: bardata = {
