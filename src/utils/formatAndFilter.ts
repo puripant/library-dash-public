@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-import { TDataCB } from '../types';
+import type { TDataCB } from '../types';
 
 const formatAndFilter: TDataCB = (data, xDim, stackDim, filter) => {
 	const dataByBaseDim = d3.group(

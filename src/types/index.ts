@@ -8,14 +8,16 @@ export type TData = {
 	period: string;
 };
 
+export type TFilter = {
+	dim: string;
+	value: string | number;
+};
+
 export type TDataCB = (
 	data: Array<TData>,
 	xDim: string,
 	stackDim: string,
-	filter?: {
-		dim: string;
-		value: string | number;
-	}
+	filter?: TFilter
 ) => Array<TBardata>;
 
 export type TBardata = { x: string; y: { x2: string; y2: number }[] };

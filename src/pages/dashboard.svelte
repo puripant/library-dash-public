@@ -12,10 +12,10 @@
 	import barcolorsFactory from '../utils/barcolors';
 	import type { ColorMap } from '../utils/barcolors';
 
-	import type { TData, TDataCB, TStadckdata } from '../types/index';
+	import type { TData, TDataCB, TFilter, TStadckdata } from '../types/index';
 	import metadata from '../utils/metadata';
 
-	const basedim = 'library';
+	const xDim = 'day';
 
 	let data: Array<TData> = [];
 	let barcolors: ColorMap;
@@ -33,7 +33,7 @@
 
 	const cols = [[1200, 6]];
 
-	function add(dim: string, data: Array<TData>, datacb: TDataCB, name: string) {
+	function add(data: Array<TData>, name: string, xDim: string, stackDim: string, filter?: TFilter) {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -43,11 +43,12 @@
 				customDragger: true
 			}),
 			id: id(),
+			color: barcolors,
 			data,
-			datacb,
-			dim: dim,
 			name,
-			color: barcolors
+			xDim,
+			stackDim,
+			filter
 		};
 
 		let findOutPosition = gridHelp.findSpace(newItem, items, COLS);
@@ -70,26 +71,11 @@
 		};
 	}) => {
 		const {
-			dim,
+			dim: stackDim,
 			data: { x2 }
 		} = event.detail;
 
-		const filter: TDataCB = (data, basedim, dim) => {
-			const dataByBaseDim = d3.group(
-				data,
-				(d) => d[basedim],
-				(d) => d[dim]
-			);
-			const res = Array.from(dataByBaseDim.entries()).map(([x, y]) => ({
-				x,
-				y: Array.from(y.entries()).map(([z, w]) => ({
-					x2: z,
-					y2: w.filter((v) => v[dim] === x2).length
-				}))
-			}));
-			return res;
-		};
-		add(dim, data, filter, `${metadata[dim]} (${x2})`);
+		add(data, `${metadata[stackDim]} (${x2})`, xDim, stackDim);
 	};
 
 	const remove = (item) => {
@@ -113,14 +99,14 @@
 <main class="w-screen h-screen flex flex-row">
 	{#if ready}
 		<nav>
-			<h1>{basedim}</h1>
+			<h1>{xDim}</h1>
 			<ul class="flex flex-col">
-				{#each Object.entries(metadata) as [dim, title]}
+				{#each Object.entries(metadata) as [stackDim, title]}
 					<li>
 						{title}
 						<button
 							on:click={() => {
-								add(dim, data, format, title);
+								add(data, title, xDim, stackDim);
 							}}>+</button
 						>
 					</li>

@@ -1,16 +1,22 @@
 <script lang="ts">
 	import type { TColor } from 'src/utils/barcolors';
 	import metadata from '../utils/metadata';
+	import formatAndFilter from '../utils/formatAndFilter';
 
 	import { createEventDispatcher } from 'svelte';
 
 	import Barchart from '../components/barchart.svelte';
-	import type { TData, TDataCB } from '../types';
+	import type { TData, TFilter } from '../types';
 
-	export let data: Array<TData>, datacb: TDataCB, dim: string, name: string, color: TColor;
+	export let data: Array<TData>,
+		name: string,
+		color: TColor,
+		xDim: string,
+		stackDim: string,
+		filter: TFilter;
 
 	let basedim = 'day';
-	$: bardata = datacb(data, basedim, dim);
+	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
 	const dispatch = createEventDispatcher();
 
@@ -35,9 +41,9 @@
 		{#each Object.entries(metadata) as [key, title]}
 			<div
 				class={`text-black flex-1 text-xs text-center border-2 border-white rounded cursor-pointer ${
-					key === basedim ? 'bg-blue-100' : ''
+					key === xDim ? 'bg-blue-100' : ''
 				}`}
-				on:click={() => (basedim = key)}
+				on:click={() => (xDim = key)}
 			>
 				{title}
 			</div>
@@ -48,15 +54,15 @@
 		{#each Object.entries(metadata) as [key, title]}
 			<div
 				class={`text-black flex-1 text-xs text-center border-2 border-white rounded cursor-pointer ${
-					key === dim ? 'bg-blue-100' : ''
+					key === stackDim ? 'bg-blue-100' : ''
 				}`}
-				on:click={() => (dim = key)}
+				on:click={() => (stackDim = key)}
 			>
 				{title}
 			</div>
 		{/each}
 	</div>
 	<div class="flex-1">
-		<Barchart data={bardata} {dim} {name} color={color[dim]} on:filter={forward} />
+		<Barchart data={bardata} dim={xDim} {name} color={color[stackDim]} on:filter={forward} />
 	</div>
 </div>
