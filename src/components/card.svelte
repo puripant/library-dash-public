@@ -22,12 +22,18 @@
 	const dispatch = createEventDispatcher();
 
 	function forward(event) {
+		const { axis, value } = event.detail;
 		const newFilter = {
-			filter: [...filter, { dim: stackDim, value: event.detail }],
+			dim: axis === 'x' ? xDim : stackDim,
+			value
+		};
+
+		const filters = {
+			filter: [...filter, newFilter],
 			stackDim,
 			xDim
 		};
-		dispatch('filter', newFilter);
+		dispatch('filter', filters);
 	}
 
 	let tooltip = '';

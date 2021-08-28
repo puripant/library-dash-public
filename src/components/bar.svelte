@@ -11,7 +11,7 @@
 	const dispatch = createEventDispatcher();
 
 	function filter(filterValue: string): void {
-		dispatch('filter', filterValue);
+		dispatch('filter', { axis: 'stack', value: filterValue });
 	}
 
 	function hover(xDatum: string, d?: TStadckdata) {

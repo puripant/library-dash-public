@@ -53,7 +53,13 @@
 			<g transform={`translate(0, ${h - margin.bottom + 10})`}>
 				{#each bardata as d}
 					<g transform={`translate(${X(d.x) + X.bandwidth() / 2} , 0)`}>
-						<text text-anchor="start" transform={'rotate(45)'} font-size={10}>{d.x}</text>
+						<text
+							class="cursor-pointer"
+							text-anchor="start"
+							transform={'rotate(45)'}
+							font-size={10}
+							on:click={() => forward({ detail: { axis: 'x', value: d.x } })}>{d.x}</text
+						>
 					</g>
 				{/each}
 			</g>
