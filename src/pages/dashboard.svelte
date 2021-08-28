@@ -12,7 +12,7 @@
 	import barcolorsFactory from '../utils/barcolors';
 	import type { ColorMap } from '../utils/barcolors';
 
-	import type { TData, TDataCB, TFilter, TStadckdata } from '../types/index';
+	import type { TData, TFilter } from '../types/index';
 	import metadata from '../utils/metadata';
 
 	const xDim = 'day';

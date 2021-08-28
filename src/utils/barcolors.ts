@@ -7,21 +7,10 @@ export type TColor = (val: string | number) => string;
 export type ColorMap = { [key: string]: TColor };
 
 export default function barcolorsFactory(dataset: Array<TData>, metadata: TMetadata): ColorMap {
-	// console.log('--- metadata :', metadata, ' ---');
 	const alldims = Object.keys(metadata);
-	// console.log('--- alldims :', alldims, ' ---');
 	const colors = {};
 
 	for (const dim of alldims) {
-		// const possibleValues = [
-		// 	...new Set(
-		// 		alldims
-		// 			.map((d) => {
-		// 				return d[dim].flat().map((d) => d.key);
-		// 			})
-		// 			.flat()
-		// 	)
-		// ];
 		const possibleValues = [...new Set(dataset.map((d) => d[dim]))];
 
 		if (isNaN(+possibleValues[0])) {

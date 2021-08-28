@@ -50,7 +50,6 @@
 				}
 			];
 		}, []);
-		console.log('--- stackdata :', stackdata, ' ---');
 		return stackdata;
 	})();
 </script>
