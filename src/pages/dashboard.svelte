@@ -61,7 +61,7 @@
 			}
 		};
 
-		items = [...items, ...[newItem]];
+		items = [...items, newItem];
 	}
 
 	const addByFilter = (event: {
@@ -104,7 +104,7 @@
 					on:filter={addByFilter}
 					on:remove={() => remove(dataItem)}
 					on:move={(e) => movePointerDown(e.detail)}
-					{...dataItem}
+					{dataItem}
 				/>
 			</Grid>
 		</div>

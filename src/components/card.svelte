@@ -8,12 +8,15 @@
 	import Barchart from '../components/barchart.svelte';
 	import type { TData, TFilter } from '../types';
 
-	export let data: Array<TData>,
-		name: string,
-		color: TColor,
-		xDim: string,
-		stackDim: string,
+	export let dataItem: {
+		data: Array<TData>;
+		name: string;
+		color: TColor;
+		xDim: string;
+		stackDim: string;
 		filter: TFilter;
+	};
+	let { data, name, color, xDim, stackDim, filter } = dataItem;
 
 	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
