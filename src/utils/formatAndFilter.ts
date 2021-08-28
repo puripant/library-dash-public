@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 
-import type { TDataCB } from '../types';
+import type { TData, TDataCB, TFilter } from '../types';
 
-const formatAndFilter: TDataCB = (data, xDim, stackDim, filter) => {
+const formatAndFilter: TDataCB = (data, xDim, stackDim, filter = []) => {
 	const dataByBaseDim = d3.group(
 		data,
 		(d) => d[xDim],
@@ -12,10 +12,18 @@ const formatAndFilter: TDataCB = (data, xDim, stackDim, filter) => {
 		x,
 		y: Array.from(y.entries()).map(([z, w]) => ({
 			x2: z,
-			y2: filter ? w.filter((v) => v[filter.dim] === filter.value).length : w.length
+			y2: filter.length ? filterAndCount(w, filter) : w.length
 		}))
 	}));
 	return res;
 };
+
+function filterAndCount(array: TData[], filters: TFilter[]): number {
+	for (const filter of filters) {
+		array = array.filter((v) => v[filter.dim] === filter.value);
+	}
+
+	return array.length;
+}
 
 export default formatAndFilter;

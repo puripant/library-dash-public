@@ -33,7 +33,13 @@
 
 	const cols = [[1200, 6]];
 
-	function add(data: Array<TData>, name: string, xDim: string, stackDim: string, filter?: TFilter) {
+	function add(
+		data: Array<TData>,
+		name: string,
+		xDim: string,
+		stackDim: string,
+		filter: TFilter[] = []
+	) {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -68,12 +74,13 @@
 		detail: {
 			xDim: string;
 			stackDim: string;
-			filter: TFilter;
+			filter: TFilter[];
 		};
 	}) => {
-		const { xDim, stackDim, filter } = event.detail;
+		const { xDim, stackDim, filter = [] } = event.detail;
 
-		add(data, `${metadata[stackDim]} (${filter.value})`, xDim, stackDim, filter);
+		const name = filter.map((f) => `${metadata[f.dim]}: ${f.value}`).join('\n');
+		add(data, name, xDim, stackDim, filter);
 	};
 
 	const remove = (item) => {
@@ -91,7 +98,7 @@
 						{title}
 						<button
 							on:click={() => {
-								add(data, title, xDim, stackDim);
+								add(data, '-', xDim, stackDim);
 							}}>+</button
 						>
 					</li>

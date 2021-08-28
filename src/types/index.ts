@@ -17,7 +17,7 @@ export type TDataCB = (
 	data: Array<TData>,
 	xDim: string,
 	stackDim: string,
-	filter?: TFilter
+	filter?: TFilter[]
 ) => Array<TBardata>;
 
 export type TBardata = { x: string; y: { x2: string; y2: number }[] };

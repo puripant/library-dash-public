@@ -14,16 +14,20 @@
 		color: TColor;
 		xDim: string;
 		stackDim: string;
-		filter: TFilter;
+		filter: TFilter[];
 	};
-	let { data, name, color, xDim, stackDim, filter } = dataItem;
-
+	let { data, name, color, xDim, stackDim, filter = [] } = dataItem;
 	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
 	const dispatch = createEventDispatcher();
 
 	function forward(event) {
-		dispatch('filter', { filter: { dim: stackDim, value: event.detail }, stackDim, xDim });
+		const newFilter = {
+			filter: [...filter, { dim: stackDim, value: event.detail }],
+			stackDim,
+			xDim
+		};
+		dispatch('filter', newFilter);
 	}
 
 	let tooltip = '';
@@ -84,7 +88,10 @@
 		{/each}
 	</div>
 	<div id="input-area">
-		<h2 class="text-center font-bold p-2 text-lg">{name}</h2>
+		<h2 class="text-center p-2 text-xs whitespace-pre">
+			<div>Filter</div>
+			{name}
+		</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
 			<p class="text-center text-sm h-10 whitespace-pre flex items-center justify-center">
 				{tooltip}
