@@ -8,13 +8,20 @@ const formatAndFilter: TDataCB = (data, xDim, stackDim, filter = []) => {
 		(d) => d[xDim],
 		(d) => d[stackDim]
 	);
-	const res = Array.from(dataByBaseDim.entries()).map(([x, y]) => ({
-		x,
-		y: Array.from(y.entries()).map(([z, w]) => ({
-			x2: z,
-			y2: filter.length ? filterAndCount(w, filter) : w.length
+	const res = Array.from(dataByBaseDim.entries())
+		.map(([x, y]) => ({
+			x,
+			y: Array.from(y.entries()).map(([z, w]) => ({
+				x2: z,
+				y2: filter.length ? filterAndCount(w, filter) : w.length
+			}))
 		}))
-	}));
+		.sort(function sortByCount(a, b) {
+			const countA = a.y.reduce((c, d) => (c += d.y2), 0);
+			const countB = b.y.reduce((c, d) => (c += d.y2), 0);
+			return countB - countA;
+		});
+
 	return res;
 };
 
