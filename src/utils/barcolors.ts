@@ -11,7 +11,13 @@ export default function barcolorsFactory(dataset: Array<TData>, metadata: TMetad
 	const colors: ColorMap = {};
 
 	for (const dim of alldims) {
-		const possibleValues = [...new Set(dataset.map((d) => d[dim]))];
+		const groupByDim = [...d3.group(dataset, (d) => d[dim])].sort(function sortByCount(a, b) {
+			const countA = a.values.length;
+			const countB = b.values.length;
+			return countB - countA;
+		});
+
+		const possibleValues = groupByDim.map(([dim]) => dim);
 
 		if (isNaN(+possibleValues[0])) {
 			// Nominal
