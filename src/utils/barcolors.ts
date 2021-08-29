@@ -8,7 +8,7 @@ export type ColorMap = { [key: string]: TColor };
 
 export default function barcolorsFactory(dataset: Array<TData>, metadata: TMetadata): ColorMap {
 	const alldims = Object.keys(metadata);
-	const colors = {};
+	const colors: ColorMap = {};
 
 	for (const dim of alldims) {
 		const possibleValues = [...new Set(dataset.map((d) => d[dim]))];
@@ -19,14 +19,14 @@ export default function barcolorsFactory(dataset: Array<TData>, metadata: TMetad
 			for (let i = 0; i < possibleValues.length; i++) {
 				color[possibleValues[i]] = d3.schemeTableau10[i];
 			}
-			colors[dim] = (val) => color[val];
+			colors[dim] = (val: string | number) => color[val];
 		} else {
 			// Ordinal
 			const vals = possibleValues.map((d) => +d);
 
 			const scale = d3.scaleLinear().domain(d3.extent(vals)).range([0, 1]);
 
-			colors[dim] = (val) => d3.interpolateBlues(scale(val));
+			colors[dim] = (val: string | number) => d3.interpolateBlues(scale(<number>val));
 		}
 	}
 	return colors;
