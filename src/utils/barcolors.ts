@@ -19,7 +19,7 @@ export default function barcolorsFactory(dataset: Array<TData>, metadata: TMetad
 			for (let i = 0; i < possibleValues.length; i++) {
 				color[possibleValues[i]] = d3.schemeTableau10[i];
 			}
-			colors[dim] = (val: string | number) => color[val];
+			colors[dim] = (val: string | number) => (val === 'others' ? 'gainsboro' : color[val]);
 		} else {
 			// Ordinal
 			const vals = possibleValues.map((d) => +d);

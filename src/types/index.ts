@@ -22,4 +22,4 @@ export type TDataCB = (
 
 export type TBardata = { x: string; y: { x2: string; y2: number }[] };
 
-export type TStadckdata = { x2: string; y2: number; y: number; prev: number };
+export type TStackdata = { x2: string; y2: number; y: number; prev: number };

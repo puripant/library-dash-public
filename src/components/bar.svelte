@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as d3 from 'd3';
-	import type { TBardata, TFilter, TStadckdata } from 'src/types';
+	import type { TBardata, TStackdata } from 'src/types';
 	import type { TColor } from 'src/utils/barcolors';
 	import { createEventDispatcher } from 'svelte';
 	export let X = d3.scaleBand(),
@@ -14,7 +14,7 @@
 		dispatch('filter', { axis: 'stack', value: filterValue });
 	}
 
-	function hover(xDatum: string, d?: TStadckdata) {
+	function hover(xDatum: string, d?: TStackdata) {
 		dispatch(
 			'hover',
 			d
@@ -33,23 +33,38 @@
 		y: data.y
 			.map((k) => {
 				const [x2, y2] = Object.values(k);
-				return { x2, y2 };
+				return { x2, y2: <number>y2 };
 			})
 			.sort((a, b) => +a.x2 - +b.x2)
 	};
 
 	$: stackdata = (() => {
 		let accumulator = 0;
-		const stackdata: Array<TStadckdata> = bardata.y.reduce((acc, cur, idx) => {
-			return [
-				...acc,
-				{
-					...cur,
-					y: (accumulator += +cur.y2),
-					prev: acc.length ? acc[idx - 1].y : 0
-				}
-			];
-		}, []);
+		const others = { x2: 'others', y2: 0 };
+
+		const stackdata: Array<TStackdata> = bardata.y
+			.reduce(
+				(acc, cur) => {
+					const haveColor = color(cur.x2);
+					if (haveColor) {
+						return [...acc, cur];
+					} else {
+						acc[0].y2 += cur.y2;
+						return acc;
+					}
+				},
+				[others]
+			)
+			.reduce((acc, cur, idx) => {
+				return [
+					...acc,
+					{
+						...cur,
+						y: (accumulator += +cur.y2),
+						prev: acc.length ? acc[idx - 1].y : 0
+					}
+				];
+			}, []);
 		return stackdata;
 	})();
 </script>
