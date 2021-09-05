@@ -14,8 +14,7 @@
 
 	import type { TData, TFilter, TRent, TBook } from '../types/index';
 	import metadata from '../utils/metadata';
-
-	const xDim = 'day';
+	import Manager from '../components/manager.svelte';
 
 	let data: TData = { rent: [], book: [] };
 	let barcolors: ColorMap;
@@ -43,6 +42,7 @@
 		name: string,
 		xDim: string,
 		stackDim: string,
+		color: ColorMap[keyof ColorMap],
 		filter: TFilter[] = []
 	) {
 		let newItem = {
@@ -54,7 +54,7 @@
 				customDragger: true
 			}),
 			id: id(),
-			color: barcolors.rent,
+			color,
 			data,
 			name,
 			xDim,
@@ -85,7 +85,7 @@
 		const { xDim, stackDim, filter = [] } = event.detail;
 
 		const name = filter.map((f) => `${metadata[f.dim]}: ${f.value}`).join('\n');
-		add(data.rent, name, xDim, stackDim, filter);
+		add(data.rent, name, xDim, stackDim, barcolors.rent, filter);
 	};
 
 	const remove = (item) => {
@@ -96,32 +96,20 @@
 <main class="w-screen h-screen flex flex-row">
 	{#if ready}
 		<nav>
-			<h1>{xDim}</h1>
-			<ul class="flex flex-col">
-				{#each Object.entries(metadata.rent) as [stackDim, title]}
-					<li>
-						{title}
-						<button
-							on:click={() => {
-								add(data.rent, '-', xDim, stackDim);
-							}}>+</button
-						>
-					</li>
-				{/each}
-			</ul>
-			<h1>Book</h1>
-			<ul class="flex flex-col">
-				{#each Object.entries(metadata.book) as [stackDim, title]}
-					<li>
-						{title}
-						<button
-							on:click={() => {
-								add(data.book, '-', 'title', 'library');
-							}}>+</button
-						>
-					</li>
-				{/each}
-			</ul>
+			<Manager
+				name="Rent"
+				dataset={data.rent}
+				metadata={metadata.rent}
+				colorMap={barcolors.rent}
+				{add}
+			/>
+			<Manager
+				name="Book"
+				dataset={data.book}
+				metadata={metadata.book}
+				colorMap={barcolors.book}
+				{add}
+			/>
 		</nav>
 		<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 			<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
@@ -146,12 +134,5 @@
 		@apply border-r-2;
 		@apply h-full;
 		@apply p-3;
-	}
-
-	h1 {
-		@apply text-center;
-		@apply text-red-600;
-		@apply capitalize;
-		@apply text-xl;
 	}
 </style>
