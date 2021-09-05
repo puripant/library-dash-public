@@ -12,18 +12,23 @@
 	import barcolorsFactory from '../utils/barcolors';
 	import type { ColorMap } from '../utils/barcolors';
 
-	import type { TData, TFilter } from '../types/index';
+	import type { TData, TFilter, TRent, TBook } from '../types/index';
 	import metadata from '../utils/metadata';
 
 	const xDim = 'day';
 
-	let data: Array<TData> = [];
+	let data: TData = { rent: [], book: [] };
 	let barcolors: ColorMap;
 	let ready = false;
 
 	const COLS = 6;
 	onMount(async () => {
-		data = await d3.json('/data/data.json');
+		const rent: TRent[] = await d3.json('/data/rent.json');
+		const book: TBook[] = await d3.json('/data/book.json');
+		data = {
+			rent,
+			book
+		};
 
 		barcolors = barcolorsFactory(data, metadata);
 		ready = true;
@@ -34,7 +39,7 @@
 	const cols = [[1200, 6]];
 
 	function add(
-		data: Array<TData>,
+		data: TData[keyof TData],
 		name: string,
 		xDim: string,
 		stackDim: string,
@@ -49,7 +54,7 @@
 				customDragger: true
 			}),
 			id: id(),
-			color: barcolors,
+			color: barcolors.rent,
 			data,
 			name,
 			xDim,
@@ -80,7 +85,7 @@
 		const { xDim, stackDim, filter = [] } = event.detail;
 
 		const name = filter.map((f) => `${metadata[f.dim]}: ${f.value}`).join('\n');
-		add(data, name, xDim, stackDim, filter);
+		add(data.rent, name, xDim, stackDim, filter);
 	};
 
 	const remove = (item) => {
@@ -93,12 +98,25 @@
 		<nav>
 			<h1>{xDim}</h1>
 			<ul class="flex flex-col">
-				{#each Object.entries(metadata) as [stackDim, title]}
+				{#each Object.entries(metadata.rent) as [stackDim, title]}
 					<li>
 						{title}
 						<button
 							on:click={() => {
-								add(data, '-', xDim, stackDim);
+								add(data.rent, '-', xDim, stackDim);
+							}}>+</button
+						>
+					</li>
+				{/each}
+			</ul>
+			<h1>Book</h1>
+			<ul class="flex flex-col">
+				{#each Object.entries(metadata.book) as [stackDim, title]}
+					<li>
+						{title}
+						<button
+							on:click={() => {
+								add(data.book, '-', 'title', 'library');
 							}}>+</button
 						>
 					</li>

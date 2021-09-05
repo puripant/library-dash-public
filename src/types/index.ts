@@ -1,4 +1,4 @@
-export type TData = {
+export type TRent = {
 	id: number;
 	year: number;
 	month: number;
@@ -6,6 +6,21 @@ export type TData = {
 	faculty: string;
 	library: string;
 	period: string;
+};
+export type TBook = {
+	title: string;
+	library: string;
+	internal_use_count: number;
+	language_code: string;
+	year: number;
+	month: number;
+	day: string;
+	period: string;
+};
+
+export type TData = {
+	rent: Array<TRent>;
+	book: Array<TBook>;
 };
 
 export type TFilter = {
