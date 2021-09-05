@@ -10,13 +10,12 @@
 	export let dataItem: {
 		dataset: ValueOf<TDataset>;
 		name: string;
-		// color: TColor;
 		xDim: string;
 		stackDim: string;
 		filter: TFilter[];
 	};
 	let { dataset, name, xDim, stackDim, filter = [] } = dataItem;
-	let { data, metadata, colorMap } = dataset;
+	let { title, data, metadata, colorMap } = dataset;
 	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
 	const dispatch = createEventDispatcher();
@@ -59,6 +58,8 @@
 	function removeEvent() {
 		dispatch('remove');
 	}
+
+	const dims = Object.entries(metadata);
 </script>
 
 <div class="w-full h-full border-2 border-black flex flex-col">
@@ -66,33 +67,32 @@
 		<span on:pointerdown={(e) => e.stopPropagation()} on:click={removeEvent} class="cursor-pointer">
 			✕
 		</span>
-		<div on:pointerdown={(e) => dispatch('move', e)} class="flex-1 cursor-pointer" />
+		<div
+			on:pointerdown={(e) => dispatch('move', e)}
+			class="flex-1 cursor-pointer text-center text-black"
+		>
+			{title}
+		</div>
 	</div>
-	<h3 class="text-center">แกน X</h3>
-	<div id="base-dim" class="w-full flex flex-row justify-evenly items-center">
-		{#each Object.entries(metadata) as [key, title]}
-			<div
-				class={`text-black flex-1 text-xs text-center border-2 border-white rounded cursor-pointer ${
-					key === xDim ? 'bg-blue-100' : ''
-				}`}
-				on:click={() => (xDim = key)}
-			>
-				{title}
-			</div>
-		{/each}
+	<div class="w-full flex flex-row justify-evenly items-center p-2">
+		<h3 class="w-1/2">แกน X</h3>
+		<select bind:value={xDim}>
+			{#each dims as [dim, title] (dim)}
+				<option value={dim}>
+					{title}
+				</option>
+			{/each}
+		</select>
 	</div>
-	<h3 class="text-center">แกน stack</h3>
-	<div id="dim" class="w-full flex flex-row justify-evenly items-center">
-		{#each Object.entries(metadata) as [key, title]}
-			<div
-				class={`text-black flex-1 text-xs text-center border-2 border-white rounded cursor-pointer ${
-					key === stackDim ? 'bg-blue-100' : ''
-				}`}
-				on:click={() => (stackDim = key)}
-			>
-				{title}
-			</div>
-		{/each}
+	<div class="w-full flex flex-row justify-evenly items-center p-2">
+		<h3 class=" w-1/2">แกน stack</h3>
+		<select bind:value={stackDim}>
+			{#each dims as [dim, title] (dim)}
+				<option value={dim}>
+					{title}
+				</option>
+			{/each}
+		</select>
 	</div>
 	<div id="input-area">
 		<h2 class="text-center p-2 text-xs whitespace-pre">
@@ -114,3 +114,12 @@
 		/>
 	</div>
 </div>
+
+<style>
+	select {
+		@apply text-sm;
+		@apply border;
+		@apply w-1/2;
+		@apply p-1;
+	}
+</style>
