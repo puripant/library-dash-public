@@ -14,10 +14,10 @@
 	$: readyToAdd = !!(xDim && stackDim);
 </script>
 
-<div class="flex flex-col mb-10">
+<div class="flex flex-col mb-5 pb-5 border-b-2 ">
 	<h2 class="text-xl text-center">{title}</h2>
 	<div class="flex flex-col">
-		<h3 class="dataset-title">xDim</h3>
+		<h3 class="dataset-title">แกน X</h3>
 		<select bind:value={xDim}>
 			{#each dims as [dim, title] (dim)}
 				<option value={dim}>
@@ -26,7 +26,7 @@
 			{/each}
 		</select>
 	</div>
-	<h3 class="dataset-title">stackDim</h3>
+	<h3 class="dataset-title">แกน Stack</h3>
 	<select bind:value={stackDim}>
 		{#each dims as [dim, title] (dim)}
 			<option value={dim}>
@@ -35,9 +35,7 @@
 		{/each}
 	</select>
 	<button
-		class={`${
-			readyToAdd ? 'bg-blue-400' : 'bg-gray-600 pointer-events-none'
-		} text-white px-2 py-1 mt-3`}
+		class={`bg-blue-400 text-white px-2 py-1 mt-3 rounded`}
 		disabled={!readyToAdd}
 		on:click={() => {
 			add(dataset, '-', xDim, stackDim, []);
@@ -53,5 +51,6 @@
 	select {
 		@apply border;
 		@apply p-1;
+		@apply rounded;
 	}
 </style>

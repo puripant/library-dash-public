@@ -26,13 +26,13 @@
 		const book: TBook[] = await d3.json('/data/book.json');
 		dataset = {
 			[Dataset.Rent]: {
-				title: 'Rent',
+				title: 'ชุดข้อมูลการยืม',
 				data: rent,
 				colorMap: barcolorsFactory(rent, metadata.rent),
 				metadata: metadata.rent
 			},
 			[Dataset.Book]: {
-				title: 'Book',
+				title: 'ชุดข้อมูลหนังสือ',
 				data: book,
 				colorMap: barcolorsFactory(book, metadata.book),
 				metadata: metadata.book
@@ -44,7 +44,7 @@
 
 	$: items = [];
 
-	const cols = [[1200, 6]];
+	const cols = [[1920, 6]];
 
 	const add: TAdd = (
 		dataset: ValueOf<TDataset>,
@@ -56,7 +56,7 @@
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
-				h: 5,
+				h: 6,
 				x: 0,
 				y: 0,
 				customDragger: true
