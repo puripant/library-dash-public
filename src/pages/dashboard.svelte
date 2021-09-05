@@ -20,7 +20,7 @@
 	let dataset: TDataset;
 	let ready = false;
 
-	const COLS = 6;
+	const COLS = 12;
 	onMount(async () => {
 		const rent: TRent[] = await d3.json('/data/rent.json');
 		const book: TBook[] = await d3.json('/data/book.json');
@@ -44,7 +44,7 @@
 
 	$: items = [];
 
-	const cols = [[1920, 6]];
+	const cols = [[1920, COLS]];
 
 	const add: TAdd = (
 		dataset: ValueOf<TDataset>,
@@ -54,9 +54,9 @@
 		filter: TFilter[] = []
 	) => {
 		let newItem = {
-			6: gridHelp.item({
+			[COLS]: gridHelp.item({
 				w: 2,
-				h: 6,
+				h: 5,
 				x: 0,
 				y: 0,
 				customDragger: true
