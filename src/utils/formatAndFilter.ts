@@ -2,8 +2,10 @@ import * as d3 from 'd3';
 
 import type { TData, TDataCB, TFilter } from '../types';
 
+// @ts-ignore
 const formatAndFilter: TDataCB = (data, xDim, stackDim, filter = []) => {
 	const dataByBaseDim = d3.group(
+		// @ts-ignore
 		data,
 		(d) => d[xDim],
 		(d) => d[stackDim]
@@ -13,6 +15,7 @@ const formatAndFilter: TDataCB = (data, xDim, stackDim, filter = []) => {
 			x,
 			y: Array.from(y.entries()).map(([z, w]) => ({
 				x2: z,
+				// @ts-ignore
 				y2: filter.length ? filterAndCount(w, filter) : w.length
 			}))
 		}))

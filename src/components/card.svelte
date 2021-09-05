@@ -1,22 +1,22 @@
 <script lang="ts">
-	import type { TColor } from 'src/utils/barcolors';
-	import metadata from '../utils/metadata';
 	import formatAndFilter from '../utils/formatAndFilter';
 
 	import { createEventDispatcher } from 'svelte';
 
 	import Barchart from '../components/barchart.svelte';
-	import type { TData, TFilter } from '../types';
+	import type { TDataset, TFilter } from '../types';
+	import type { ValueOf } from 'src/types/helper';
 
 	export let dataItem: {
-		data: Array<TData>;
+		dataset: ValueOf<TDataset>;
 		name: string;
-		color: TColor;
+		// color: TColor;
 		xDim: string;
 		stackDim: string;
 		filter: TFilter[];
 	};
-	let { data, name, color, xDim, stackDim, filter = [] } = dataItem;
+	let { dataset, name, xDim, stackDim, filter = [] } = dataItem;
+	let { data, metadata, colorMap } = dataset;
 	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
 	const dispatch = createEventDispatcher();
@@ -29,6 +29,7 @@
 		};
 
 		const filters = {
+			dataset,
 			filter: [...filter, newFilter],
 			stackDim,
 			xDim
@@ -105,6 +106,11 @@
 		</div>
 	</div>
 	<div class="flex-1">
-		<Barchart data={bardata} color={color[stackDim]} on:filter={forward} on:hover={handleHover} />
+		<Barchart
+			data={bardata}
+			color={colorMap[stackDim]}
+			on:filter={forward}
+			on:hover={handleHover}
+		/>
 	</div>
 </div>

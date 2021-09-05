@@ -1,22 +1,11 @@
 <script lang="ts">
 	import * as d3 from 'd3';
-	import type { TData, TFilter } from '../types';
+	import type { ValueOf } from '../types/helper';
+	import type { TAdd, TDataset } from '../types';
 
-	import type { ColorMap } from '../utils/barcolors';
-	import type { TMetadata } from '../utils/metadata';
+	export let dataset: ValueOf<TDataset>, add: TAdd;
 
-	export let name: string,
-		dataset: TData[keyof TData],
-		colorMap: ColorMap[keyof ColorMap],
-		metadata: TMetadata[keyof TMetadata],
-		add: (
-			data: TData[keyof TData],
-			name: string,
-			xDim: string,
-			stackDim: string,
-			color: ColorMap[keyof ColorMap],
-			filter?: TFilter[]
-		) => void;
+	let { title, metadata } = dataset;
 
 	const dims = Object.entries(metadata);
 
@@ -26,7 +15,7 @@
 </script>
 
 <div class="flex flex-col mb-10">
-	<h2 class="text-xl text-center">{name}</h2>
+	<h2 class="text-xl text-center">{title}</h2>
 	<div class="flex flex-col">
 		<h3 class="dataset-title">xDim</h3>
 		<select bind:value={xDim}>
@@ -51,7 +40,7 @@
 		} text-white px-2 py-1 mt-3`}
 		disabled={!readyToAdd}
 		on:click={() => {
-			add(dataset, '-', xDim, stackDim, colorMap);
+			add(dataset, '-', xDim, stackDim, []);
 		}}>Add</button
 	>
 </div>

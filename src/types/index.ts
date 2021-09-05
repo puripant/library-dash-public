@@ -1,3 +1,7 @@
+import type { ColorMap } from '../utils/barcolors';
+import type { TMetadata } from '../utils/metadata';
+import type { ValueOf } from './helper';
+
 export type TRent = {
 	id: number;
 	year: number;
@@ -7,6 +11,7 @@ export type TRent = {
 	library: string;
 	period: string;
 };
+
 export type TBook = {
 	title: string;
 	library: string;
@@ -18,10 +23,7 @@ export type TBook = {
 	period: string;
 };
 
-export type TData = {
-	rent: Array<TRent>;
-	book: Array<TBook>;
-};
+export type TData = Array<TRent> | Array<TBook>;
 
 export type TFilter = {
 	dim: string;
@@ -29,7 +31,7 @@ export type TFilter = {
 };
 
 export type TDataCB = (
-	data: Array<TData>,
+	data: TData,
 	xDim: string,
 	stackDim: string,
 	filter?: TFilter[]
@@ -38,3 +40,25 @@ export type TDataCB = (
 export type TBardata = { x: string; y: { x2: string; y2: number }[] };
 
 export type TStackdata = { x2: string; y2: number; y: number; prev: number };
+
+export enum Dataset {
+	Rent = 'Rent',
+	Book = 'Book'
+}
+
+export type TDataset = {
+	[key in keyof typeof Dataset]: {
+		title: string;
+		data: TData;
+		metadata: TMetadata[keyof TMetadata];
+		colorMap: ColorMap;
+	};
+};
+
+export type TAdd = (
+	dataset: ValueOf<TDataset>,
+	name: string,
+	xDim: string,
+	stackDim: string,
+	filter: TFilter[]
+) => void;

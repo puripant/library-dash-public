@@ -10,26 +10,35 @@
 	import id from '../utils/id';
 	import Card from '../components/card.svelte';
 	import barcolorsFactory from '../utils/barcolors';
-	import type { ColorMap } from '../utils/barcolors';
 
-	import type { TData, TFilter, TRent, TBook } from '../types/index';
+	import { Dataset } from '../types/index';
+	import type { TFilter, TRent, TBook, TDataset, TAdd } from '../types/index';
+	import type { ValueOf } from '../types/helper';
 	import metadata from '../utils/metadata';
 	import Manager from '../components/manager.svelte';
 
-	let data: TData = { rent: [], book: [] };
-	let barcolors: ColorMap;
+	let dataset: TDataset;
 	let ready = false;
 
 	const COLS = 6;
 	onMount(async () => {
 		const rent: TRent[] = await d3.json('/data/rent.json');
 		const book: TBook[] = await d3.json('/data/book.json');
-		data = {
-			rent,
-			book
+		dataset = {
+			[Dataset.Rent]: {
+				title: 'Rent',
+				data: rent,
+				colorMap: barcolorsFactory(rent, metadata.rent),
+				metadata: metadata.rent
+			},
+			[Dataset.Book]: {
+				title: 'Book',
+				data: book,
+				colorMap: barcolorsFactory(book, metadata.book),
+				metadata: metadata.book
+			}
 		};
 
-		barcolors = barcolorsFactory(data, metadata);
 		ready = true;
 	});
 
@@ -37,14 +46,13 @@
 
 	const cols = [[1200, 6]];
 
-	function add(
-		data: TData[keyof TData],
+	const add: TAdd = (
+		dataset: ValueOf<TDataset>,
 		name: string,
 		xDim: string,
 		stackDim: string,
-		color: ColorMap[keyof ColorMap],
 		filter: TFilter[] = []
-	) {
+	) => {
 		let newItem = {
 			6: gridHelp.item({
 				w: 2,
@@ -54,8 +62,7 @@
 				customDragger: true
 			}),
 			id: id(),
-			color,
-			data,
+			dataset,
 			name,
 			xDim,
 			stackDim,
@@ -73,19 +80,21 @@
 		};
 
 		items = [...items, newItem];
-	}
+	};
 
 	const addByFilter = (event: {
 		detail: {
+			dataset: ValueOf<TDataset>;
 			xDim: string;
 			stackDim: string;
 			filter: TFilter[];
 		};
 	}) => {
-		const { xDim, stackDim, filter = [] } = event.detail;
+		const { dataset, xDim, stackDim, filter = [] } = event.detail;
+		const { metadata } = dataset;
 
 		const name = filter.map((f) => `${metadata[f.dim]}: ${f.value}`).join('\n');
-		add(data.rent, name, xDim, stackDim, barcolors.rent, filter);
+		add(dataset, name, xDim, stackDim, filter);
 	};
 
 	const remove = (item) => {
@@ -96,20 +105,9 @@
 <main class="w-screen h-screen flex flex-row">
 	{#if ready}
 		<nav>
-			<Manager
-				name="Rent"
-				dataset={data.rent}
-				metadata={metadata.rent}
-				colorMap={barcolors.rent}
-				{add}
-			/>
-			<Manager
-				name="Book"
-				dataset={data.book}
-				metadata={metadata.book}
-				colorMap={barcolors.book}
-				{add}
-			/>
+			{#each Object.values(dataset) as dataset (dataset)}
+				<Manager {dataset} {add} />
+			{/each}
 		</nav>
 		<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 			<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
