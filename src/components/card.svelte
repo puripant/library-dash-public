@@ -14,7 +14,7 @@
 		stackDim: string;
 		filter: TFilter[];
 	};
-	let { dataset, name, xDim, stackDim, filter = [] } = dataItem;
+	let { dataset, xDim, stackDim, filter = [] } = dataItem;
 	let { title, data, metadata, colorMap } = dataset;
 	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
 
@@ -98,15 +98,20 @@
 		<h2 class="text-center p-2 text-xs whitespace-pre">
 			<div>Filter</div>
 			{#each filter as { dim, value } (dim)}
-				{dim}: {value}
-				<button
-					class="bg-red-500 text-white px-1 rounded"
-					on:click={() => {
-						const idx = filter.findIndex(({ dim: fdim }) => fdim === dim);
-						filter.splice(idx, 1);
-						filter = filter;
-					}}>x</button
-				>
+				<div class="flex flex-row justify-center items-center">
+					<span class="mr-2">
+						{metadata[dim]}
+					</span>
+					<input class="border-b-2 px-2" bind:value />
+					<button
+						class="bg-red-500 text-white px-1 rounded"
+						on:click={() => {
+							const idx = filter.findIndex(({ dim: fdim }) => fdim === dim);
+							filter.splice(idx, 1);
+							filter = filter;
+						}}>x</button
+					>
+				</div>
 			{/each}
 		</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
