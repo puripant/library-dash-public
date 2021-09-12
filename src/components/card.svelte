@@ -97,7 +97,17 @@
 	<div id="input-area">
 		<h2 class="text-center p-2 text-xs whitespace-pre">
 			<div>Filter</div>
-			{name}
+			{#each filter as { dim, value } (dim)}
+				{dim}: {value}
+				<button
+					class="bg-red-500 text-white px-1 rounded"
+					on:click={() => {
+						const idx = filter.findIndex(({ dim: fdim }) => fdim === dim);
+						filter.splice(idx, 1);
+						filter = filter;
+					}}>x</button
+				>
+			{/each}
 		</h2>
 		<div id="slicer" class="w-full px-2 flex flex-col">
 			<p class="text-center text-sm h-10 whitespace-pre flex items-center justify-center">
