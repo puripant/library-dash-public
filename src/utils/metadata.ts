@@ -15,6 +15,12 @@ const metadata = {
 		year: 'ปีที่นำเข้า',
 		month: 'เดือนที่นำเข้า',
 		internal_use_count: 'จำนวนครั้งที่ถูกยืม'
+	},
+	patron: {
+		ptype: 'ประเภทสมาชิก',
+		library: 'ห้องสมุด',
+		renewal_total: 'renewal_total',
+		checkout_total: 'checkout_total'
 	}
 };
 

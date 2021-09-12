@@ -23,7 +23,14 @@ export type TBook = {
 	period: string;
 };
 
-export type TData = Array<TRent> | Array<TBook>;
+export type TPatron = {
+	ptype: string;
+	library: string;
+	renewal_total: number;
+	checkout_total: number;
+};
+
+export type TData = Array<TRent> | Array<TBook> | Array<TPatron>;
 
 export type TFilter = {
 	dim: string;
@@ -43,7 +50,8 @@ export type TStackdata = { x2: string; y2: number; y: number; prev: number };
 
 export enum Dataset {
 	Rent = 'Rent',
-	Book = 'Book'
+	Book = 'Book',
+	Patron = 'Patron'
 }
 
 export type TDataset = {

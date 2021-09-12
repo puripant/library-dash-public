@@ -12,7 +12,7 @@
 	import barcolorsFactory from '../utils/barcolors';
 
 	import { Dataset } from '../types/index';
-	import type { TFilter, TRent, TBook, TDataset, TAdd } from '../types/index';
+	import type { TFilter, TRent, TBook, TPatron, TDataset, TAdd } from '../types/index';
 	import type { ValueOf } from '../types/helper';
 	import metadata from '../utils/metadata';
 	import Manager from '../components/manager.svelte';
@@ -24,6 +24,7 @@
 	onMount(async () => {
 		const rent: TRent[] = await d3.json('/data/rent.json');
 		const book: TBook[] = await d3.json('/data/book.json');
+		const patron: TPatron[] = await d3.json('/data/patron.json');
 		dataset = {
 			[Dataset.Rent]: {
 				title: 'ชุดข้อมูลการยืม',
@@ -36,6 +37,12 @@
 				data: book,
 				colorMap: barcolorsFactory(book, metadata.book),
 				metadata: metadata.book
+			},
+			[Dataset.Patron]: {
+				title: 'ชุดข้อมูลสมาชิก',
+				data: patron,
+				colorMap: barcolorsFactory(patron, metadata.patron),
+				metadata: metadata.patron
 			}
 		};
 
