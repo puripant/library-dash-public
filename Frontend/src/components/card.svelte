@@ -49,7 +49,7 @@
 	}) {
 		if (event.detail) {
 			const { xDatum, stackDatum, count } = event.detail;
-			tooltip = `${metadata[xDim]}: ${xDatum}\n${metadata[stackDim]}: ${stackDatum} count: ${count}`;
+			tooltip = `${xDim}: ${xDatum}\n${stackDim}: ${stackDatum} count: ${count}`;
 		} else {
 			tooltip = 'hover for tooltip';
 		}
