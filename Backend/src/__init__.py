@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 from .routes.hello_route import hello_blueprint
-from .routes.format_and_filter import format_and_filter_blueprint
+from .routes.filter_route import filter_blueprint
 
 
 def create_app(test_config=None):
@@ -22,7 +22,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    app.register_blueprint(hello_blueprint)
-    app.register_blueprint(format_and_filter_blueprint)
+    app.register_blueprint(filter_blueprint)
 
     return app
