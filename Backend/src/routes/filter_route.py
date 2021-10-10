@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, request, jsonify
 from itertools import groupby
 from operator import itemgetter
@@ -11,7 +12,7 @@ def filter_route():
     data = body['data']
     x_dim = body['xDim']
     stack_dim = body['stackDim']
-    filter = body['filter']
+    filters = body['filter']
 
     data_by_base_dim = {}
     for key, value in groupby(data, itemgetter(x_dim, stack_dim)):
@@ -23,8 +24,19 @@ def filter_route():
         else:
             data_by_base_dim[key[0]][key[1]].append(list(value)[0])
 
-    res = [{'x': key, 'y':
-            [{'x2': sub_key, 'y2': len(sub_value)} for sub_key, sub_value in value.items()]}
-           for key, value in data_by_base_dim.items()]
+    res = []
+    for key, value in data_by_base_dim.items():
+        element = {'x': key, 'y': []}
+        for sub_key, sub_value in value.items():
+            if not len(filters):
+                sub_element = {'x2': sub_key, 'y2': len(sub_value)}
+            else:
+                if sub_key == filters[0]['value']:
+                    print('Hello')
+                    sub_element = {'x2': sub_key, 'y2': len(sub_value)}
+                else:
+                    sub_element = {'x2': sub_key, 'y2': 0}
+            element['y'].append(sub_element)
+        res.append(element)
 
     return jsonify(res)
