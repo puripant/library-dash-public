@@ -39,4 +39,11 @@ def filter_route():
             element['y'].append(sub_element)
         res.append(element)
 
-    return jsonify(res)
+    return {
+        "statusCode": 200,
+        "body": jsonify(res),
+        "headers": {
+            'Access-Control-Allow-Headers': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        }
+    }

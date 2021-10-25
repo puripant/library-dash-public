@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask
-from .routes.hello_route import hello_blueprint
 from .routes.filter_route import filter_blueprint
 
 
