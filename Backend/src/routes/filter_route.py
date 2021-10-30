@@ -3,6 +3,8 @@ from flask import Blueprint, request, jsonify
 from itertools import groupby
 from operator import itemgetter
 
+from flask.wrappers import Response
+
 filter_blueprint = Blueprint('filter_blueprint', __name__)
 
 
@@ -38,12 +40,9 @@ def filter_route():
                     sub_element = {'x2': sub_key, 'y2': 0}
             element['y'].append(sub_element)
         res.append(element)
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps(res),
-        "headers": {
-            'Access-Control-Allow-Headers': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        }
-    }
+    return Response(
+        headers={
+            "Access-Control-Allow-Origin": "*"
+        },
+        response=json.dumps(res)
+    )
