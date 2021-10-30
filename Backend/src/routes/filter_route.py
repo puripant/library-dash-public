@@ -8,7 +8,8 @@ filter_blueprint = Blueprint('filter_blueprint', __name__)
 
 @filter_blueprint.route('/v1/filter', methods=['POST'])
 def filter_route():
-    body = request.json
+    # body = request.json
+    body = json.loads(request.get_data())
     data = body['data']
     x_dim = body['xDim']
     stack_dim = body['stackDim']

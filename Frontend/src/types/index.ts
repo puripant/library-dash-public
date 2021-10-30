@@ -42,7 +42,7 @@ export type TDataCB = (
 	xDim: string,
 	stackDim: string,
 	filter?: TFilter[]
-) => Array<TBardata>;
+) => Promise<Array<TBardata>>;
 
 export type TBardata = { x: string; y: { x2: string; y2: number }[] };
 

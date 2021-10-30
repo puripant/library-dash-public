@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import type { TData, TDataCB, TFilter } from '../types';
 
 // @ts-ignore
-const formatAndFilter: TDataCB = (data, xDim, stackDim, filter = []) => {
+const formatAndFilter: TDataCB = async (data, xDim, stackDim, filter = []) => {
 	const dataByBaseDim = d3.group(
 		// @ts-ignore
 		data,

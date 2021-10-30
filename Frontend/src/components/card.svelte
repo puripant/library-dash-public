@@ -6,6 +6,7 @@
 	import Barchart from '../components/barchart.svelte';
 	import type { TDataset, TFilter } from '../types';
 	import type { ValueOf } from 'src/types/helper';
+	import { Wave as Spinner } from 'svelte-loading-spinners';
 
 	export let dataItem: {
 		dataset: ValueOf<TDataset>;
@@ -16,7 +17,7 @@
 	};
 	let { dataset, xDim, stackDim, filter = [] } = dataItem;
 	let { title, data, metadata, colorMap } = dataset;
-	$: bardata = formatAndFilter(data, xDim, stackDim, filter);
+	$: bardataPromise = formatAndFilter(data, xDim, stackDim, filter);
 
 	const dispatch = createEventDispatcher();
 
@@ -120,14 +121,20 @@
 			</p>
 		</div>
 	</div>
-	<div class="flex-1">
-		<Barchart
-			data={bardata}
-			color={colorMap[stackDim]}
-			on:filter={forward}
-			on:hover={handleHover}
-		/>
-	</div>
+	{#await bardataPromise}
+		<div class="w-full h-full flex justify-center items-center">
+			<Spinner size="60" color="hsl(200, 60%, 40%)" unit="px" duration="1s" />
+		</div>
+	{:then bardata}
+		<div class="flex-1">
+			<Barchart
+				data={bardata}
+				color={colorMap[stackDim]}
+				on:filter={forward}
+				on:hover={handleHover}
+			/>
+		</div>
+	{/await}
 </div>
 
 <style>
