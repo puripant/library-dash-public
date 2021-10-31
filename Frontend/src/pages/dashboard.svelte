@@ -22,9 +22,9 @@
 
 	const COLS = 12;
 	onMount(async () => {
-		const rent: TRent[] = await d3.json('/data/rent.json');
-		const book: TBook[] = await d3.json('/data/book.json');
-		const patron: TPatron[] = await d3.json('/data/patron.json');
+		const rent: TRent[] = await d3.json('/js/data/rent.json');
+		const book: TBook[] = await d3.json('/js/data/book.json');
+		const patron: TPatron[] = await d3.json('/js/data/patron.json');
 		dataset = {
 			[Dataset.Rent]: {
 				title: 'ชุดข้อมูลการยืม',

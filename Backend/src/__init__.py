@@ -1,12 +1,17 @@
 import os
 
 from flask import Flask
+from flask.helpers import send_from_directory
 from .routes.filter_route import filter_blueprint
 
 
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, static_url_path="/", static_folder="/dist", instance_relative_config=True)
+
+    @app.route('/js/<path:path>')
+    def send_js(path):
+        return send_from_directory('dist', path)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
