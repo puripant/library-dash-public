@@ -1,9 +1,9 @@
 import json
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
+from flask.wrappers import Response
 from itertools import groupby
 from operator import itemgetter
 
-from flask.wrappers import Response
 
 filter_blueprint = Blueprint('filter_blueprint', __name__)
 
@@ -11,10 +11,12 @@ filter_blueprint = Blueprint('filter_blueprint', __name__)
 @filter_blueprint.route('/v1/filter', methods=['POST'])
 def filter_route():
     body = json.loads(request.get_data())
-    data = body['data']
+    basedim = body['basedim']
     x_dim = body['xDim']
     stack_dim = body['stackDim']
     filters = body['filter']
+
+    data = get_data(basedim)
 
     data_by_base_dim = {}
     for key, value in groupby(data, itemgetter(x_dim, stack_dim)):
@@ -34,15 +36,24 @@ def filter_route():
                 sub_element = {'x2': sub_key, 'y2': len(sub_value)}
             else:
                 if sub_key == filters[0]['value']:
-                    print('Hello')
                     sub_element = {'x2': sub_key, 'y2': len(sub_value)}
                 else:
                     sub_element = {'x2': sub_key, 'y2': 0}
             element['y'].append(sub_element)
         res.append(element)
+
     return Response(
         headers={
             "Access-Control-Allow-Origin": "*"
         },
         response=json.dumps(res)
     )
+
+
+def get_data(basedim):
+    path = 'src/static/json/{basedim}.json'.format(basedim=basedim)
+
+    with open(path, 'r') as json_file:
+        json_file = json.loads(json_file.read())
+
+    return json_file
