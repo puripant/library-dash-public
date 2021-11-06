@@ -4,7 +4,7 @@ WORKDIR /app
 COPY ./Frontend .
 RUN yarn install
 RUN yarn build
-RUN mv ./dist ./src
+RUN mv ./dist ./src/dist
 
 FROM python:3.8-slim-buster
 WORKDIR /app

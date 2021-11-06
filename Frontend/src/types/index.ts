@@ -30,7 +30,7 @@ export type TPatron = {
 	checkout_total: number;
 };
 
-export type TData = Array<TRent> | Array<TBook> | Array<TPatron>;
+export type TData = 'rent' | 'book' | 'patron';
 
 export type TFilter = {
 	dim: string;
@@ -59,7 +59,7 @@ export type TDataset = {
 		title: string;
 		data: TData;
 		metadata: TMetadata[keyof TMetadata];
-		colorMap: ColorMap;
+		colorMap?: ColorMap;
 	};
 };
 

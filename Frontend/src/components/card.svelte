@@ -129,7 +129,7 @@
 		<div class="flex-1">
 			<Barchart
 				data={bardata}
-				color={colorMap[stackDim]}
+				color={() => 'gainsboro'}
 				on:filter={forward}
 				on:hover={handleHover}
 			/>

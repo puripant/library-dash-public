@@ -22,26 +22,20 @@
 
 	const COLS = 12;
 	onMount(async () => {
-		const rent: TRent[] = await d3.json('/js/data/rent.json');
-		const book: TBook[] = await d3.json('/js/data/book.json');
-		const patron: TPatron[] = await d3.json('/js/data/patron.json');
 		dataset = {
 			[Dataset.Rent]: {
 				title: 'ชุดข้อมูลการยืม',
-				data: rent,
-				colorMap: barcolorsFactory(rent, metadata.rent),
+				data: 'rent',
 				metadata: metadata.rent
 			},
 			[Dataset.Book]: {
 				title: 'ชุดข้อมูลหนังสือ',
-				data: book,
-				colorMap: barcolorsFactory(book, metadata.book),
+				data: 'book',
 				metadata: metadata.book
 			},
 			[Dataset.Patron]: {
 				title: 'ชุดข้อมูลสมาชิก',
-				data: patron,
-				colorMap: barcolorsFactory(patron, metadata.patron),
+				data: 'patron',
 				metadata: metadata.patron
 			}
 		};

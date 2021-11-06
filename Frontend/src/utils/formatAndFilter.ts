@@ -7,7 +7,7 @@ const formatAndFilter: TDataCB = async (data, xDim, stackDim, filter = []) => {
 	const res = await fetch(`http://127.0.0.1:5000/v1/filter`, {
 		method: 'POST',
 		body: JSON.stringify({
-			data,
+			basedim: data,
 			xDim,
 			stackDim,
 			filter
