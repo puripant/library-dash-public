@@ -35,10 +35,8 @@ def filter_route():
             if not len(filters):
                 sub_element = {'x2': sub_key, 'y2': len(sub_value)}
             else:
-                if sub_key == filters[0]['value']:
-                    sub_element = {'x2': sub_key, 'y2': len(sub_value)}
-                else:
-                    sub_element = {'x2': sub_key, 'y2': 0}
+                sub_element = {'x2': sub_key,
+                               'y2': filter_and_count(sub_value, filters)}
             element['y'].append(sub_element)
         res.append(element)
 
@@ -48,6 +46,17 @@ def filter_route():
         },
         response=json.dumps(res)
     )
+
+
+def filter_and_count(values, filters):
+    for element in filters:
+        arr = list(
+            filter(
+                lambda value: value[element['dim']] == element['value'],
+                values
+            )
+        )
+    return len(arr)
 
 
 def get_data(basedim):
