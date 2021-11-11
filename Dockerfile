@@ -4,10 +4,10 @@ WORKDIR /app
 COPY ./Frontend .
 RUN yarn install
 RUN yarn build
-RUN mv ./dist ./src/dist
 
 FROM python:3.8-slim-buster
 WORKDIR /app
+COPY --from=0 /app/dist ./src/dist
 COPY ./Backend/requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 COPY ./Backend .
