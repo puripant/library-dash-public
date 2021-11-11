@@ -59,7 +59,7 @@ export type TDataset = {
 		title: string;
 		data: TData;
 		metadata: TMetadata[keyof TMetadata];
-		colorMap?: ColorMap;
+		colorMap: ColorMap;
 	};
 };
 

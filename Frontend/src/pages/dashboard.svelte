@@ -5,8 +5,6 @@
 	import Grid from 'svelte-grid';
 	import gridHelp from 'svelte-grid/build/helper/index.js';
 
-	import * as d3 from 'd3';
-
 	import id from '../utils/id';
 	import Card from '../components/card.svelte';
 	import barcolorsFactory from '../utils/barcolors';
@@ -22,21 +20,26 @@
 
 	const COLS = 12;
 	onMount(async () => {
+		const barColor = barcolorsFactory();
+		console.log('barColor', barColor);
 		dataset = {
 			[Dataset.Rent]: {
 				title: 'ชุดข้อมูลการยืม',
 				data: 'rent',
-				metadata: metadata.rent
+				metadata: metadata.rent,
+				colorMap: barColor['rent']
 			},
 			[Dataset.Book]: {
 				title: 'ชุดข้อมูลหนังสือ',
 				data: 'book',
-				metadata: metadata.book
+				metadata: metadata.book,
+				colorMap: barColor['book']
 			},
 			[Dataset.Patron]: {
 				title: 'ชุดข้อมูลสมาชิก',
 				data: 'patron',
-				metadata: metadata.patron
+				metadata: metadata.patron,
+				colorMap: barColor['patron']
 			}
 		};
 
