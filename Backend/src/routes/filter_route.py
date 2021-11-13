@@ -40,6 +40,9 @@ def filter_route():
             element['y'].append(sub_element)
         res.append(element)
 
+    res = sorted(res, key=lambda k: sum(
+        item['y2'] for item in k['y']), reverse=True)
+
     return Response(
         headers={
             "Access-Control-Allow-Origin": "*"
