@@ -1,4 +1,5 @@
 import json
+import os
 from flask import Blueprint, request
 from flask.wrappers import Response
 from itertools import groupby
@@ -16,7 +17,7 @@ def filter_route():
     stack_dim = body['stackDim']
     filters = body['filter']
 
-    data = get_data(basedim)
+    data = database[basedim]
 
     data_by_base_dim = {}
     for key, value in groupby(data, itemgetter(x_dim, stack_dim)):
@@ -51,6 +52,25 @@ def filter_route():
     )
 
 
+@filter_blueprint.before_app_first_request
+def load_data():
+    global database
+    database = {}
+
+    for path, directories, files in os.walk('src/static/json'):
+        for file in files:
+            if '.json' in file:
+                basedim = file[:-5]
+                database[basedim] = get_data(os.path.join(path, file))
+
+
+def get_data(path):
+    with open(path, 'r') as json_file:
+        json_file = json.loads(json_file.read())
+
+    return json_file
+
+
 def filter_and_count(values, filters):
     for element in filters:
         arr = list(
@@ -60,12 +80,3 @@ def filter_and_count(values, filters):
             )
         )
     return len(arr)
-
-
-def get_data(basedim):
-    path = 'src/static/json/{basedim}.json'.format(basedim=basedim)
-
-    with open(path, 'r') as json_file:
-        json_file = json.loads(json_file.read())
-
-    return json_file
