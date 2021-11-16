@@ -1,61 +1,73 @@
 {
-  "vet": [
+  "Veterinary Science Library": [
     "Veterinary Science Library",
     "Veterinary Science Library : Reserve Collection",
     "Veterinary Science Library : Reference Collection",
     "Veterinary Science Library : Thesis"
   ],
-  "others": [
+  "Central Library": [
     "Central Library (4th Floor)",
     "Central Library (5th Floor)",
     "Central Library : Juvenile Collection (4th Floor)",
     "Central Library : Stack (Contact Staff)",
-    "Thailand and ASEAN Information Center (6th Floor)",
-    "Thailand and ASEAN Information Center (6th Floor) : Thesis",
     "Central Library @ Chamchuri 10",
     "Central Library : Reserve Collection (1st Floor)",
-    "Language Institute Library",
     "Central Library",
     "Central Library : Education Collection",
-    "Thailand and ASEAN Information Center (6th Floor) : Chula Collection",
-    "Asia Study Institute Library",
-    "Thailand and ASEAN Information Center (6th Floor) : Rarebook Collection",
-    "Scientific and Technological Research Equipment Centre\u00a0Library",
-    "Scientific and Technological Research Equipment Centre\u00a0Library : Government Publication",
-    "Scientific and Technological Research Equipment Centre\u00a0Library :  Standard",
     "Central Library : Oversized Book (5th Floor)",
     "Central Library : Reference Collection",
-    "Language Institute Library : SALC",
     "Central Library : Audio-Visual Collection (3rd Floor)",
-    "Environmental Research Institute Library",
-    "Environmental Research Institute Library : Research Collection",
-    "Environmental Research Institute Library : EIA Collection",
-    "Environmental Research Institute Library : Reference Collection",
-    "Thailand and ASEAN Information Center (6th Floor) : Thailand Collection",
     "Central Library @ Chamchuri 10 : Special Collection",
-    "Thai Music Library",
     "Central Library : Reserve Collection at Stack (Contact Staff)",
-    "Center of Excellence on Hazardous Substance Management Library",
-    "Thailand and ASEAN Information Center (6th Floor) : Indian Studies",
-    "Central Library : Reference Collection at Stack (Contact Staff)",
-    "Central Library : Library Information Management Division",
-    "Thailand and ASEAN Information Center (6th Floor) : Government Publication",
-    "Language Institute Library : SALC Reference",
-    "Thailand and ASEAN Information Center (6th floor) : Chinese Studies",
-    "Thai Music Library : Research",
-    "Thai Music Library : Thesis",
     "Central Library @ Chamchuri 10 : Thesis",
     "Central Library @ Chamchuri 10 : Thesis at Stack",
     "Central Library @ Chamchuri 10 : Special Collections Science Library : Research Collection",
     "Central Library : King Chulalongkorn Collection (7th Floor)",
     "Central Library : Russian Center (5th floor)",
-    "Language Institute Library : Reference Collection",
-    "Language Institute Library : Audio-Visual Collection",
-    "Language Institute Library : SALC Reserve",
-    "Environmental Research Institute Library : Thesis",
+    "Central Library : Reference Collection at Stack (Contact Staff)",
+    "Central Library : Library Information Management Division",
     "Central Library @ Chamchuri 9"
   ],
-  "art": [
+  "Thailand and ASEAN Information Center": [
+    "Thailand and ASEAN Information Center (6th Floor) : Indian Studies",
+    "Thailand and ASEAN Information Center (6th Floor) : Government Publication",
+    "Thailand and ASEAN Information Center (6th Floor)",
+    "Thailand and ASEAN Information Center (6th Floor) : Thesis",
+    "Thailand and ASEAN Information Center (6th Floor) : Chula Collection",
+    "Thailand and ASEAN Information Center (6th Floor) : Rarebook Collection",
+    "Thailand and ASEAN Information Center (6th Floor) : Thailand Collection",
+    "Thailand and ASEAN Information Center (6th floor) : Chinese Studies"
+  ],
+  "Asia Study Institute Library": ["Asia Study Institute Library"],
+  "Scientific and Technological Research Equipment Centre\u00a0Library": [
+    "Scientific and Technological Research Equipment Centre\u00a0Library",
+    "Scientific and Technological Research Equipment Centre\u00a0Library : Government Publication",
+    "Scientific and Technological Research Equipment Centre\u00a0Library :  Standard"
+  ],
+  "Center of Excellence on Hazardous Substance Management Library": [
+    "Center of Excellence on Hazardous Substance Management Library"
+  ],
+  "Language Institute Library": [
+    "Language Institute Library",
+    "Language Institute Library : SALC",
+    "Language Institute Library : SALC Reference",
+    "Language Institute Library : Reference Collection",
+    "Language Institute Library : Audio-Visual Collection",
+    "Language Institute Library : SALC Reserve"
+  ],
+  "Environmental Research Institute Library": [
+    "Environmental Research Institute Library",
+    "Environmental Research Institute Library : Research Collection",
+    "Environmental Research Institute Library : EIA Collection",
+    "Environmental Research Institute Library : Reference Collection",
+    "Environmental Research Institute Library : Thesis"
+  ],
+  "Thai Music Library": [
+    "Thai Music Library",
+    "Thai Music Library : Research",
+    "Thai Music Library : Thesis"
+  ],
+  "Arts Library": [
     "Arts Library",
     "Arts Library : Stack",
     "Arts Library : ASEAN Collection",
@@ -75,7 +87,7 @@
     "Arts Library : Thai Studies Collection",
     "Arts Library : Government Publication"
   ],
-  "sasin": [
+  "Sasin Library": [
     "Sasin Library",
     "Sasin Library : Reserve Collection",
     "Sasin Library : SET Collection",
@@ -83,7 +95,7 @@
     "Sasin Library : Pamphlet",
     "Sasin Library : ADB"
   ],
-  "business": [
+  "Chula Business School Library": [
     "Chula Business School Library",
     "Chula Business School Library : Reserve Collection",
     "Chula Business School Library : Thesis",
@@ -92,12 +104,12 @@
     "Chula Business School Library : Special Project",
     "Chula Business School Library : Reference Collection"
   ],
-  "dentistry": [
+  "Dentistry Library": [
     "Dentistry Library",
     "Dentistry Library : Research Collection",
     "Dentistry Library : Reserve Collection"
   ],
-  "science": [
+  "Science Library": [
     "Science Library",
     "Science Library : Closed Shelf",
     "Science Library : Government Publication",
@@ -107,14 +119,14 @@
     "Science Library : Audio-Visual Collection",
     "Science Library : Dept. of Mathematics"
   ],
-  "pharma": [
+  "Pharmaceutical Sciences Library": [
     "Pharmaceutical Sciences Library",
     "Pharmaceutical Sciences Library : Reference Collection",
     "Pharmaceutical Sciences Library : Thesis",
     "Pharmaceutical Sciences Library : Reserve Collection",
     "Pharmaceutical Sciences Library : Research Collection"
   ],
-  "engineer": [
+  "Engineering Library": [
     "Engineering Library",
     "Petroleum & Petrochemical College Library",
     "Petroleum & Petrochemical College Library : Thesis",
@@ -122,7 +134,7 @@
     "Engineering Library : Reference Collection",
     "Petroleum & Petrochemical College Library : Reference Collection"
   ],
-  "medicine": [
+  "Medicine Library": [
     "Medicine Library",
     "Medicine Library : Stack",
     "Medicine Library : Research Collection",
@@ -132,8 +144,8 @@
     "Medicine Library : Reserve Collection",
     "Medicine Library :  MDCU Memorial Hall"
   ],
-  "econ": ["Economics Library", "Economics Library : Thesis"],
-  "education": [
+  "Economics Library": ["Economics Library", "Economics Library : Thesis"],
+  "Education Library": [
     "Education Library : Research Collection",
     "Education Library",
     "Education Library : Curiculum Lab",
@@ -146,7 +158,7 @@
     "Education Library : Reserve Collection",
     "Education Library : RIHED"
   ],
-  "polsci": [
+  "Political Science Library": [
     "Political Science Library",
     "Political Science Library : Reserve Collection",
     "Political Science Library : Thesis",
@@ -154,14 +166,14 @@
     "Political Science Library : Chula Collection",
     "Political Science Library : Reference Collection"
   ],
-  "commart": [
+  "Communication Arts  Library": [
     "Communication Arts  Library",
     "Communication Arts  Library : Research Collection",
     "Communication Arts  Library : Thesis",
     "Communication Arts  Library : Reference Collection",
     "Communication Arts  Library : Reserve Collection"
   ],
-  "law": [
+  "Law Library": [
     "Law Library (4th Floor)",
     "Law Library (3rd Floor)",
     "Law Library : Thesis (4th  Floor)",
@@ -171,19 +183,19 @@
     "Law Library",
     "Law Library : Reference Collection (1st Floor)"
   ],
-  "architecture": [
+  "Architecture Library": [
     "Architecture Library (Quiet Zone)",
     "Architecture Library (4th Floor)",
     "Architecture Library (3rd Floor)",
     "Architecture Library",
     "Architecture Library : Reserve Collection"
   ],
-  "healthscience": [
+  "College of Public Health Sciences Library": [
     "College of Public Health Sciences Library",
     "College of Public Health Sciences Library : Thesis",
     "College of Public Health Sciences Library : Reference Collection"
   ],
-  "fineart": [
+  "Fine & Applied Arts Library": [
     "Fine & Applied Arts Library",
     "Fine & Applied Arts Library : Research Collection",
     "Fine & Applied Arts Library : Reserve Collection",
