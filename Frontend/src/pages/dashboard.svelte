@@ -47,8 +47,16 @@
 
 	$: items = [];
 
-	const cols = [[1920, COLS]];
+	const cols = [[innerWidth, COLS]];
+	const rowHeight = 100;
+	const TARGET_WIDTH = 250,
+		TARGET_HEIGHT = 500;
+	const SIDEBAR_WIDTH = 226;
+	const DISPLAY_AREA = innerWidth - SIDEBAR_WIDTH;
+	const w = Math.min(COLS, ~~((TARGET_WIDTH / DISPLAY_AREA) * COLS) + 1),
+		h = TARGET_HEIGHT / rowHeight;
 
+	console.log('w, h', w, h);
 	const add: TAdd = ({
 		dataset,
 		name,
@@ -64,8 +72,8 @@
 	}) => {
 		let newItem = {
 			[COLS]: gridHelp.item({
-				w: 2,
-				h: 5,
+				w,
+				h,
 				x: 0,
 				y: 0,
 				customDragger: true
@@ -117,7 +125,7 @@
 			<Manager {dataset} {add} />
 		</nav>
 		<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
-			<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>
+			<Grid bind:items {rowHeight} let:dataItem {cols} let:movePointerDown>
 				<Card
 					on:filter={addByFilter}
 					on:remove={() => remove(dataItem)}
