@@ -4,6 +4,7 @@
 	import Bar from './bar.svelte';
 	import type { TBardata } from '../types';
 	import type { TColor } from 'src/utils/barcolors';
+	import { max } from 'd3';
 
 	export let data: Array<TBardata> = [],
 		color: TColor;
@@ -11,7 +12,7 @@
 	export const margin = {
 		top: 20,
 		right: 20,
-		bottom: 50,
+		bottom: 75,
 		left: 40
 	};
 
@@ -46,9 +47,26 @@
 </script>
 
 <div class="w-full h-full flex flex-col">
-	<p class="text-center text-sm">Top {slicer} - {slicer + 5}</p>
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
 		<svg class="w-full h-full">
+			<!-- next and back -->
+			<g
+				on:click={() => {
+					slicer = Math.min(slicer + 1, data.length - 5);
+				}}
+				transform={`translate(${w - margin.right / 2 + 6}, ${h / 2 - 10})`}
+				style="cursor: pointer;"
+			>
+				<path d="M-10, -10 l10 10 l-10 10" stroke="black" fill="transparent" />
+			</g>
+			<g
+				on:click={() => (slicer = Math.max(0, slicer - 1))}
+				transform={`translate(${margin.left / 2 - 12}, ${h / 2 - 10})`}
+				style="cursor: pointer;"
+			>
+				<path d="M10, -10 l-10 10 l10 10" stroke="black" fill="transparent" />
+			</g>
+
 			<!-- X Axis -->
 			<g transform={`translate(0, ${h - margin.bottom + 10})`}>
 				{#each bardata as d}
@@ -82,8 +100,5 @@
 				{/each}
 			</g>
 		</svg>
-	</div>
-	<div id="slicer" class="w-full px-2 flex flex-col">
-		<input type="range" class="w-full" min={0} max={data.length} step={1} bind:value={slicer} />
 	</div>
 </div>
