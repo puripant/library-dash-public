@@ -32,13 +32,23 @@ def filter_route():
     res = []
     for key, value in data_by_base_dim.items():
         element = {'x': key, 'y': []}
+        all_y = []
         for sub_key, sub_value in value.items():
             if not len(filters):
                 sub_element = {'x2': sub_key, 'y2': len(sub_value)}
             else:
                 sub_element = {'x2': sub_key,
                                'y2': filter_and_count(sub_value, filters)}
-            element['y'].append(sub_element)
+            all_y.append(sub_element)
+
+        if stack_dim == 'title':
+            all_y.sort(key=lambda y: y['y2'], reverse=True)
+            top10 = all_y[:10]
+            top10.append({'x2': 'others', 'y2': sum(
+                map(lambda x: x['y2'], all_y[10:]))})
+            element['y'] = top10
+        else:
+            element['y'] = all_y
         res.append(element)
 
     res = sorted(res, key=lambda k: sum(
