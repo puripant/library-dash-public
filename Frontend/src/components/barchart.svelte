@@ -49,24 +49,6 @@
 <div class="w-full h-full flex flex-col">
 	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
 		<svg class="w-full h-full">
-			<!-- next and back -->
-			<g
-				on:click={() => {
-					slicer = Math.min(slicer + 1, data.length - 5);
-				}}
-				transform={`translate(${w - margin.right / 2 + 6}, ${h / 2 - 10})`}
-				style="cursor: pointer;"
-			>
-				<path d="M-10, -10 l10 10 l-10 10" stroke="black" fill="transparent" />
-			</g>
-			<g
-				on:click={() => (slicer = Math.max(0, slicer - 1))}
-				transform={`translate(${margin.left / 2 - 12}, ${h / 2 - 10})`}
-				style="cursor: pointer;"
-			>
-				<path d="M10, -10 l-10 10 l10 10" stroke="black" fill="transparent" />
-			</g>
-
 			<!-- X Axis -->
 			<g transform={`translate(0, ${h - margin.bottom + 10})`}>
 				{#each bardata as d}
@@ -98,6 +80,24 @@
 				{#each bardata as d}
 					<Bar {X} {Y} data={d} {color} on:filter={forward} on:hover={handleHover} />
 				{/each}
+			</g>
+
+			<!-- next and back -->
+			<g
+				on:click={() => {
+					slicer = Math.min(slicer + 1, data.length - 5);
+				}}
+				transform={`translate(${w - margin.right / 2 + 6}, ${h / 2 - 10})`}
+				style="cursor: pointer;"
+			>
+				<path d="M-10, -10 l10 10 l-10 10" stroke="black" fill="transparent" />
+			</g>
+			<g
+				on:click={() => (slicer = Math.max(0, slicer - 1))}
+				transform={`translate(${margin.left / 2 - 12}, ${h / 2 - 10})`}
+				style="cursor: pointer;"
+			>
+				<path d="M10, -10 l-10 10 l10 10" stroke="black" fill="transparent" />
 			</g>
 		</svg>
 	</div>

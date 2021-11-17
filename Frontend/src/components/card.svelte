@@ -75,7 +75,7 @@
 			{title}
 		</div>
 	</div>
-	<div class="w-full flex flex-row justify-evenly items-center px-2 text-sm">
+	<div class="w-full flex flex-row justify-evenly items-center px-2 text-sm mt-2">
 		<h3 class="w-1/2">แกน X</h3>
 		<select bind:value={xDim}>
 			{#each dims as [dim, title] (dim)}
@@ -96,7 +96,7 @@
 		</select>
 	</div>
 	<h2 class="text-center px-2 mt-2 text-xs">
-		<h3 class="mb-1">Filters</h3>
+		<h3 class="mb-1">ตัวกรอง</h3>
 		{#each filter as { dim, value } (dim)}
 			<div class="flex flex-row justify-between items-center mb-1">
 				<span class="mr-2">
