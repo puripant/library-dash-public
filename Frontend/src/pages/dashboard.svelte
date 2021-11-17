@@ -50,13 +50,19 @@
 
 	const cols = [[1920, COLS]];
 
-	const add: TAdd = (
-		dataset: ValueOf<TDataset>,
-		name: string,
-		xDim: string,
-		stackDim: string,
-		filter: TFilter[] = []
-	) => {
+	const add: TAdd = ({
+		dataset,
+		name,
+		xDim,
+		stackDim,
+		filter = []
+	}: {
+		dataset: ValueOf<TDataset>;
+		name: string;
+		xDim: string;
+		stackDim: string;
+		filter: TFilter[];
+	}) => {
 		let newItem = {
 			[COLS]: gridHelp.item({
 				w: 2,
@@ -98,7 +104,7 @@
 		const { metadata } = dataset;
 
 		const name = filter.map((f) => `${metadata[f.dim]}: ${f.value}`).join('\n');
-		add(dataset, name, xDim, stackDim, filter);
+		add({ dataset, name, xDim, stackDim, filter });
 	};
 
 	const remove = (item) => {
@@ -109,9 +115,7 @@
 <main class="w-screen h-screen flex flex-row">
 	{#if ready}
 		<nav>
-			{#each Object.values(dataset) as dataset (dataset)}
-				<Manager {dataset} {add} />
-			{/each}
+			<Manager {dataset} {add} />
 		</nav>
 		<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 			<Grid bind:items rowHeight={100} let:dataItem {cols} let:movePointerDown>

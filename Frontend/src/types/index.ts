@@ -63,10 +63,11 @@ export type TDataset = {
 	};
 };
 
-export type TAdd = (
-	dataset: ValueOf<TDataset>,
-	name: string,
-	xDim: string,
-	stackDim: string,
-	filter: TFilter[]
-) => void;
+export type IAdd = {
+	dataset: ValueOf<TDataset>;
+	name: string;
+	xDim: string;
+	stackDim: string;
+	filter: TFilter[];
+};
+export type TAdd = (args: IAdd) => void;

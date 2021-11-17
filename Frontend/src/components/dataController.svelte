@@ -38,7 +38,7 @@
 		class={`bg-blue-400 text-white px-2 py-1 mt-3 rounded`}
 		disabled={!readyToAdd}
 		on:click={() => {
-			add(dataset, '-', xDim, stackDim, []);
+			add({ dataset, name: '-', xDim, stackDim, filter: [] });
 		}}>Add</button
 	>
 </div>
