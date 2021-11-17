@@ -10,7 +10,7 @@
 	import barcolorsFactory from '../utils/barcolors';
 
 	import { Dataset } from '../types/index';
-	import type { TFilter, TRent, TBook, TPatron, TDataset, TAdd } from '../types/index';
+	import type { TFilter, TDataset, TAdd } from '../types/index';
 	import type { ValueOf } from '../types/helper';
 	import metadata from '../utils/metadata';
 	import Manager from '../components/manager.svelte';
