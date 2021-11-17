@@ -75,7 +75,7 @@
 			{title}
 		</div>
 	</div>
-	<div class="w-full flex flex-row justify-evenly items-center p-2">
+	<div class="w-full flex flex-row justify-evenly items-center px-2 text-sm">
 		<h3 class="w-1/2">แกน X</h3>
 		<select bind:value={xDim}>
 			{#each dims as [dim, title] (dim)}
@@ -85,8 +85,8 @@
 			{/each}
 		</select>
 	</div>
-	<div class="w-full flex flex-row justify-evenly items-center p-2">
-		<h3 class=" w-1/2">แกน stack</h3>
+	<div class="w-full flex flex-row justify-evenly items-center px-2 text-sm">
+		<h3 class="w-1/2">แกน stack</h3>
 		<select bind:value={stackDim}>
 			{#each dims as [dim, title] (dim)}
 				<option value={dim}>
@@ -95,27 +95,25 @@
 			{/each}
 		</select>
 	</div>
-	<div id="input-area">
-		<h2 class="text-center p-2 text-xs whitespace-pre">
-			<div>Filter</div>
-			{#each filter as { dim, value } (dim)}
-				<div class="flex flex-row justify-center items-center">
-					<span class="mr-2">
-						{metadata[dim]}
-					</span>
-					<input class="border-b-2 px-2" bind:value />
-					<button
-						class="bg-red-500 text-white px-1 rounded"
-						on:click={() => {
-							const idx = filter.findIndex(({ dim: fdim }) => fdim === dim);
-							filter.splice(idx, 1);
-							filter = filter;
-						}}>x</button
-					>
-				</div>
-			{/each}
-		</h2>
-	</div>
+	<h2 class="text-center px-2 mt-2 text-xs">
+		<h3 class="mb-1">Filters</h3>
+		{#each filter as { dim, value } (dim)}
+			<div class="flex flex-row justify-between items-center mb-1">
+				<span class="mr-2">
+					{metadata[dim]}
+				</span>
+				<input class="border-b-2 px-2" bind:value />
+				<button
+					class="bg-red-500 text-white px-1 rounded"
+					on:click={() => {
+						const idx = filter.findIndex(({ dim: fdim }) => fdim === dim);
+						filter.splice(idx, 1);
+						filter = filter;
+					}}>x</button
+				>
+			</div>
+		{/each}
+	</h2>
 	{#await bardataPromise}
 		<div class="w-full h-full flex justify-center items-center">
 			<Spinner size="60" color="hsl(200, 60%, 40%)" unit="px" duration="1s" />
