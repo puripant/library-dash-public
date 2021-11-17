@@ -1,11 +1,29 @@
 <script lang="ts">
-	import type { ArgsType } from 'src/types/helper';
-
 	import type { IAdd, TAdd, TDataset } from '../types';
 
 	export let dataset: TDataset, add: TAdd;
 
-	const PRESETS: { name: string; cards: IAdd[] }[] = [];
+	const PRESETS: { name: string; cards: IAdd[] }[] = [
+		{
+			name: 'Atlas of human anatomy',
+			cards: [
+				{
+					dataset: dataset['Book'],
+					name: '-',
+					xDim: 'title',
+					stackDim: 'library',
+					filter: [{ dim: 'title', value: 'Atlas of human anatomy' }]
+				},
+				{
+					dataset: dataset['Rent'],
+					name: '-',
+					xDim: 'title',
+					stackDim: 'library',
+					filter: [{ dim: 'title', value: 'Atlas of human anatomy' }]
+				}
+			]
+		}
+	];
 	let selectedPreset = PRESETS[0];
 </script>
 
@@ -24,7 +42,9 @@
 	<button
 		class={`bg-blue-400 text-white px-2 py-1 mt-3 rounded`}
 		on:click={() => {
-			// add(dataset, '-', xDim, stackDim, []);
+			for (const preset of selectedPreset.cards) {
+				add(preset);
+			}
 		}}>Add</button
 	>
 </div>

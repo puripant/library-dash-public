@@ -48,14 +48,14 @@ export type TBardata = { x: string; y: { x2: string; y2: number }[] };
 
 export type TStackdata = { x2: string; y2: number; y: number; prev: number };
 
-export enum Dataset {
-	Rent = 'Rent',
-	Book = 'Book',
-	Patron = 'Patron'
-}
+export type Dataset = 'Rent' | 'Book' | 'Patron';
+// 	Rent = 'Rent',
+// 	Book = 'Book',
+// 	Patron = 'Patron'
+// }
 
 export type TDataset = {
-	[key in keyof typeof Dataset]: {
+	[key in Dataset]: {
 		title: string;
 		data: TData;
 		metadata: TMetadata[keyof TMetadata];

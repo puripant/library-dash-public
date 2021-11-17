@@ -9,7 +9,6 @@
 	import Card from '../components/card.svelte';
 	import barcolorsFactory from '../utils/barcolors';
 
-	import { Dataset } from '../types/index';
 	import type { TFilter, TDataset, TAdd } from '../types/index';
 	import type { ValueOf } from '../types/helper';
 	import metadata from '../utils/metadata';
@@ -23,19 +22,19 @@
 		const barColor = barcolorsFactory();
 		console.log('barColor', barColor);
 		dataset = {
-			[Dataset.Rent]: {
+			Rent: {
 				title: 'ชุดข้อมูลการยืม',
 				data: 'rent',
 				metadata: metadata.rent,
 				colorMap: barColor['rent']
 			},
-			[Dataset.Book]: {
+			Book: {
 				title: 'ชุดข้อมูลหนังสือ',
 				data: 'book',
 				metadata: metadata.book,
 				colorMap: barColor['book']
 			},
-			[Dataset.Patron]: {
+			Patron: {
 				title: 'ชุดข้อมูลสมาชิก',
 				data: 'patron',
 				metadata: metadata.patron,
