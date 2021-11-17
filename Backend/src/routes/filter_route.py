@@ -27,7 +27,7 @@ def filter_route():
         if key[1] not in data_by_base_dim[key[0]]:
             data_by_base_dim[key[0]][key[1]] = list(value)
         else:
-            data_by_base_dim[key[0]][key[1]].append(list(value)[0])
+            data_by_base_dim[key[0]][key[1]].extend(list(value))
 
     res = []
     for key, value in data_by_base_dim.items():
