@@ -10,15 +10,15 @@
 				{
 					dataset: dataset['Book'],
 					name: '-',
-					xDim: 'title',
+					xDim: 'library',
 					stackDim: 'library',
 					filter: [{ dim: 'title', value: 'Atlas of human anatomy' }]
 				},
 				{
 					dataset: dataset['Rent'],
 					name: '-',
-					xDim: 'title',
-					stackDim: 'library',
+					xDim: 'library',
+					stackDim: 'faculty',
 					filter: [{ dim: 'title', value: 'Atlas of human anatomy' }]
 				}
 			]
