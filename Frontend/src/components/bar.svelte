@@ -14,7 +14,7 @@
 		dispatch('filter', { axis: 'stack', value: filterValue });
 	}
 
-	function hover(xDatum: string, d?: TStackdata) {
+	function hover(xDatum: string, d?: TStackdata, event?: MouseEvent) {
 		dispatch(
 			'hover',
 			d
@@ -22,7 +22,9 @@
 						// tooltip: x.length === 0 ? x : `แกน X: ${x} \n cd: ${d.x2} count: ${d.y2}`
 						xDatum,
 						stackDatum: d.x2,
-						count: d.y2
+						count: d.y2,
+						top: event.clientY,
+						left: event.clientX
 				  }
 				: false
 		);
@@ -78,7 +80,8 @@
 			height={Y(d.prev) - Y(d.y)}
 			fill={color(d.x2)}
 			on:click={() => filter(d.x2)}
-			on:mouseenter={() => hover(data.x, d)}
+			on:mouseenter={(e) => hover(data.x, d, e)}
+			on:mousemove={(e) => hover(data.x, d, e)}
 			on:mouseleave={() => hover('')}
 		/>
 	{/each}

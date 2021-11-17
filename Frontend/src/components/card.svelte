@@ -7,6 +7,7 @@
 	import type { TDataset, TFilter } from '../types';
 	import type { ValueOf } from 'src/types/helper';
 	import { Wave as Spinner } from 'svelte-loading-spinners';
+	import { tooltip } from './tooltip.store';
 
 	export let dataItem: {
 		dataset: ValueOf<TDataset>;
@@ -37,22 +38,21 @@
 		dispatch('filter', filters);
 	}
 
-	let tooltip = '';
-
 	function handleHover(event: {
 		detail:
 			| {
 					xDatum: string;
 					stackDatum: string;
 					count: number;
+					top: number;
+					left: number;
 			  }
 			| false;
 	}) {
 		if (event.detail) {
-			const { xDatum, stackDatum, count } = event.detail;
-			tooltip = `${xDim}: ${xDatum}\n${stackDim}: ${stackDatum} count: ${count}`;
+			$tooltip = { ...event.detail, xDim: metadata[xDim], stackDim: metadata[stackDim] };
 		} else {
-			tooltip = 'hover for tooltip';
+			$tooltip = null;
 		}
 	}
 
@@ -115,11 +115,6 @@
 				</div>
 			{/each}
 		</h2>
-		<div id="slicer" class="w-full px-2 flex flex-col">
-			<p class="text-center text-sm h-10 whitespace-pre flex items-center justify-center">
-				{tooltip}
-			</p>
-		</div>
 	</div>
 	{#await bardataPromise}
 		<div class="w-full h-full flex justify-center items-center">
