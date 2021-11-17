@@ -6,7 +6,7 @@ const metadata = {
 		faculty: 'ประเภทบุคลากร',
 		library: 'ห้องสมุด',
 		period: 'ช่วงเวลาของวัน',
-		title: 'หนังสือ'
+		title: 'ชื่อหนังสือ'
 	},
 	book: {
 		title: 'ชื่อหนังสือ',
@@ -19,8 +19,8 @@ const metadata = {
 	patron: {
 		ptype: 'ประเภทสมาชิก',
 		library: 'ห้องสมุด',
-		renewal_total: 'renewal_total',
-		checkout_total: 'checkout_total'
+		renewal_total: 'จำนวนการต่ออายุ',
+		checkout_total: 'จำนวนการยืม'
 	}
 };
 
