@@ -8,7 +8,6 @@
 	import type { ValueOf } from 'src/types/helper';
 	import { Wave as Spinner } from 'svelte-loading-spinners';
 	import { tooltip } from './tooltip.store';
-	import { stack } from 'd3-shape';
 
 	export let dataItem: {
 		dataset: ValueOf<TDataset>;

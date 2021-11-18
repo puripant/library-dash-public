@@ -1,4 +1,5 @@
 <script lang="ts">
+	import saveItems from '../utils/saveItems';
 	export let items: any;
 </script>
 
@@ -13,7 +14,13 @@
 
 	<button
 		on:click={() => {
-			console.log('items io', items);
+			const json = JSON.stringify(saveItems(items));
+			const data = 'data:text/json;charset=utf-8,' + encodeURIComponent(json);
+
+			const a = document.createElement('a');
+			a.href = data;
+			a.download = 'library-dash-save.json';
+			a.click();
 		}}
 		><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svelte-c8tyih"
 			><path
