@@ -18,11 +18,16 @@
 		on:mouseenter={() => (show = true)}
 		on:mouseleave={() => (show = false)}
 	>
-		<rect width={w} height={h} fill="white" stroke="gainsboro" />
+		<rect
+			width={w}
+			height={Object.keys(color.label.val).length * 15 + 5}
+			fill="white"
+			stroke="gainsboro"
+		/>
 		{#each Object.entries(color.label.val) as [dim, color], i}
 			<g transform={`translate(5, ${15 * i + 5})`}>
 				<rect width={10} height={10} fill={color} />
-				<text x={15} y={5} font-size={10} dominant-baseline="middle">
+				<text x={15} y={6.75} font-size={10} dominant-baseline="middle">
 					{dim}
 				</text>
 			</g>
