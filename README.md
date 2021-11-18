@@ -16,7 +16,7 @@ download data from
 https://drive.google.com/drive/folders/1wMOfj0Uo3I1uEKDPjnlSAy8Fa5yKKsgF?usp=sharing
 ```
 
-and put inside `Backen/src/static/json` folder like an example below.
+and put inside `Backend/src/static/json` folder like an example below.
 
 ```
 ├── README.md
@@ -34,4 +34,10 @@ then run to start application (need `Docker` to be running).
 
 ```
 ./run.sh
+```
+
+and the web should be served at
+
+```
+http://localhost:5001/js/index.html
 ```
