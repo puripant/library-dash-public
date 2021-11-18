@@ -7,7 +7,7 @@
 	export let dataset: TDataset, add: TAdd, items: any;
 </script>
 
-<IoController bind:items />
+<IoController {items} {dataset} {add} />
 
 <PresetController {dataset} {add} />
 

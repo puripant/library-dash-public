@@ -121,7 +121,7 @@
 <main class="w-screen h-screen flex flex-row">
 	{#if ready}
 		<nav>
-			<Manager {dataset} {add} bind:items />
+			<Manager {dataset} {add} {items} />
 		</nav>
 		<div id="visualise" class="p-4 overflow-y-auto flex-1 h-screen">
 			<Grid bind:items {rowHeight} let:dataItem {cols} let:movePointerDown>
