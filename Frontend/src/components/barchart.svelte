@@ -34,9 +34,11 @@
 
 	$: bardata = data.slice(slicer, slicer + 5);
 
+	let yMin = 0,
+		yMax = d3.max(data, (d) => d.y.reduce((prev, cur) => (prev += cur.y2), 0));
 	$: Y = d3
 		.scaleLinear()
-		.domain([0, d3.max(data, (d) => d.y.reduce((prev, cur) => (prev += cur.y2), 0))])
+		.domain([yMin, yMax])
 		.range([h - margin.bottom, margin.top])
 		.nice();
 
@@ -45,10 +47,46 @@
 		.domain(bardata.map((d) => d.x))
 		.range([margin.left, w - margin.right])
 		.padding(0.25);
+
+	let showScaleDialog = false;
 </script>
 
 <div class="w-full h-full flex flex-col">
-	<div class="w-full flex-1" bind:clientHeight={h} bind:clientWidth={w}>
+	<div class="w-full h-full" bind:clientHeight={h} bind:clientWidth={w}>
+		{#if showScaleDialog}
+			<div
+				class="w-44 h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-400 text-white rounded opacity-90 text-center py-2"
+			>
+				<span
+					on:pointerdown={(e) => e.stopPropagation()}
+					on:click={() => (showScaleDialog = false)}
+					class="cursor-pointer absolute top-1 left-2"
+				>
+					✕
+				</span>
+				ปรับแกน Y
+				<div class="flex justify-evenly text-sm">
+					<div class="flex flex-col	justify-center w-1/3">
+						<label for="min">ต่ำสุด</label>
+						<input
+							id="min"
+							type="number"
+							bind:value={yMin}
+							class="text-black w-full px-1 font-mono text-sm"
+						/>
+					</div>
+					<div class="flex flex-col	justify-center w-1/3">
+						<label for="max">สูงสุด</label>
+						<input
+							id="max"
+							type="number"
+							bind:value={yMax}
+							class="text-black w-full px-1 font-mono text-sm"
+						/>
+					</div>
+				</div>
+			</div>
+		{/if}
 		<svg class="w-full h-full">
 			<!-- X Axis -->
 			<g transform={`translate(0, ${h - margin.bottom + 10})`}>
@@ -66,7 +104,18 @@
 			</g>
 
 			<!-- Y Axis -->
-			<g transform={`translate(${margin.left}, 0)`}>
+			<g
+				transform={`translate(${margin.left}, 0)`}
+				class="cursor-pointer"
+				on:click={() => (showScaleDialog = true)}
+			>
+				<!-- Hitbox -->
+				<rect
+					x={-margin.left}
+					width={margin.left}
+					height={h - margin.bottom - 25}
+					fill="transparent"
+				/>
 				{#each Y.ticks() as tick}
 					<g transform={`translate(0, ${Y(tick)})`}>
 						<text text-anchor="end" dominant-baseline="central" font-size={10}
