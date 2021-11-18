@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { format } from 'd3-format';
 	import { tooltip } from './tooltip.store';
 </script>
 
@@ -17,7 +18,7 @@
 				{$tooltip.stackDim}: {$tooltip.stackDatum}
 			</div>
 			<div>
-				จำนวน: {$tooltip.count}
+				จำนวน: {format(',.0f')($tooltip.count)}
 			</div>
 		</div>
 	</div>
