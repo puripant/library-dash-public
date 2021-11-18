@@ -5,21 +5,79 @@
 
 	const PRESETS: { name: string; cards: IAdd[] }[] = [
 		{
-			name: 'Atlas of human anatomy',
+			name: 'วิศวกรรมการประปา',
 			cards: [
 				{
 					dataset: dataset['Book'],
 					name: '-',
 					xDim: 'library',
 					stackDim: 'library',
-					filter: [{ dim: 'title', value: 'Atlas of human anatomy' }]
+					filter: [{ dim: 'title', value: 'วิศวกรรมการประปา' }]
 				},
 				{
 					dataset: dataset['Rent'],
 					name: '-',
 					xDim: 'library',
 					stackDim: 'faculty',
-					filter: [{ dim: 'title', value: 'Atlas of human anatomy' }]
+					filter: [{ dim: 'title', value: 'วิศวกรรมการประปา' }]
+				}
+			]
+		},
+		{
+			name: 'ฟิสิกส์ 1',
+			cards: [
+				{
+					dataset: dataset['Book'],
+					name: '-',
+					xDim: 'library',
+					stackDim: 'library',
+					filter: [{ dim: 'title', value: 'ฟิสิกส์ 1' }]
+				},
+				{
+					dataset: dataset['Rent'],
+					name: '-',
+					xDim: 'library',
+					stackDim: 'faculty',
+					filter: [{ dim: 'title', value: 'ฟิสิกส์ 1' }]
+				}
+			]
+		},
+		{
+			name: 'เวลาที่เข้ายืมที่หอกลาง',
+			cards: [
+				{
+					dataset: dataset['Rent'],
+					name: '-',
+					xDim: 'library',
+					stackDim: 'faculty',
+					filter: []
+				},
+				{
+					dataset: dataset['Rent'],
+					name: '-',
+					xDim: 'faculty',
+					stackDim: 'faculty',
+					filter: [{ dim: 'library', value: 'Central Library' }]
+				},
+				{
+					dataset: dataset['Rent'],
+					name: '-',
+					xDim: 'month',
+					stackDim: 'period',
+					filter: [
+						{ dim: 'library', value: 'Central Library' },
+						{ dim: 'faculty', value: 'Education' }
+					]
+				},
+				{
+					dataset: dataset['Rent'],
+					name: '-',
+					xDim: 'month',
+					stackDim: 'period',
+					filter: [
+						{ dim: 'library', value: 'Central Library' },
+						{ dim: 'faculty', value: 'Others' }
+					]
 				}
 			]
 		}
