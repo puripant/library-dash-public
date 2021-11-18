@@ -7,7 +7,8 @@
 	import Labels from './labels.svelte';
 
 	export let data: Array<TBardata> = [],
-		color: TColor;
+		color: TColor,
+		label: string;
 
 	export const margin = {
 		top: 20,
@@ -83,7 +84,7 @@
 			</g>
 
 			// Label box on top right
-			<Labels w={w * 0.7} h={155} {margin} {color} />
+			<Labels title={label} w={w * 0.7} h={155} {margin} {color} />
 
 			<!-- next and back -->
 			<g

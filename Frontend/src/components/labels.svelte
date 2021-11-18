@@ -5,7 +5,8 @@
 	export let w: number,
 		h: number,
 		margin: { top: number; right: number; bottom: number; left: number },
-		color: TColor;
+		color: TColor,
+		title;
 
 	let show = false;
 </script>
@@ -20,12 +21,13 @@
 	>
 		<rect
 			width={w}
-			height={Object.keys(color.label.val).length * 15 + 5}
+			height={Object.keys(color.label.val).length * 15 + 5 + 15}
 			fill="white"
 			stroke="gainsboro"
 		/>
+		<text x={5} y={10} dominant-baseline="middle" font-size={10}> {title} </text>
 		{#each Object.entries(color.label.val) as [dim, color], i}
-			<g transform={`translate(5, ${15 * i + 5})`}>
+			<g transform={`translate(5, ${15 * i + 5 + 15})`}>
 				<rect width={10} height={10} fill={color} />
 				<text x={15} y={6.75} font-size={10} dominant-baseline="middle">
 					{dim}
@@ -35,9 +37,10 @@
 	</g>
 {/if}
 {#if color.label.type === 'quantitative'}
-	<g transform={`translate(${w - margin.right / 2 + 25}, ${margin.top / 2})`} opacity={0.95}>
-		<rect width={50} height={h / 2} fill="white" stroke="gainsboro" />
-		<g transform={`translate(5, 5)`} font-size={10}>
+	<g transform={`translate(${w - margin.right / 2 + 10}, ${margin.top / 2})`} opacity={0.95}>
+		<rect width={65} height={h / 2 + 15} fill="white" stroke="gainsboro" />
+		<text x={5} y={10} dominant-baseline="middle" font-size={10}> {title} </text>
+		<g transform={`translate(5, 20)`} font-size={10}>
 			{#each range(...color.label.val, (color.label.val[1] - color.label.val[0]) / ((h / 2 - 10) / 2)).reverse() as value, i}
 				<g transform={`translate(0, ${2 * i})`}>
 					<rect width={10} height={2} fill={color(value)} />
