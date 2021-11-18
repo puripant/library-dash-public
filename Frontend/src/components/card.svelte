@@ -100,7 +100,7 @@
 		<h3 class="mb-1">ตัวกรอง</h3>
 		{#each filter as { dim, value } (dim)}
 			<div class="flex flex-row justify-between items-center mb-1">
-				<span class="mr-2">
+				<span class="mr-2 whitespace-pre">
 					{metadata[dim]}
 				</span>
 				<input class="border-b-2 px-2" bind:value />
