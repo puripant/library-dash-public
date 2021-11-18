@@ -56,7 +56,6 @@
 	const w = Math.min(COLS, ~~((TARGET_WIDTH / DISPLAY_AREA) * COLS) + 1),
 		h = TARGET_HEIGHT / rowHeight;
 
-	console.log('w, h', w, h);
 	const add: TAdd = ({
 		dataset,
 		name,
@@ -145,7 +144,8 @@
 	nav {
 		@apply w-52;
 		@apply border-r-2;
-		@apply h-full;
+		@apply h-screen;
+		@apply overflow-y-auto;
 		@apply p-3;
 	}
 </style>
