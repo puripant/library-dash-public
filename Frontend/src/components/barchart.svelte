@@ -4,7 +4,7 @@
 	import Bar from './bar.svelte';
 	import type { TBardata } from '../types';
 	import type { TColor } from 'src/utils/barcolors';
-	import { max } from 'd3';
+	import Labels from './labels.svelte';
 
 	export let data: Array<TBardata> = [],
 		color: TColor;
@@ -82,19 +82,22 @@
 				{/each}
 			</g>
 
+			// Label box on top right
+			<Labels w={w * 0.7} h={155} {margin} {color} />
+
 			<!-- next and back -->
 			<g
 				on:click={() => {
 					slicer = Math.min(slicer + 1, data.length - 5);
 				}}
-				transform={`translate(${w - margin.right / 2 + 6}, ${h / 2 - 10})`}
+				transform={`translate(${w - margin.right / 2 + 6}, ${h - margin.bottom - 10})`}
 				style="cursor: pointer;"
 			>
 				<path d="M-10, -10 l10 10 l-10 10" stroke="black" fill="transparent" />
 			</g>
 			<g
 				on:click={() => (slicer = Math.max(0, slicer - 1))}
-				transform={`translate(${margin.left / 2 - 12}, ${h / 2 - 10})`}
+				transform={`translate(${margin.left / 2 - 12}, ${h - margin.bottom - 10})`}
 				style="cursor: pointer;"
 			>
 				<path d="M10, -10 l-10 10 l10 10" stroke="black" fill="transparent" />
