@@ -62,7 +62,7 @@
 				{
 					dataset: dataset['Rent'],
 					name: '-',
-					xDim: 'month',
+					xDim: 'day',
 					stackDim: 'period',
 					filter: [
 						{ dim: 'library', value: 'Central Library' },
@@ -72,7 +72,7 @@
 				{
 					dataset: dataset['Rent'],
 					name: '-',
-					xDim: 'month',
+					xDim: 'day',
 					stackDim: 'period',
 					filter: [
 						{ dim: 'library', value: 'Central Library' },

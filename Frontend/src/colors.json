@@ -1,1 +1,143 @@
-{"book": {"title": {"\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32": "#4e79a7", "\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32 \u0e09\u0e1a\u0e31\u0e1a\u0e2a\u0e21\u0e1a\u0e39\u0e23\u0e13\u0e4c": "#f28e2c", "\u0e2a\u0e32\u0e2a\u0e4c\u0e19\u0e2a\u0e21\u0e40\u0e14\u0e47\u0e08": "#e15759", "Organic chemistry": "#76b7b2", "\u0e08\u0e34\u0e15\u0e27\u0e34\u0e17\u0e22\u0e32\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32": "#59a14f", "\u0e40\u0e04\u0e21\u0e35\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#edc949", "\u0e1f\u0e34\u0e2a\u0e34\u0e01\u0e2a\u0e4c": "#af7aa1", "\u0e2b\u0e25\u0e31\u0e01\u0e2a\u0e16\u0e34\u0e15\u0e34": "#ff9da7", "\u0e04\u0e27\u0e32\u0e21\u0e23\u0e39\u0e49\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e15\u0e49\u0e19\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#9c755f", "\u0e08\u0e34\u0e15\u0e27\u0e34\u0e17\u0e22\u0e32\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#bab0ab"}, "library": {"Central Library": "#4e79a7", "Arts Library": "#f28e2c", "Political Science Library": "#e15759", "Education Library": "#76b7b2", "Law Library": "#59a14f", "Thailand and ASEAN Information Center": "#edc949", "Science Library": "#af7aa1", "Chula Business School Library": "#ff9da7", "Engineering Library": "#9c755f", "Communication Arts  Library": "#bab0ab"}, "language_code": {"tha": "#4e79a7", "eng": "#f28e2c", "fre": "#e15759", "jpn": "#76b7b2", "chi": "#59a14f", "ger": "#edc949", "ita": "#af7aa1", "spa": "#ff9da7", "kor": "#9c755f", "mul": "#bab0ab"}, "internal_use_count": [0, 218], "day": {"Tue": "#4e79a7", "Fri": "#f28e2c", "Mon": "#e15759", "Wed": "#76b7b2", "Thu": "#59a14f", "Sat": "#edc949", "Sun": "#af7aa1"}, "month": [1, 12], "year": [1995, 2020], "period": {"afternoon": "#4e79a7", "morning": "#f28e2c", "evening": "#e15759"}}, "patron": {"ptype": {"\u0e25\u0e39\u0e01\u0e08\u0e49\u0e32\u0e07": "#4e79a7", "OAR Member A (Alumni)": "#f28e2c", "\u0e19\u0e34\u0e2a\u0e34\u0e15\u0e04\u0e23\u0e38": "#e15759", "\u0e1a\u0e38\u0e04\u0e25\u0e32\u0e01\u0e23\u0e2b\u0e49\u0e2d\u0e07\u0e2a\u0e21\u0e38\u0e14": "#76b7b2", "\u0e2d.\u0e04\u0e13\u0e30\u0e2d\u0e31\u0e01\u0e29\u0e23\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#59a14f", "\u0e2d.\u0e04\u0e13\u0e30\u0e23\u0e31\u0e10\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#edc949", "\u0e2d.\u0e04\u0e13\u0e30\u0e04\u0e23\u0e38\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#af7aa1", "\u0e19.\u0e1a\u0e31\u0e13\u0e11\u0e34\u0e15\u0e23\u0e31\u0e10\u0e28\u0e32\u0e2a\u0e15\u0e23": "#ff9da7", "\u0e19\u0e34\u0e2a\u0e34\u0e15\u0e19\u0e34\u0e15\u0e34\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#9c755f", "\u0e19\u0e34\u0e2a\u0e34\u0e15\u0e23\u0e31\u0e10\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#bab0ab"}, "library": {"Central Library": "#4e79a7", "Political Science Library": "#f28e2c", "Arts Library": "#e15759", "Law Library": "#76b7b2", "Education Library": "#59a14f", "Thailand and ASEAN Information Center": "#edc949", "Chula Business School Library": "#af7aa1", "Science Library": "#ff9da7", "Communication Arts  Library": "#9c755f", "Architecture Library": "#bab0ab"}, "renewal_total": [0, 5263], "checkout_total": [1, 8246], "day": {"Fri": "#4e79a7", "Wed": "#f28e2c", "Tue": "#e15759", "Mon": "#76b7b2", "Thu": "#59a14f", "Sat": "#edc949", "Sun": "#af7aa1"}, "month": [1, 12], "year": [1997, 2020], "period": {"afternoon": "#4e79a7", "morning": "#f28e2c", "evening": "#e15759"}}, "rent": {"faculty": {"Others": "#4e79a7", "Political Science": "#f28e2c", "Education": "#e15759", "Arts": "#76b7b2", "Law": "#59a14f", "Science": "#edc949", "Architecture": "#af7aa1", "Communication Arts": "#ff9da7", "Chula Business School": "#9c755f", "Medicine": "#bab0ab"}, "library": {"Central Library": "#4e79a7", "Political Science Library": "#f28e2c", "Arts Library": "#e15759", "Law Library": "#76b7b2", "Education Library": "#59a14f", "Thailand and ASEAN Information Center": "#edc949", "Chula Business School Library": "#af7aa1", "Science Library": "#ff9da7", "Communication Arts  Library": "#9c755f", "Architecture Library": "#bab0ab"}, "title": {"\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32 \u0e09\u0e1a\u0e31\u0e1a\u0e2a\u0e21\u0e1a\u0e39\u0e23\u0e13\u0e4c": "#4e79a7", "\u0e40\u0e04\u0e21\u0e35\u0e27\u0e34\u0e40\u0e04\u0e23\u0e32\u0e30\u0e2b\u0e4c": "#f28e2c", "\u0e08\u0e34\u0e15\u0e27\u0e34\u0e17\u0e22\u0e32\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32": "#e15759", "\u0e04\u0e33\u0e2d\u0e18\u0e34\u0e1a\u0e32\u0e22\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22\u0e1b\u0e01\u0e04\u0e23\u0e2d\u0e07": "#76b7b2", "\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32": "#59a14f", "\u0e2a\u0e32\u0e2a\u0e4c\u0e19\u0e2a\u0e21\u0e40\u0e14\u0e47\u0e08": "#edc949", "\u0e04\u0e27\u0e32\u0e21\u0e23\u0e39\u0e49\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e15\u0e49\u0e19\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#af7aa1", "\u0e2a\u0e22\u0e1a\u0e1f\u0e49\u0e32\u0e1e\u0e34\u0e0a\u0e34\u0e15\u0e1b\u0e10\u0e1e\u0e35": "#ff9da7", "\u0e2b\u0e25\u0e31\u0e01\u0e2a\u0e16\u0e34\u0e15\u0e34": "#9c755f", "\u0e19\u0e42\u0e22\u0e1a\u0e32\u0e22\u0e2a\u0e32\u0e18\u0e32\u0e23\u0e13\u0e30": "#bab0ab"}, "day": {"Fri": "#4e79a7", "Wed": "#f28e2c", "Tue": "#e15759", "Mon": "#76b7b2", "Thu": "#59a14f", "Sat": "#edc949", "Sun": "#af7aa1"}, "month": [1, 12], "year": [1997, 2020], "period": {"afternoon": "#4e79a7", "morning": "#f28e2c", "evening": "#e15759"}}}
+{
+	"book": {
+		"title": {
+			"\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32": "#4e79a7",
+			"\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32 \u0e09\u0e1a\u0e31\u0e1a\u0e2a\u0e21\u0e1a\u0e39\u0e23\u0e13\u0e4c": "#f28e2c",
+			"\u0e2a\u0e32\u0e2a\u0e4c\u0e19\u0e2a\u0e21\u0e40\u0e14\u0e47\u0e08": "#e15759",
+			"Organic chemistry": "#76b7b2",
+			"\u0e08\u0e34\u0e15\u0e27\u0e34\u0e17\u0e22\u0e32\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32": "#59a14f",
+			"\u0e40\u0e04\u0e21\u0e35\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#edc949",
+			"\u0e1f\u0e34\u0e2a\u0e34\u0e01\u0e2a\u0e4c": "#af7aa1",
+			"\u0e2b\u0e25\u0e31\u0e01\u0e2a\u0e16\u0e34\u0e15\u0e34": "#ff9da7",
+			"\u0e04\u0e27\u0e32\u0e21\u0e23\u0e39\u0e49\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e15\u0e49\u0e19\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#9c755f",
+			"\u0e08\u0e34\u0e15\u0e27\u0e34\u0e17\u0e22\u0e32\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#bab0ab"
+		},
+		"library": {
+			"Central Library": "#4e79a7",
+			"Arts Library": "#f28e2c",
+			"Political Science Library": "#e15759",
+			"Education Library": "#76b7b2",
+			"Law Library": "#59a14f",
+			"Thailand and ASEAN Information Center": "#edc949",
+			"Science Library": "#af7aa1",
+			"Chula Business School Library": "#ff9da7",
+			"Engineering Library": "#9c755f",
+			"Communication Arts  Library": "#bab0ab"
+		},
+		"language_code": {
+			"tha": "#4e79a7",
+			"eng": "#f28e2c",
+			"fre": "#e15759",
+			"jpn": "#76b7b2",
+			"chi": "#59a14f",
+			"ger": "#edc949",
+			"ita": "#af7aa1",
+			"spa": "#ff9da7",
+			"kor": "#9c755f",
+			"mul": "#bab0ab"
+		},
+		"internal_use_count": [0, 218],
+		"day": {
+			"Sun": "rgb(252, 40, 28)",
+			"Mon": "rgb(239, 188, 17)",
+			"Tue": "rgb(237, 113, 134)",
+			"Wed": "rgb(40, 197, 101)",
+			"Thu": "rgb(226, 116, 31)",
+			"Fri": "rgb(82, 162, 221)",
+			"Sat": "rgb(143, 79, 172)"
+		},
+		"month": [1, 12],
+		"year": [1995, 2020],
+		"period": { "afternoon": "#4e79a7", "morning": "#f28e2c", "evening": "#e15759" }
+	},
+	"patron": {
+		"ptype": {
+			"\u0e25\u0e39\u0e01\u0e08\u0e49\u0e32\u0e07": "#4e79a7",
+			"OAR Member A (Alumni)": "#f28e2c",
+			"\u0e19\u0e34\u0e2a\u0e34\u0e15\u0e04\u0e23\u0e38": "#e15759",
+			"\u0e1a\u0e38\u0e04\u0e25\u0e32\u0e01\u0e23\u0e2b\u0e49\u0e2d\u0e07\u0e2a\u0e21\u0e38\u0e14": "#76b7b2",
+			"\u0e2d.\u0e04\u0e13\u0e30\u0e2d\u0e31\u0e01\u0e29\u0e23\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#59a14f",
+			"\u0e2d.\u0e04\u0e13\u0e30\u0e23\u0e31\u0e10\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#edc949",
+			"\u0e2d.\u0e04\u0e13\u0e30\u0e04\u0e23\u0e38\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#af7aa1",
+			"\u0e19.\u0e1a\u0e31\u0e13\u0e11\u0e34\u0e15\u0e23\u0e31\u0e10\u0e28\u0e32\u0e2a\u0e15\u0e23": "#ff9da7",
+			"\u0e19\u0e34\u0e2a\u0e34\u0e15\u0e19\u0e34\u0e15\u0e34\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#9c755f",
+			"\u0e19\u0e34\u0e2a\u0e34\u0e15\u0e23\u0e31\u0e10\u0e28\u0e32\u0e2a\u0e15\u0e23\u0e4c": "#bab0ab"
+		},
+		"library": {
+			"Central Library": "#4e79a7",
+			"Political Science Library": "#f28e2c",
+			"Arts Library": "#e15759",
+			"Law Library": "#76b7b2",
+			"Education Library": "#59a14f",
+			"Thailand and ASEAN Information Center": "#edc949",
+			"Chula Business School Library": "#af7aa1",
+			"Science Library": "#ff9da7",
+			"Communication Arts  Library": "#9c755f",
+			"Architecture Library": "#bab0ab"
+		},
+		"renewal_total": [0, 5263],
+		"checkout_total": [1, 8246],
+		"day": {
+			"Sun": "rgb(252, 40, 28)",
+			"Mon": "rgb(239, 188, 17)",
+			"Tue": "rgb(237, 113, 134)",
+			"Wed": "rgb(40, 197, 101)",
+			"Thu": "rgb(226, 116, 31)",
+			"Fri": "rgb(82, 162, 221)",
+			"Sat": "rgb(143, 79, 172)"
+		},
+		"month": [1, 12],
+		"year": [1997, 2020],
+		"period": { "afternoon": "#4e79a7", "morning": "#f28e2c", "evening": "#e15759" }
+	},
+	"rent": {
+		"faculty": {
+			"Others": "#4e79a7",
+			"Political Science": "#f28e2c",
+			"Education": "#e15759",
+			"Arts": "#76b7b2",
+			"Law": "#59a14f",
+			"Science": "#edc949",
+			"Architecture": "#af7aa1",
+			"Communication Arts": "#ff9da7",
+			"Chula Business School": "#9c755f",
+			"Medicine": "#bab0ab"
+		},
+		"library": {
+			"Central Library": "#4e79a7",
+			"Political Science Library": "#f28e2c",
+			"Arts Library": "#e15759",
+			"Law Library": "#76b7b2",
+			"Education Library": "#59a14f",
+			"Thailand and ASEAN Information Center": "#edc949",
+			"Chula Business School Library": "#af7aa1",
+			"Science Library": "#ff9da7",
+			"Communication Arts  Library": "#9c755f",
+			"Architecture Library": "#bab0ab"
+		},
+		"title": {
+			"\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32 \u0e09\u0e1a\u0e31\u0e1a\u0e2a\u0e21\u0e1a\u0e39\u0e23\u0e13\u0e4c": "#4e79a7",
+			"\u0e40\u0e04\u0e21\u0e35\u0e27\u0e34\u0e40\u0e04\u0e23\u0e32\u0e30\u0e2b\u0e4c": "#f28e2c",
+			"\u0e08\u0e34\u0e15\u0e27\u0e34\u0e17\u0e22\u0e32\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32": "#e15759",
+			"\u0e04\u0e33\u0e2d\u0e18\u0e34\u0e1a\u0e32\u0e22\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22\u0e1b\u0e01\u0e04\u0e23\u0e2d\u0e07": "#76b7b2",
+			"\u0e40\u0e1e\u0e0a\u0e23\u0e1e\u0e23\u0e30\u0e2d\u0e38\u0e21\u0e32": "#59a14f",
+			"\u0e2a\u0e32\u0e2a\u0e4c\u0e19\u0e2a\u0e21\u0e40\u0e14\u0e47\u0e08": "#edc949",
+			"\u0e04\u0e27\u0e32\u0e21\u0e23\u0e39\u0e49\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e15\u0e49\u0e19\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e01\u0e0e\u0e2b\u0e21\u0e32\u0e22\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b": "#af7aa1",
+			"\u0e2a\u0e22\u0e1a\u0e1f\u0e49\u0e32\u0e1e\u0e34\u0e0a\u0e34\u0e15\u0e1b\u0e10\u0e1e\u0e35": "#ff9da7",
+			"\u0e2b\u0e25\u0e31\u0e01\u0e2a\u0e16\u0e34\u0e15\u0e34": "#9c755f",
+			"\u0e19\u0e42\u0e22\u0e1a\u0e32\u0e22\u0e2a\u0e32\u0e18\u0e32\u0e23\u0e13\u0e30": "#bab0ab"
+		},
+		"day": {
+			"Sun": "rgb(252, 40, 28)",
+			"Mon": "rgb(239, 188, 17)",
+			"Tue": "rgb(237, 113, 134)",
+			"Wed": "rgb(40, 197, 101)",
+			"Thu": "rgb(226, 116, 31)",
+			"Fri": "rgb(82, 162, 221)",
+			"Sat": "rgb(143, 79, 172)"
+		},
+		"month": [1, 12],
+		"year": [1997, 2020],
+		"period": { "afternoon": "#4e79a7", "morning": "#f28e2c", "evening": "#e15759" }
+	}
+}
