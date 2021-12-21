@@ -118,6 +118,47 @@
 					stackDim: 'ptype'
 				}
 			]
+		},
+		{
+			name: 'หนังสือที่ไม่ใช่ภาษาไทยและอังกฤษ',
+			note: 'หนังสือที่ไม่ใช่ภาษาไทยและอังกฤษส่วนใหญ่อยู่ที่ห้องสมุดอักษรศาสตร์',
+			cards: [
+				{
+					dataset: dataset['Book'],
+					filter: [],
+					name: '-',
+					xDim: 'language_code',
+					stackDim: 'library'
+				},
+				{
+					dataset: dataset['Book'],
+					filter: [{ dim: 'language_code', value: 'fre' }],
+					name: 'ภาษา: fre',
+					xDim: 'library',
+					stackDim: 'language_code'
+				},
+				{
+					dataset: dataset['Book'],
+					filter: [{ dim: 'language_code', value: 'jpn' }],
+					name: 'ภาษา: jpn',
+					xDim: 'library',
+					stackDim: 'language_code'
+				},
+				{
+					dataset: dataset['Book'],
+					filter: [{ dim: 'language_code', value: 'chi' }],
+					name: 'ภาษา: chi',
+					xDim: 'library',
+					stackDim: 'language_code'
+				},
+				{
+					dataset: dataset['Book'],
+					filter: [{ dim: 'language_code', value: 'ger' }],
+					name: 'ภาษา: ger',
+					xDim: 'library',
+					stackDim: 'language_code'
+				}
+			]
 		}
 	];
 	let selectedPreset = PRESETS[0];
