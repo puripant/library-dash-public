@@ -6,7 +6,7 @@
 	const PRESETS: { name: string; note?: string; cards: IAdd[] }[] = [
 		{
 			name: 'วิศวกรรมการประปา (ยืม vs ห้องสมุด)',
-			note: '',
+			note: 'หอกลางมีหลังสือวิศวกรรมการประปาเยอะ (90+ เล่ม) ในคณะที่มีการยืมเพียง 1 ครั้ง กลับกันที่ห้องสมุดวิศวกรรมศาสตร์มีการยืม 8 ครั้ง แต่มีหนังสือที่ห้องสมุดวิศวกรรมศาสตร์น้อยกว่าหอกลาง',
 			cards: [
 				{
 					dataset: dataset['Book'],
@@ -26,6 +26,7 @@
 		},
 		{
 			name: 'ฟิสิกส์ 1 (ยืม vs ห้องสมุด)',
+			note: 'หนังสือฟิสิกส์ 1 มีการถูกยืมที่ห้องสมุดคณะวิทยาศาสตร์ 35 ครั้ง ในขณะที่ห้องสมุดคณะวิทยาศาสตร์มีหนังสือ 44 เล่ม แต่ที่ห้องสมุดคณะวิศวกรรมศาสตร์ที่มีหนังสือ 56 เล่ม กลับมีการยืมเพียง 14 ครั้ง',
 			cards: [
 				{
 					dataset: dataset['Book'],
@@ -45,45 +46,41 @@
 		},
 		{
 			name: 'เวลาที่เข้ายืมที่หอกลาง',
+			note: 'คณะอักษรศาสตร์กับคณะศึกษาศาสตร์ที่มีการยืมหนังสือจากหอกลางมากที่สุด มีลักษณะการยืมในช่วงเวลาที่แตกต่างกัน โดยคณะอักษรศาสตร์จะเข้ายืมช่วงเช้ามากกว่าคณะศึกษาศาสตร์ และคณะศึกษาศาสตร์จะเข้ายืมช่วงเย็นมากกว่าคณะอักษรศาสตร์',
 			cards: [
+				{ dataset: dataset['Rent'], filter: [], name: '-', xDim: 'library', stackDim: 'library' },
 				{
 					dataset: dataset['Rent'],
-					name: '-',
-					xDim: 'library',
-					stackDim: 'faculty',
-					filter: []
-				},
-				{
-					dataset: dataset['Rent'],
+					filter: [{ dim: 'library', value: 'Central Library' }],
 					name: '-',
 					xDim: 'faculty',
-					stackDim: 'faculty',
-					filter: [{ dim: 'library', value: 'Central Library' }]
+					stackDim: 'faculty'
 				},
 				{
 					dataset: dataset['Rent'],
-					name: '-',
-					xDim: 'day',
-					stackDim: 'period',
 					filter: [
 						{ dim: 'library', value: 'Central Library' },
 						{ dim: 'faculty', value: 'Education' }
-					]
+					],
+					name: '-',
+					xDim: 'day',
+					stackDim: 'period'
 				},
 				{
 					dataset: dataset['Rent'],
-					name: '-',
-					xDim: 'day',
-					stackDim: 'period',
 					filter: [
 						{ dim: 'library', value: 'Central Library' },
-						{ dim: 'faculty', value: 'Others' }
-					]
+						{ dim: 'faculty', value: 'Arts' }
+					],
+					name: 'ห้องสมุด: Central Library\nประเภทบุคลากร: Arts',
+					xDim: 'faculty',
+					stackDim: 'faculty'
 				}
 			]
 		},
 		{
-			name: 'คณะที่ใช้หอกลางมากกว่าห้องสมุดตัวเอง',
+			name: 'คณะที่บุตลากรใช้หอกลางมากกว่าห้องสมุดตัวเอง',
+			note: 'คณะศึกษาศาสตร์ใช้ห้องสมุดหอกลางเป็นสัดส่วนมากกว่าคณะอื่น ๆ รวมไปถึงหอกลางมีจำนวนสมาชิกจากบุคลากรคณะศึกษามากกว่าห้องสมุดคณะศึกษาศาสตร์เอง',
 			cards: [
 				{
 					dataset: dataset['Patron'],
