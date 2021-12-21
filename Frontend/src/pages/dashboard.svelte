@@ -110,7 +110,7 @@
 		const { metadata } = dataset;
 
 		const name = filter.map((f) => `${metadata[f.dim]}: ${f.value}`).join('\n');
-		add({ dataset, name, xDim, stackDim, filter });
+		add({ dataset, name, xDim: stackDim, stackDim: xDim, filter });
 	};
 
 	const remove = (item) => {
