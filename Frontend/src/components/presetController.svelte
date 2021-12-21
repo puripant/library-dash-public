@@ -3,9 +3,10 @@
 
 	export let dataset: TDataset, add: TAdd;
 
-	const PRESETS: { name: string; cards: IAdd[] }[] = [
+	const PRESETS: { name: string; note?: string; cards: IAdd[] }[] = [
 		{
-			name: 'วิศวกรรมการประปา',
+			name: 'วิศวกรรมการประปา (ยืม vs ห้องสมุด)',
+			note: '',
 			cards: [
 				{
 					dataset: dataset['Book'],
@@ -24,7 +25,7 @@
 			]
 		},
 		{
-			name: 'ฟิสิกส์ 1',
+			name: 'ฟิสิกส์ 1 (ยืม vs ห้องสมุด)',
 			cards: [
 				{
 					dataset: dataset['Book'],
@@ -78,6 +79,46 @@
 						{ dim: 'library', value: 'Central Library' },
 						{ dim: 'faculty', value: 'Others' }
 					]
+				}
+			]
+		},
+		{
+			name: 'คณะที่ใช้หอกลางมากกว่าห้องสมุดตัวเอง',
+			cards: [
+				{
+					dataset: dataset['Patron'],
+					filter: [],
+					name: '-',
+					xDim: 'library',
+					stackDim: 'ptype'
+				},
+				{
+					dataset: dataset['Patron'],
+					filter: [{ dim: 'ptype', value: 'Arts' }],
+					name: 'ประเภทสมาชิก: Arts',
+					xDim: 'library',
+					stackDim: 'ptype'
+				},
+				{
+					dataset: dataset['Patron'],
+					filter: [{ dim: 'ptype', value: 'Education' }],
+					name: 'ประเภทสมาชิก: Education',
+					xDim: 'library',
+					stackDim: 'ptype'
+				},
+				{
+					dataset: dataset['Patron'],
+					filter: [{ dim: 'ptype', value: 'Architecture' }],
+					name: 'ประเภทสมาชิก: Architecture',
+					xDim: 'library',
+					stackDim: 'ptype'
+				},
+				{
+					dataset: dataset['Patron'],
+					filter: [{ dim: 'ptype', value: 'Science' }],
+					name: 'ประเภทสมาชิก: Science',
+					xDim: 'library',
+					stackDim: 'ptype'
 				}
 			]
 		}
