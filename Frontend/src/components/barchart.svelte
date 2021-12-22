@@ -87,6 +87,9 @@
 				</div>
 			</div>
 		{/if}
+		<div class="absolute top-0 right-0">
+			<Labels title={label} w={w * 0.7} h={155} {margin} {color} />
+		</div>
 		<svg class="w-full h-full">
 			<!-- X Axis -->
 			<g transform={`translate(0, ${h - margin.bottom + 10})`}>
@@ -131,9 +134,6 @@
 					<Bar {X} {Y} data={d} {color} on:filter={forward} on:hover={handleHover} />
 				{/each}
 			</g>
-
-			// Label box on top right
-			<Labels title={label} w={w * 0.7} h={155} {margin} {color} />
 
 			<!-- next and back -->
 			<g

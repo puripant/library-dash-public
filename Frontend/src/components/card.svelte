@@ -63,7 +63,7 @@
 	const dims = Object.entries(metadata);
 </script>
 
-<div class="w-full h-full border-2 border-black flex flex-col">
+<div class="w-full h-full border-2 border-black flex flex-col overflow-hidden">
 	<div id="top-bar" class="w-full flex bg-gray-200 px-2">
 		<span on:pointerdown={(e) => e.stopPropagation()} on:click={removeEvent} class="cursor-pointer">
 			✕
